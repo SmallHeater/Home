@@ -7,11 +7,15 @@
 //
 
 #import "RewardingViewController.h"
+#import "DatePickView.h"
+
 
 #define VIEWHEIGHT 40
 #define VIEWWITHIMAGESHEIGHT 90
+#define UITEXTFIEDLBASETAG  1230
 
-@interface RewardingViewController () <UITextFieldDelegate>
+
+@interface RewardingViewController () <UITextFieldDelegate,DatePickViewDelegate>
 
 //完成按钮
 @property (nonatomic,strong) UIButton * finishBtn;
@@ -32,7 +36,10 @@
 @property (nonatomic,strong) UIView * hasShelfLifeView;
 //保质期view
 @property (nonatomic,strong) UIView * shelfLifeView;
-
+//日期label
+@property (nonatomic,strong) UILabel * dateLabel;
+//日期选择view
+@property (nonatomic,strong) DatePickView * datePickerView;
  
 @end
 
@@ -53,7 +60,6 @@
     [self.scrollView addSubview:self.storageLocationImageView];
     [self.scrollView addSubview:self.quantityView];
     [self.scrollView addSubview:self.hasShelfLifeView];
-    [self.scrollView addSubview:self.shelfLifeView];
     
     [self.view addSubview:self.scrollView];
 }
@@ -72,6 +78,13 @@
     return YES;
 }
 
+#pragma mark  ----  DatePickViewDelegate
+
+-(void)finishSelectedWithTimeStr:(NSString *)selectedTime{
+    
+    self.dateLabel.text = selectedTime;
+}
+
 #pragma mark  ----  自定义函数
 //重写返回方法
 -(void)backBtnClicked:(UIButton *)btn{
@@ -80,10 +93,34 @@
     [super backBtnClicked:btn];
 }
 
-
+//完成按钮的响应事件
 -(void)finishBtnClicked:(UIButton *)finishBtn{
     
     
+}
+
+//有无保质期开关的响应
+-(void)shelfSwitchValueChanged:(UISwitch *)shelfSwitch{
+    
+    if (shelfSwitch.isOn) {
+        
+        //打开
+        [self.scrollView addSubview:self.shelfLifeView];
+        self.scrollView.contentSize = CGSizeMake(SCREENWIDTH, self.scrollView.contentSize.height + CGRectGetHeight(self.shelfLifeView.frame));
+    }
+    else{
+        
+        //关闭
+        [self.shelfLifeView removeFromSuperview];
+        self.scrollView.contentSize = CGSizeMake(SCREENWIDTH, self.scrollView.contentSize.height - CGRectGetHeight(self.shelfLifeView.frame));
+    }
+}
+
+
+//选择物品到期时间的响应
+-(void)shelfLiftLabelTaped:(UIGestureRecognizer *)ges{
+    
+    [self.view addSubview:self.datePickerView];
 }
 
 #pragma mark  ----  懒加载
@@ -104,7 +141,7 @@
     if (!_scrollView) {
         
         _scrollView = [[UIScrollView alloc] initWithFrame:CGRectMake(0, 64, SCREENWIDTH, SCREENHEIGHT - 64)];
-        _scrollView.contentSize = CGSizeMake(SCREENWIDTH, 420);
+        _scrollView.contentSize = CGSizeMake(SCREENWIDTH, 380);
         _scrollView.backgroundColor = [UIColor whiteColor];
     }
     return _scrollView;
@@ -147,6 +184,7 @@
         UITextField * commodityTextField = [[UITextField alloc] initWithFrame:CGRectMake(120, 0, SCREENWIDTH - 120, CGRectGetHeight(_commodityView.frame))];
         commodityTextField.font = FONT14;
         commodityTextField.delegate = self;
+        commodityTextField.tag = UITEXTFIEDLBASETAG;
         commodityTextField.placeholder = @"请输入商品名称";
         [_commodityView addSubview:commodityTextField];
         
@@ -193,6 +231,7 @@
         UITextField * storageLocationTextField = [[UITextField alloc] initWithFrame:CGRectMake(120, 0, SCREENWIDTH - 120, CGRectGetHeight(_storageLocationView.frame))];
         storageLocationTextField.font = FONT14;
         storageLocationTextField.delegate = self;
+        storageLocationTextField.tag = UITEXTFIEDLBASETAG + 1;
         storageLocationTextField.placeholder = @"请输入存放位置";
         [_storageLocationView addSubview:storageLocationTextField];
         
@@ -239,7 +278,9 @@
         UITextField * numberTextField = [[UITextField alloc] initWithFrame:CGRectMake(120, 0, SCREENWIDTH - 120, CGRectGetHeight(_quantityView.frame))];
         numberTextField.font = FONT14;
         numberTextField.delegate = self;
+        numberTextField.tag = UITEXTFIEDLBASETAG + 2;
         numberTextField.placeholder = @"请输入物品数量";
+        numberTextField.text = @"1";
         [_quantityView addSubview:numberTextField];
         
         UILabel * bottomLineLabel = [[UILabel alloc] initWithFrame:CGRectMake(0, CGRectGetHeight(_quantityView.frame), SCREENWIDTH, 0.5)];
@@ -262,6 +303,7 @@
         
         //有无保质期开关
         UISwitch * shelfSwitch = [[UISwitch alloc] initWithFrame:CGRectMake(SCREENWIDTH - 51 - 10, (40 - 31) / 2, 51, 31)];
+        [shelfSwitch addTarget:self action:@selector(shelfSwitchValueChanged:) forControlEvents:UIControlEventValueChanged];
         [_hasShelfLifeView addSubview:shelfSwitch];
         
         UILabel * bottomLineLabel = [[UILabel alloc] initWithFrame:CGRectMake(0, CGRectGetHeight(_hasShelfLifeView.frame), SCREENWIDTH, 0.5)];
@@ -286,12 +328,28 @@
         shelfLifeLabel.font = FONT14;
         shelfLifeLabel.text = @"请选择物品到期时间";
         [_shelfLifeView addSubview:shelfLifeLabel];
+        self.dateLabel = shelfLifeLabel;
+        
+        UITapGestureRecognizer * tap = [[UITapGestureRecognizer alloc] initWithTarget:self action:@selector(shelfLiftLabelTaped:)];
+        [shelfLifeLabel addGestureRecognizer:tap];
+        shelfLifeLabel.userInteractionEnabled = YES;
+        
         
         UILabel * bottomLineLabel = [[UILabel alloc] initWithFrame:CGRectMake(0, CGRectGetHeight(_shelfLifeView.frame), SCREENWIDTH, 0.5)];
         bottomLineLabel.backgroundColor = [UIColor blackColor];
         [_shelfLifeView addSubview:bottomLineLabel];
     }
     return _shelfLifeView;
+}
+
+-(DatePickView *)datePickerView{
+    
+    if (!_datePickerView) {
+        
+        _datePickerView = [[DatePickView alloc] init];
+        _datePickerView.delegate = self;
+    }
+    return _datePickerView;
 }
 
 @end

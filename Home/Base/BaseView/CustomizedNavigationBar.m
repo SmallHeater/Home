@@ -48,7 +48,6 @@
         [_backBtn setTitle:@"返回" forState:UIControlStateNormal];
         _backBtn.frame = CGRectMake(20, 20, 44, 44);
         [_backBtn setImage:[UIImage imageNamed:@""] forState:UIControlStateNormal];
-        [_backBtn addTarget:self action:@selector(backBtnClicked:) forControlEvents:UIControlEventTouchUpInside];
     }
     return _backBtn;
 }
