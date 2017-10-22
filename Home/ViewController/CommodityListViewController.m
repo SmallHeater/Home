@@ -25,7 +25,21 @@
     self.navigationBar.backBtn.hidden = YES;
     self.navigationBar.titleLabel.hidden = YES;
     
+    self.view.backgroundColor = [UIColor whiteColor];
+    
     [self.navigationBar addSubview:self.rewardBtn];
+}
+
+-(void)viewWillAppear:(BOOL)animated{
+    
+    [super viewWillAppear:animated];
+    self.tabBarController.tabBar.hidden = NO;
+}
+
+-(void)viewWillDisappear:(BOOL)animated{
+    
+    [super viewWillDisappear:animated];
+    self.tabBarController.tabBar.hidden = YES;
 }
 
 - (void)didReceiveMemoryWarning {

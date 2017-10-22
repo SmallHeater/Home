@@ -9,6 +9,8 @@
 #import "CategorySelectViewController.h"
 #import "CategoryTableViewCell.h"
 #import "CategoryModel.h"
+#import "RewardingViewController.h"
+
 
 @interface CategorySelectViewController ()
 
@@ -65,6 +67,13 @@
     return 40.0;
 }
 
+- (void)tableView:(UITableView *)tableView didSelectRowAtIndexPath:(NSIndexPath *)indexPath{
+    
+    CategoryModel * selectedModel = self.dataArray[indexPath.row];
+    RewardingViewController * rewardingViewController = [[RewardingViewController alloc] init];
+    rewardingViewController.categoryStr = selectedModel.categoryName;
+    [self.navigationController pushViewController:rewardingViewController animated:YES];
+}
 
 
 

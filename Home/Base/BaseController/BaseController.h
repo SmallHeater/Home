@@ -1,13 +1,13 @@
 //
-//  BaseModel.h
+//  BaseController.h
 //  Home
 //
 //  Created by xianjunwang on 2017/10/22.
 //  Copyright © 2017年 xianjunwang. All rights reserved.
-//  模型基类
+//  控制器基类
 
 #import <Foundation/Foundation.h>
 
-@interface BaseModel : NSObject
+@interface BaseController : NSObject
 
 @end

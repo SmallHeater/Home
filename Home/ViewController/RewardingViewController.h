@@ -9,5 +9,6 @@
 #import "BaseNavViewController.h"
 
 @interface RewardingViewController : BaseNavViewController
-
+//品类
+@property (nonatomic,strong) NSString * categoryStr;
 @end

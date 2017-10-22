@@ -19,5 +19,5 @@
 
 //Font
 #define FONT14 [UIFont systemFontOfSize:14.0]
-
+#define BOLDFONT14 [UIFont boldSystemFontOfSize:14.0]
 #endif /* Home_pch */

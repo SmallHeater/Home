@@ -13,4 +13,5 @@
 @property (nonatomic,strong) UIButton * backBtn;
 //标题label
 @property (nonatomic,strong) UILabel * titleLabel;
+
 @end

@@ -38,13 +38,6 @@
     return self;
 }
 
-#pragma mark  ----  自定义函数
-//返回按钮的响应
--(void)backBtnClicked:(UIButton *)btn{
-    
-    
-}
-
 
 #pragma mark  ----  懒加载
 -(UIButton *)backBtn{
@@ -52,6 +45,8 @@
     if (!_backBtn) {
         
         _backBtn = [UIButton buttonWithType:UIButtonTypeCustom];
+        [_backBtn setTitle:@"返回" forState:UIControlStateNormal];
+        _backBtn.frame = CGRectMake(20, 20, 44, 44);
         [_backBtn setImage:[UIImage imageNamed:@""] forState:UIControlStateNormal];
         [_backBtn addTarget:self action:@selector(backBtnClicked:) forControlEvents:UIControlEventTouchUpInside];
     }

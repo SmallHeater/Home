@@ -40,6 +40,8 @@
 		62F801C71F9C689B0038DD5C /* CategoryModel.m in Sources */ = {isa = PBXBuildFile; fileRef = 62F801C61F9C689B0038DD5C /* CategoryModel.m */; };
 		62F801CB1F9C6AFE0038DD5C /* CategoryTableViewCell.m in Sources */ = {isa = PBXBuildFile; fileRef = 62F801CA1F9C6AFE0038DD5C /* CategoryTableViewCell.m */; };
 		62F801CE1F9C6BFE0038DD5C /* RewardingViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 62F801CD1F9C6BFE0038DD5C /* RewardingViewController.m */; };
+		62F802111F9C99BF0038DD5C /* BaseController.m in Sources */ = {isa = PBXBuildFile; fileRef = 62F802101F9C99BF0038DD5C /* BaseController.m */; };
+		62F802141F9C9AC70038DD5C /* CommodityDataManager.m in Sources */ = {isa = PBXBuildFile; fileRef = 62F802131F9C9AC70038DD5C /* CommodityDataManager.m */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -133,6 +135,10 @@
 		62F801CA1F9C6AFE0038DD5C /* CategoryTableViewCell.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = CategoryTableViewCell.m; sourceTree = "<group>"; };
 		62F801CC1F9C6BFE0038DD5C /* RewardingViewController.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = RewardingViewController.h; sourceTree = "<group>"; };
 		62F801CD1F9C6BFE0038DD5C /* RewardingViewController.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = RewardingViewController.m; sourceTree = "<group>"; };
+		62F8020F1F9C99BF0038DD5C /* BaseController.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = BaseController.h; sourceTree = "<group>"; };
+		62F802101F9C99BF0038DD5C /* BaseController.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = BaseController.m; sourceTree = "<group>"; };
+		62F802121F9C9AC70038DD5C /* CommodityDataManager.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = CommodityDataManager.h; sourceTree = "<group>"; };
+		62F802131F9C9AC70038DD5C /* CommodityDataManager.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = CommodityDataManager.m; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -193,9 +199,10 @@
 		62F8012E1F9B5D780038DD5C /* Home */ = {
 			isa = PBXGroup;
 			children = (
+				62F801631F9B5DAD0038DD5C /* Base */,
+				62F8020D1F9C99840038DD5C /* Controller */,
 				62F801C81F9C6AC40038DD5C /* Cell */,
 				62F801C41F9C68880038DD5C /* Model */,
-				62F801631F9B5DAD0038DD5C /* Base */,
 				62F801621F9B5DAD0038DD5C /* TabbarViewController */,
 				62F801611F9B5DAD0038DD5C /* ViewController */,
 				62F8012F1F9B5D780038DD5C /* AppDelegate.h */,
@@ -257,6 +264,7 @@
 		62F801631F9B5DAD0038DD5C /* Base */ = {
 			isa = PBXGroup;
 			children = (
+				62F8020E1F9C998D0038DD5C /* BaseController */,
 				62F801B71F9C3EEE0038DD5C /* BaseModel */,
 				62F801AA1F9C33CE0038DD5C /* BaseCell */,
 				62F801801F9B68D20038DD5C /* BaseTabBarController */,
@@ -373,6 +381,24 @@
 				62F801CA1F9C6AFE0038DD5C /* CategoryTableViewCell.m */,
 			);
 			path = Cell;
+			sourceTree = "<group>";
+		};
+		62F8020D1F9C99840038DD5C /* Controller */ = {
+			isa = PBXGroup;
+			children = (
+				62F802121F9C9AC70038DD5C /* CommodityDataManager.h */,
+				62F802131F9C9AC70038DD5C /* CommodityDataManager.m */,
+			);
+			path = Controller;
+			sourceTree = "<group>";
+		};
+		62F8020E1F9C998D0038DD5C /* BaseController */ = {
+			isa = PBXGroup;
+			children = (
+				62F8020F1F9C99BF0038DD5C /* BaseController.h */,
+				62F802101F9C99BF0038DD5C /* BaseController.m */,
+			);
+			path = BaseController;
 			sourceTree = "<group>";
 		};
 /* End PBXGroup section */
@@ -551,6 +577,8 @@
 				62F801B01F9C34350038DD5C /* TableViewCellWithTitle.m in Sources */,
 				62F801A91F9B93A50038DD5C /* BaseTableViewController.m in Sources */,
 				62F801C31F9C67330038DD5C /* CategorySelectViewController.m in Sources */,
+				62F802111F9C99BF0038DD5C /* BaseController.m in Sources */,
+				62F802141F9C9AC70038DD5C /* CommodityDataManager.m in Sources */,
 				62F801741F9B5F030038DD5C /* BaseViewController.m in Sources */,
 				62F801861F9B69F50038DD5C /* TabBarController.m in Sources */,
 				62F801771F9B5F310038DD5C /* BaseView.m in Sources */,

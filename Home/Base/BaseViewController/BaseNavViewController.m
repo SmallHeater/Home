@@ -15,6 +15,7 @@
     
     [super viewDidLoad];
     [self.view addSubview:self.navigationBar];
+    [self.navigationBar.backBtn addTarget:self action:@selector(backBtnClicked:) forControlEvents:UIControlEventTouchUpInside];
 }
 
 
@@ -23,6 +24,12 @@
     [super viewWillAppear:animated];
     //隐藏系统默认导航条
     self.navigationController.navigationBarHidden = YES;
+}
+
+#pragma mark  ----  自定义函数
+-(void)backBtnClicked:(UIButton *)btn{
+    
+    [self.navigationController popViewControllerAnimated:YES];
 }
 
 #pragma mark  ----  懒加载

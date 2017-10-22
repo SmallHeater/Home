@@ -14,4 +14,7 @@
 
 @interface BaseNavViewController : BaseViewController
 @property (nonatomic,strong) CustomizedNavigationBar * navigationBar;
+
+//返回按钮的响应
+-(void)backBtnClicked:(UIButton *)btn;
 @end

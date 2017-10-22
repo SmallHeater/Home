@@ -8,12 +8,32 @@
 
 #import "RewardingViewController.h"
 
-@interface RewardingViewController ()
+#define VIEWHEIGHT 40
+#define VIEWWITHIMAGESHEIGHT 90
+
+@interface RewardingViewController () <UITextFieldDelegate>
 
 //完成按钮
 @property (nonatomic,strong) UIButton * finishBtn;
+@property (nonatomic,strong) UIScrollView * scrollView;
+//品类view
+@property (nonatomic,strong) UIView * categoryView;
+//商品view
+@property (nonatomic,strong) UIView * commodityView;
+//商品图片view
+@property (nonatomic,strong) UIView * commodityImageView;
+//存放位置view
+@property (nonatomic,strong) UIView * storageLocationView;
+//存放位置图片view
+@property (nonatomic,strong) UIView * storageLocationImageView;
+//数量view
+@property (nonatomic,strong) UIView * quantityView;
+//有无保质期view
+@property (nonatomic,strong) UIView * hasShelfLifeView;
+//保质期view
+@property (nonatomic,strong) UIView * shelfLifeView;
 
-
+ 
 @end
 
 @implementation RewardingViewController
@@ -25,6 +45,17 @@
     
     self.navigationBar.titleLabel.text = @"录入";
     [self.navigationBar addSubview:self.finishBtn];
+    
+    [self.scrollView addSubview:self.categoryView];
+    [self.scrollView addSubview:self.commodityView];
+    [self.scrollView addSubview:self.commodityImageView];
+    [self.scrollView addSubview:self.storageLocationView];
+    [self.scrollView addSubview:self.storageLocationImageView];
+    [self.scrollView addSubview:self.quantityView];
+    [self.scrollView addSubview:self.hasShelfLifeView];
+    [self.scrollView addSubview:self.shelfLifeView];
+    
+    [self.view addSubview:self.scrollView];
 }
 
 - (void)didReceiveMemoryWarning {
@@ -32,7 +63,24 @@
     // Dispose of any resources that can be recreated.
 }
 
+#pragma mark  ----  代理函数
+#pragma mark  ----  UITextFieldDelegate
+
+- (BOOL)textFieldShouldReturn:(UITextField *)textField{
+    
+    [textField resignFirstResponder];
+    return YES;
+}
+
 #pragma mark  ----  自定义函数
+//重写返回方法
+-(void)backBtnClicked:(UIButton *)btn{
+    
+    [self.view endEditing:YES];
+    [super backBtnClicked:btn];
+}
+
+
 -(void)finishBtnClicked:(UIButton *)finishBtn{
     
     
@@ -49,6 +97,201 @@
         [_finishBtn addTarget:self action:@selector(finishBtnClicked:) forControlEvents:UIControlEventTouchUpInside];
     }
     return _finishBtn;
+}
+
+-(UIScrollView *)scrollView{
+    
+    if (!_scrollView) {
+        
+        _scrollView = [[UIScrollView alloc] initWithFrame:CGRectMake(0, 64, SCREENWIDTH, SCREENHEIGHT - 64)];
+        _scrollView.contentSize = CGSizeMake(SCREENWIDTH, 420);
+        _scrollView.backgroundColor = [UIColor whiteColor];
+    }
+    return _scrollView;
+}
+
+-(UIView *)categoryView{
+    
+    if (!_categoryView) {
+        
+        _categoryView = [[UIView alloc] initWithFrame:CGRectMake(0, 0, SCREENWIDTH, VIEWHEIGHT)];
+        //品类标题
+        UILabel * categoryTitleLabel = [[UILabel alloc] initWithFrame:CGRectMake(20, 0, 100, CGRectGetHeight(_categoryView.frame))];
+        categoryTitleLabel.font = BOLDFONT14;
+        categoryTitleLabel.text = @"品类:";
+        [_categoryView addSubview:categoryTitleLabel];
+        //品类
+        UILabel * categoryLabel = [[UILabel alloc] initWithFrame:CGRectMake(120, 0, SCREENWIDTH - 120, CGRectGetHeight(_categoryView.frame))];
+        categoryLabel.font = FONT14;
+        categoryLabel.text = [self.categoryStr copy];
+        [_categoryView addSubview:categoryLabel];
+        
+        UILabel * bottomLineLabel = [[UILabel alloc] initWithFrame:CGRectMake(0, CGRectGetHeight(_categoryView.frame), SCREENWIDTH, 0.5)];
+        bottomLineLabel.backgroundColor = [UIColor blackColor];
+        [_categoryView addSubview:bottomLineLabel];
+    }
+    return _categoryView;
+}
+
+-(UIView *)commodityView{
+    
+    if (!_commodityView) {
+        
+        _commodityView = [[UIView alloc] initWithFrame:CGRectMake(0, CGRectGetMaxY(self.categoryView.frame), SCREENWIDTH, VIEWHEIGHT)];
+        //商品标题
+        UILabel * commodityTitleLabel = [[UILabel alloc] initWithFrame:CGRectMake(20, 0, 100, CGRectGetHeight(_commodityView.frame))];
+        commodityTitleLabel.font = BOLDFONT14;
+        commodityTitleLabel.text = @"物品:";
+        [_commodityView addSubview:commodityTitleLabel];
+        //商品
+        UITextField * commodityTextField = [[UITextField alloc] initWithFrame:CGRectMake(120, 0, SCREENWIDTH - 120, CGRectGetHeight(_commodityView.frame))];
+        commodityTextField.font = FONT14;
+        commodityTextField.delegate = self;
+        commodityTextField.placeholder = @"请输入商品名称";
+        [_commodityView addSubview:commodityTextField];
+        
+        UILabel * bottomLineLabel = [[UILabel alloc] initWithFrame:CGRectMake(0, CGRectGetHeight(_commodityView.frame), SCREENWIDTH, 0.5)];
+        bottomLineLabel.backgroundColor = [UIColor blackColor];
+        [_commodityView addSubview:bottomLineLabel];
+    }
+    return _commodityView;
+}
+
+-(UIView *)commodityImageView{
+    
+    if (!_commodityImageView) {
+        
+        _commodityImageView = [[UIView alloc] initWithFrame:CGRectMake(0, CGRectGetMaxY(self.commodityView.frame), SCREENWIDTH, VIEWWITHIMAGESHEIGHT)];
+        //商品图片标题
+        UILabel * commodityImagesTitleLabel = [[UILabel alloc] initWithFrame:CGRectMake(20, 0, 100, VIEWHEIGHT)];
+        commodityImagesTitleLabel.font = BOLDFONT14;
+        commodityImagesTitleLabel.text = @"物品图片:";
+        [_commodityImageView addSubview:commodityImagesTitleLabel];
+        //商品图片
+        UIImageView * commodityImageView = [[UIImageView alloc] initWithFrame:CGRectMake(20, VIEWHEIGHT + 5, 40, 40)];
+        commodityImageView.backgroundColor = [UIColor grayColor];
+        [_commodityImageView addSubview:commodityImageView];
+        
+        UILabel * bottomLineLabel = [[UILabel alloc] initWithFrame:CGRectMake(0, CGRectGetHeight(_commodityImageView.frame), SCREENWIDTH, 0.5)];
+        bottomLineLabel.backgroundColor = [UIColor blackColor];
+        [_commodityImageView addSubview:bottomLineLabel];
+    }
+    return _commodityImageView;
+}
+
+-(UIView *)storageLocationView{
+    
+    if (!_storageLocationView) {
+        
+        _storageLocationView = [[UIView alloc] initWithFrame:CGRectMake(0, CGRectGetMaxY(self.commodityImageView.frame), SCREENWIDTH, VIEWHEIGHT)];
+        //存放位置标题
+        UILabel * storageLocationTitleLabel = [[UILabel alloc] initWithFrame:CGRectMake(20, 0, 100, CGRectGetHeight(_storageLocationView.frame))];
+        storageLocationTitleLabel.font = BOLDFONT14;
+        storageLocationTitleLabel.text = @"存放位置:";
+        [_storageLocationView addSubview:storageLocationTitleLabel];
+        //存放位置
+        UITextField * storageLocationTextField = [[UITextField alloc] initWithFrame:CGRectMake(120, 0, SCREENWIDTH - 120, CGRectGetHeight(_storageLocationView.frame))];
+        storageLocationTextField.font = FONT14;
+        storageLocationTextField.delegate = self;
+        storageLocationTextField.placeholder = @"请输入存放位置";
+        [_storageLocationView addSubview:storageLocationTextField];
+        
+        UILabel * bottomLineLabel = [[UILabel alloc] initWithFrame:CGRectMake(0, CGRectGetHeight(_storageLocationView.frame), SCREENWIDTH, 0.5)];
+        bottomLineLabel.backgroundColor = [UIColor blackColor];
+        [_storageLocationView addSubview:bottomLineLabel];
+    }
+    return _storageLocationView;
+}
+
+-(UIView *)storageLocationImageView{
+    
+    if (!_storageLocationImageView) {
+        
+        _storageLocationImageView = [[UIView alloc] initWithFrame:CGRectMake(0, CGRectGetMaxY(self.storageLocationView.frame), SCREENWIDTH, VIEWWITHIMAGESHEIGHT)];
+        //存放位置照片标题
+        UILabel * storageLocationImagesTitleLabel = [[UILabel alloc] initWithFrame:CGRectMake(20, 0, 100, VIEWHEIGHT)];
+        storageLocationImagesTitleLabel.font = BOLDFONT14;
+        storageLocationImagesTitleLabel.text = @"存放位置图片:";
+        [_storageLocationImageView addSubview:storageLocationImagesTitleLabel];
+        //存放位置照片
+        UIImageView * storageLocationImage = [[UIImageView alloc] initWithFrame:CGRectMake(20, VIEWHEIGHT + 5, 40, 40)];
+        storageLocationImage.backgroundColor = [UIColor grayColor];
+        [_storageLocationImageView addSubview:storageLocationImage];
+        
+        UILabel * bottomLineLabel = [[UILabel alloc] initWithFrame:CGRectMake(0, CGRectGetHeight(_storageLocationImageView.frame), SCREENWIDTH, 0.5)];
+        bottomLineLabel.backgroundColor = [UIColor blackColor];
+        [_storageLocationImageView addSubview:bottomLineLabel];
+    }
+    return _storageLocationImageView;
+}
+
+-(UIView *)quantityView{
+    
+    if (!_quantityView) {
+        
+        _quantityView = [[UIView alloc] initWithFrame:CGRectMake(0, CGRectGetMaxY(self.storageLocationImageView.frame), SCREENWIDTH, VIEWHEIGHT)];
+        //数量标题
+        UILabel * numberTitleLabel = [[UILabel alloc] initWithFrame:CGRectMake(20, 0, 100, CGRectGetHeight(_quantityView.frame))];
+        numberTitleLabel.font = BOLDFONT14;
+        numberTitleLabel.text = @"数量:";
+        [_quantityView addSubview:numberTitleLabel];
+        //商品数量
+        UITextField * numberTextField = [[UITextField alloc] initWithFrame:CGRectMake(120, 0, SCREENWIDTH - 120, CGRectGetHeight(_quantityView.frame))];
+        numberTextField.font = FONT14;
+        numberTextField.delegate = self;
+        numberTextField.placeholder = @"请输入物品数量";
+        [_quantityView addSubview:numberTextField];
+        
+        UILabel * bottomLineLabel = [[UILabel alloc] initWithFrame:CGRectMake(0, CGRectGetHeight(_quantityView.frame), SCREENWIDTH, 0.5)];
+        bottomLineLabel.backgroundColor = [UIColor blackColor];
+        [_quantityView addSubview:bottomLineLabel];
+    }
+    return _quantityView;
+}
+
+-(UIView *)hasShelfLifeView{
+    
+    if (!_hasShelfLifeView) {
+        
+        _hasShelfLifeView = [[UIView alloc] initWithFrame:CGRectMake(0, CGRectGetMaxY(self.quantityView.frame), SCREENWIDTH, VIEWHEIGHT)];
+        //有无保质期标题
+        UILabel * hasShelfLifeTitleLabel = [[UILabel alloc] initWithFrame:CGRectMake(20, 0, 100, CGRectGetHeight(_hasShelfLifeView.frame))];
+        hasShelfLifeTitleLabel.font = BOLDFONT14;
+        hasShelfLifeTitleLabel.text = @"有无保质期:";
+        [_hasShelfLifeView addSubview:hasShelfLifeTitleLabel];
+        
+        //有无保质期开关
+        UISwitch * shelfSwitch = [[UISwitch alloc] initWithFrame:CGRectMake(SCREENWIDTH - 51 - 10, (40 - 31) / 2, 51, 31)];
+        [_hasShelfLifeView addSubview:shelfSwitch];
+        
+        UILabel * bottomLineLabel = [[UILabel alloc] initWithFrame:CGRectMake(0, CGRectGetHeight(_hasShelfLifeView.frame), SCREENWIDTH, 0.5)];
+        bottomLineLabel.backgroundColor = [UIColor blackColor];
+        [_hasShelfLifeView addSubview:bottomLineLabel];
+    }
+    return _hasShelfLifeView;
+}
+
+-(UIView *)shelfLifeView{
+    
+    if (!_shelfLifeView) {
+        
+        _shelfLifeView = [[UIView alloc] initWithFrame:CGRectMake(0, CGRectGetMaxY(self.hasShelfLifeView.frame), SCREENWIDTH, VIEWHEIGHT)];
+        //保质期标题
+        UILabel * shelfLifeTitleLabel = [[UILabel alloc] initWithFrame:CGRectMake(20, 0, 100, CGRectGetHeight(_shelfLifeView.frame))];
+        shelfLifeTitleLabel.font = BOLDFONT14;
+        shelfLifeTitleLabel.text = @"保质期:";
+        [_shelfLifeView addSubview:shelfLifeTitleLabel];
+        //保质期
+        UILabel * shelfLifeLabel = [[UILabel alloc] initWithFrame:CGRectMake(120, 0, SCREENWIDTH - 120, CGRectGetHeight(_shelfLifeView.frame))];
+        shelfLifeLabel.font = FONT14;
+        shelfLifeLabel.text = @"请选择物品到期时间";
+        [_shelfLifeView addSubview:shelfLifeLabel];
+        
+        UILabel * bottomLineLabel = [[UILabel alloc] initWithFrame:CGRectMake(0, CGRectGetHeight(_shelfLifeView.frame), SCREENWIDTH, 0.5)];
+        bottomLineLabel.backgroundColor = [UIColor blackColor];
+        [_shelfLifeView addSubview:bottomLineLabel];
+    }
+    return _shelfLifeView;
 }
 
 @end
