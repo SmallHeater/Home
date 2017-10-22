@@ -1,0 +1,23 @@
+//
+//  Home.pch
+//  Home
+//
+//  Created by xianjunwang on 2017/10/21.
+//  Copyright © 2017年 xianjunwang. All rights reserved.
+//
+
+#ifndef Home_pch
+#define Home_pch
+
+// Include any system framework and library headers here that should be included in all compilation units.
+// You will also need to set the Prefix Header build setting of one or more of your targets to reference this file.
+
+//宽高
+#define SCREENWIDTH [UIScreen mainScreen].bounds.size.width
+#define SCREENHEIGHT [UIScreen mainScreen].bounds.size.height
+
+
+//Font
+#define FONT14 [UIFont systemFontOfSize:14.0]
+
+#endif /* Home_pch */
