@@ -10,6 +10,8 @@
 
 @implementation CommodityDataManager
 
+
+#pragma mark  ----  生命周期函数
 //初始化方法
 +(CommodityDataManager *)sharedManager{
     
@@ -19,6 +21,17 @@
         dataManager = [[CommodityDataManager alloc] init];
     });
     return dataManager;
+}
+
+
+#pragma mark  ----  懒加载
+-(NSMutableArray<CommodityModel *> *)dataArray{
+    
+    if (!_dataArray) {
+        
+        _dataArray = [[NSMutableArray alloc] init];
+    }
+    return _dataArray;
 }
 
 @end

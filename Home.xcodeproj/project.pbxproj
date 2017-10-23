@@ -8,6 +8,8 @@
 
 /* Begin PBXBuildFile section */
 		62282C6A1F9CCF8F007E3ABE /* CommodityModel.m in Sources */ = {isa = PBXBuildFile; fileRef = 62282C691F9CCF8F007E3ABE /* CommodityModel.m */; };
+		62282C6D1F9E2C02007E3ABE /* CommodityTableViewCell.m in Sources */ = {isa = PBXBuildFile; fileRef = 62282C6C1F9E2C02007E3ABE /* CommodityTableViewCell.m */; };
+		62282C711F9E2FB1007E3ABE /* NSString+CGSize.m in Sources */ = {isa = PBXBuildFile; fileRef = 62282C701F9E2FB1007E3ABE /* NSString+CGSize.m */; };
 		62B9C0081F9CC0A0006B5F66 /* DatePickView.m in Sources */ = {isa = PBXBuildFile; fileRef = 62B9C0071F9CC0A0006B5F66 /* DatePickView.m */; };
 		62F801311F9B5D780038DD5C /* AppDelegate.m in Sources */ = {isa = PBXBuildFile; fileRef = 62F801301F9B5D780038DD5C /* AppDelegate.m */; };
 		62F801341F9B5D780038DD5C /* ViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 62F801331F9B5D780038DD5C /* ViewController.m */; };
@@ -73,6 +75,10 @@
 /* Begin PBXFileReference section */
 		62282C681F9CCF8F007E3ABE /* CommodityModel.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = CommodityModel.h; sourceTree = "<group>"; };
 		62282C691F9CCF8F007E3ABE /* CommodityModel.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = CommodityModel.m; sourceTree = "<group>"; };
+		62282C6B1F9E2C02007E3ABE /* CommodityTableViewCell.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = CommodityTableViewCell.h; sourceTree = "<group>"; };
+		62282C6C1F9E2C02007E3ABE /* CommodityTableViewCell.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = CommodityTableViewCell.m; sourceTree = "<group>"; };
+		62282C6F1F9E2FB1007E3ABE /* NSString+CGSize.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = "NSString+CGSize.h"; sourceTree = "<group>"; };
+		62282C701F9E2FB1007E3ABE /* NSString+CGSize.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = "NSString+CGSize.m"; sourceTree = "<group>"; };
 		62B9C0061F9CC0A0006B5F66 /* DatePickView.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = DatePickView.h; sourceTree = "<group>"; };
 		62B9C0071F9CC0A0006B5F66 /* DatePickView.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = DatePickView.m; sourceTree = "<group>"; };
 		62F8012C1F9B5D780038DD5C /* Home.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = Home.app; sourceTree = BUILT_PRODUCTS_DIR; };
@@ -179,6 +185,15 @@
 /* End PBXFrameworksBuildPhase section */
 
 /* Begin PBXGroup section */
+		62282C6E1F9E2F4D007E3ABE /* Category */ = {
+			isa = PBXGroup;
+			children = (
+				62282C6F1F9E2FB1007E3ABE /* NSString+CGSize.h */,
+				62282C701F9E2FB1007E3ABE /* NSString+CGSize.m */,
+			);
+			path = Category;
+			sourceTree = "<group>";
+		};
 		62B9C0051F9CBFD6006B5F66 /* View */ = {
 			isa = PBXGroup;
 			children = (
@@ -214,6 +229,7 @@
 		62F8012E1F9B5D780038DD5C /* Home */ = {
 			isa = PBXGroup;
 			children = (
+				62282C6E1F9E2F4D007E3ABE /* Category */,
 				62F801631F9B5DAD0038DD5C /* Base */,
 				62B9C0051F9CBFD6006B5F66 /* View */,
 				62F8020D1F9C99840038DD5C /* Controller */,
@@ -397,6 +413,8 @@
 			children = (
 				62F801C91F9C6AFE0038DD5C /* CategoryTableViewCell.h */,
 				62F801CA1F9C6AFE0038DD5C /* CategoryTableViewCell.m */,
+				62282C6B1F9E2C02007E3ABE /* CommodityTableViewCell.h */,
+				62282C6C1F9E2C02007E3ABE /* CommodityTableViewCell.m */,
 			);
 			path = Cell;
 			sourceTree = "<group>";
@@ -586,6 +604,7 @@
 			buildActionMask = 2147483647;
 			files = (
 				62F8019F1F9B8F910038DD5C /* HomeSource.bundle in Sources */,
+				62282C6D1F9E2C02007E3ABE /* CommodityTableViewCell.m in Sources */,
 				62F801831F9B68F40038DD5C /* BaseTabBarController.m in Sources */,
 				62F801C71F9C689B0038DD5C /* CategoryModel.m in Sources */,
 				62282C6A1F9CCF8F007E3ABE /* CommodityModel.m in Sources */,
@@ -602,6 +621,7 @@
 				62F801861F9B69F50038DD5C /* TabBarController.m in Sources */,
 				62F801771F9B5F310038DD5C /* BaseView.m in Sources */,
 				62F801691F9B5E2A0038DD5C /* CommodityListViewController.m in Sources */,
+				62282C711F9E2FB1007E3ABE /* NSString+CGSize.m in Sources */,
 				62F8013F1F9B5D780038DD5C /* main.m in Sources */,
 				62B9C0081F9CC0A0006B5F66 /* DatePickView.m in Sources */,
 				62F801891F9B7F5C0038DD5C /* BaseTabBarItem.m in Sources */,

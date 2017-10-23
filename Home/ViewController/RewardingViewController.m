@@ -8,6 +8,8 @@
 
 #import "RewardingViewController.h"
 #import "DatePickView.h"
+#import "CommodityModel.h"
+#import "CommodityDataManager.h"
 
 
 #define VIEWHEIGHT 40
@@ -40,6 +42,9 @@
 @property (nonatomic,strong) UILabel * dateLabel;
 //日期选择view
 @property (nonatomic,strong) DatePickView * datePickerView;
+
+//物品模型
+@property (nonatomic,strong) CommodityModel * model;
  
 @end
 
@@ -52,6 +57,8 @@
     
     self.navigationBar.titleLabel.text = @"录入";
     [self.navigationBar addSubview:self.finishBtn];
+    
+    self.model.category = [self.categoryStr copy];
     
     [self.scrollView addSubview:self.categoryView];
     [self.scrollView addSubview:self.commodityView];
@@ -72,6 +79,28 @@
 #pragma mark  ----  代理函数
 #pragma mark  ----  UITextFieldDelegate
 
+-(void)textFieldDidEndEditing:(UITextField *)textField{
+    
+    if (textField.text.length > 0) {
+     
+        if (textField.tag == UITEXTFIEDLBASETAG) {
+            
+            //商品名称
+            self.model.commodityName = textField.text;
+        }
+        else if (textField.tag == UITEXTFIEDLBASETAG + 1){
+            
+            //存放位置
+            self.model.commodityLocation = textField.text;
+        }
+        else if (textField.tag == UITEXTFIEDLBASETAG + 2){
+            
+            //数量
+            self.model.commodityCount = textField.text.integerValue;
+        }
+    }
+}
+
 - (BOOL)textFieldShouldReturn:(UITextField *)textField{
     
     [textField resignFirstResponder];
@@ -83,6 +112,7 @@
 -(void)finishSelectedWithTimeStr:(NSString *)selectedTime{
     
     self.dateLabel.text = selectedTime;
+    self.model.shelfLife = selectedTime;
 }
 
 #pragma mark  ----  自定义函数
@@ -96,7 +126,8 @@
 //完成按钮的响应事件
 -(void)finishBtnClicked:(UIButton *)finishBtn{
     
-    
+    [[CommodityDataManager sharedManager].dataArray addObject:self.model];
+    [self.navigationController popViewControllerAnimated:YES];
 }
 
 //有无保质期开关的响应
@@ -114,6 +145,8 @@
         [self.shelfLifeView removeFromSuperview];
         self.scrollView.contentSize = CGSizeMake(SCREENWIDTH, self.scrollView.contentSize.height - CGRectGetHeight(self.shelfLifeView.frame));
     }
+    
+    self.model.hasShelfLife = shelfSwitch.isOn;
 }
 
 
@@ -350,6 +383,17 @@
         _datePickerView.delegate = self;
     }
     return _datePickerView;
+}
+
+-(CommodityModel *)model{
+    
+    if (!_model) {
+        
+        _model = [[CommodityModel alloc] init];
+        //生成唯一ID
+        _model.commodityID = [[NSUUID UUID] UUIDString];
+    }
+    return _model;
 }
 
 @end

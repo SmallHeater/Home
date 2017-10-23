@@ -9,6 +9,8 @@
 #import "BaseModel.h"
 
 @interface CategoryModel : BaseModel
-
+//品类名
 @property (nonatomic,strong) NSString * categoryName;
+//品类ID
+@property (nonatomic,strong) NSString * categoryID;
 @end

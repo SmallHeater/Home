@@ -8,6 +8,8 @@
 
 #import "CommodityListViewController.h"
 #import "CategorySelectViewController.h"
+#import "CommodityTableViewCell.h"
+#import "CommodityDataManager.h"
 
 
 @interface CommodityListViewController ()
@@ -34,6 +36,10 @@
     
     [super viewWillAppear:animated];
     self.tabBarController.tabBar.hidden = NO;
+    
+    [self.dataArray removeAllObjects];
+    [self.dataArray addObjectsFromArray:[CommodityDataManager sharedManager].dataArray];
+    [self.tableView reloadData];
 }
 
 -(void)viewWillDisappear:(BOOL)animated{
@@ -47,16 +53,30 @@
     // Dispose of any resources that can be recreated.
 }
 
-/*
-#pragma mark - Navigation
+#pragma mark  ----  代理函数
+#pragma mark  ----  UITableViewDataSource
 
-// In a storyboard-based application, you will often want to do a little preparation before navigation
-- (void)prepareForSegue:(UIStoryboardSegue *)segue sender:(id)sender {
-    // Get the new view controller using [segue destinationViewController].
-    // Pass the selected object to the new view controller.
+- (NSInteger)tableView:(UITableView *)tableView numberOfRowsInSection:(NSInteger)section {
+    
+    return self.dataArray.count;
 }
-*/
 
+- (UITableViewCell *)tableView:(UITableView *)tableView cellForRowAtIndexPath:(NSIndexPath *)indexPath{
+    
+    CommodityTableViewCell * cell = [tableView dequeueReusableCellWithIdentifier:@"CommodityTableViewCell"];
+    if (!cell) {
+        
+        cell = [[CommodityTableViewCell alloc] initWithStyle:UITableViewCellStyleDefault reuseIdentifier:@"CommodityTableViewCell"];
+    }
+    cell.commodityModel = self.dataArray[indexPath.row];
+    return cell;
+}
+
+#pragma mark  ----  UITableViewDataSource
+- (CGFloat)tableView:(UITableView *)tableView heightForRowAtIndexPath:(NSIndexPath *)indexPath{
+    
+    return 120.5;
+}
 
 #pragma mark  ----  自定义函数
 -(void)rewardBtnClicked:(UIButton *)btn{
