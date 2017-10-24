@@ -10,21 +10,21 @@
 
 @interface CommodityModel : BaseModel
 //自己生成的唯一ID
-@property (nonatomic,strong) NSString * commodityID;
+@property (nonatomic,copy) NSString * commodityID;
 //品类
-@property (nonatomic,strong) NSString * category;
+@property (nonatomic,copy) NSString * category;
 //品类ID
-@property (nonatomic,strong) NSString * categoryID;
+@property (nonatomic,copy) NSString * categoryID;
 //物品名
-@property (nonatomic,strong) NSString * commodityName;
+@property (nonatomic,copy) NSString * commodityName;
 //物品数量
 @property (nonatomic,assign) NSUInteger commodityCount;
 //物品图片数组
-@property (nonatomic,strong) NSArray * commodityImageArray;
+@property (nonatomic,strong) NSMutableArray * commodityImageArray;
 //物品存放位置
-@property (nonatomic,strong) NSString * commodityLocation;
+@property (nonatomic,copy) NSString * commodityLocation;
 //物品存放位置图片数组
-@property (nonatomic,strong) NSArray * commodityLocationImagesArray;
+@property (nonatomic,strong) NSMutableArray * commodityLocationImagesArray;
 //有无保质期
 @property (nonatomic,assign) BOOL hasShelfLife;
 //保质期

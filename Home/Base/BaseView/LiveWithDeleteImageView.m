@@ -29,7 +29,7 @@
         [self addSubview:self.imageView];
         
         UITapGestureRecognizer * tap = [[UITapGestureRecognizer alloc] initWithTarget:target action:action];
-        [self.imageView addGestureRecognizer:tap];
+        [self addGestureRecognizer:tap];
         
         self.btn.frame = CGRectMake(rect.size.width - 22, 0, 22, 22);
         self.btn.imageEdgeInsets = UIEdgeInsetsMake(0, 6, 6, 0);

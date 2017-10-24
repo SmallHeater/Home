@@ -10,6 +10,7 @@
 		62282C6A1F9CCF8F007E3ABE /* CommodityModel.m in Sources */ = {isa = PBXBuildFile; fileRef = 62282C691F9CCF8F007E3ABE /* CommodityModel.m */; };
 		62282C6D1F9E2C02007E3ABE /* CommodityTableViewCell.m in Sources */ = {isa = PBXBuildFile; fileRef = 62282C6C1F9E2C02007E3ABE /* CommodityTableViewCell.m */; };
 		62282C711F9E2FB1007E3ABE /* NSString+CGSize.m in Sources */ = {isa = PBXBuildFile; fileRef = 62282C701F9E2FB1007E3ABE /* NSString+CGSize.m */; };
+		62282C741F9F7998007E3ABE /* UIColor+Translate.m in Sources */ = {isa = PBXBuildFile; fileRef = 62282C731F9F7998007E3ABE /* UIColor+Translate.m */; };
 		62B9C0081F9CC0A0006B5F66 /* DatePickView.m in Sources */ = {isa = PBXBuildFile; fileRef = 62B9C0071F9CC0A0006B5F66 /* DatePickView.m */; };
 		62DE4B401F9F41CB0086CE06 /* LiveWithDeleteImageView.m in Sources */ = {isa = PBXBuildFile; fileRef = 62DE4B3F1F9F41CB0086CE06 /* LiveWithDeleteImageView.m */; };
 		62DE4B451F9F42890086CE06 /* delete_ful@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = 62DE4B411F9F42890086CE06 /* delete_ful@2x.png */; };
@@ -84,6 +85,8 @@
 		62282C6C1F9E2C02007E3ABE /* CommodityTableViewCell.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = CommodityTableViewCell.m; sourceTree = "<group>"; };
 		62282C6F1F9E2FB1007E3ABE /* NSString+CGSize.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = "NSString+CGSize.h"; sourceTree = "<group>"; };
 		62282C701F9E2FB1007E3ABE /* NSString+CGSize.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = "NSString+CGSize.m"; sourceTree = "<group>"; };
+		62282C721F9F7998007E3ABE /* UIColor+Translate.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = "UIColor+Translate.h"; sourceTree = "<group>"; };
+		62282C731F9F7998007E3ABE /* UIColor+Translate.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = "UIColor+Translate.m"; sourceTree = "<group>"; };
 		62B9C0061F9CC0A0006B5F66 /* DatePickView.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = DatePickView.h; sourceTree = "<group>"; };
 		62B9C0071F9CC0A0006B5F66 /* DatePickView.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = DatePickView.m; sourceTree = "<group>"; };
 		62DE4B3E1F9F41CB0086CE06 /* LiveWithDeleteImageView.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = LiveWithDeleteImageView.h; sourceTree = "<group>"; };
@@ -199,6 +202,8 @@
 		62282C6E1F9E2F4D007E3ABE /* Category */ = {
 			isa = PBXGroup;
 			children = (
+				62282C721F9F7998007E3ABE /* UIColor+Translate.h */,
+				62282C731F9F7998007E3ABE /* UIColor+Translate.m */,
 				62282C6F1F9E2FB1007E3ABE /* NSString+CGSize.h */,
 				62282C701F9E2FB1007E3ABE /* NSString+CGSize.m */,
 			);
@@ -654,6 +659,7 @@
 				62F801A61F9B916E0038DD5C /* SetTableViewController.m in Sources */,
 				62F801BA1F9C3F010038DD5C /* BaseModel.m in Sources */,
 				62F801BD1F9C3F210038DD5C /* ModelWithTitle.m in Sources */,
+				62282C741F9F7998007E3ABE /* UIColor+Translate.m in Sources */,
 				62F801CE1F9C6BFE0038DD5C /* RewardingViewController.m in Sources */,
 				62F801711F9B5EC60038DD5C /* BaseNavViewController.m in Sources */,
 			);

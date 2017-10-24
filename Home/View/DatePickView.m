@@ -30,7 +30,7 @@
     self = [super initWithFrame:CGRectMake(0, 0, SCREENWIDTH, SCREENHEIGHT)];
     if (self) {
         
-        self.backgroundColor = [UIColor colorWithRed:0.5 green:0.5 blue:0.5 alpha:0.4]; 
+        self.backgroundColor = [UIColor colorWithRed:0 green:0 blue:0 alpha:0.4];
         [self.datePickBackgroundView addSubview:self.cancleBtn];
         [self.datePickBackgroundView addSubview:self.sureBtn];
         [self.datePickBackgroundView addSubview:self.datePicker];
@@ -67,7 +67,8 @@
     
     if (!_datePickBackgroundView) {
         
-        _datePickBackgroundView = [[UIView alloc] initWithFrame:CGRectMake(0, SCREENHEIGHT - 300, SCREENWIDTH, 300)];
+        _datePickBackgroundView = [[UIView alloc] initWithFrame:CGRectMake(0, SCREENHEIGHT - 260, SCREENWIDTH, 260)];
+        _datePickBackgroundView.backgroundColor = [UIColor whiteColor];
         [_datePickBackgroundView addSubview:self.cancleBtn];
         [_datePickBackgroundView addSubview:self.sureBtn];
         [_datePickBackgroundView addSubview:self.datePicker];
@@ -82,6 +83,7 @@
         _cancleBtn = [UIButton buttonWithType:UIButtonTypeCustom];
         _cancleBtn.frame = CGRectMake(20, 0, 44, 44);
         [_cancleBtn setTitle:@"取消" forState:UIControlStateNormal];
+        [_cancleBtn setTitleColor:Color_999999 forState:UIControlStateNormal];
         [_cancleBtn addTarget:self action:@selector(cancleBtnClicked:) forControlEvents:UIControlEventTouchUpInside];
     }
     return _cancleBtn;
@@ -94,6 +96,7 @@
         _sureBtn = [UIButton buttonWithType:UIButtonTypeCustom];
         _sureBtn.frame = CGRectMake(SCREENWIDTH - 64, 0, 44, 44);
         [_sureBtn setTitle:@"确定" forState:UIControlStateNormal];
+        [_sureBtn setTitleColor:Color_87BA4B forState:UIControlStateNormal];
         [_sureBtn addTarget:self action:@selector(sureBtnClicked:) forControlEvents:UIControlEventTouchUpInside];
     }
     return _sureBtn;

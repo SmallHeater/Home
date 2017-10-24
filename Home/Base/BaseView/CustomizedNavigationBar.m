@@ -19,7 +19,7 @@
     self = [super initWithFrame:CGRectMake(0, 0, SCREENWIDTH, 64)];
     if (self) {
         
-        self.backgroundColor = [UIColor greenColor];
+        self.backgroundColor = Color_87BA4B;
         [self addSubview:self.backBtn];
         [self addSubview:self.titleLabel];
     }

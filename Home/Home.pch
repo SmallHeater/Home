@@ -14,6 +14,8 @@
 
 #import <Foundation/Foundation.h>
 #import <UIKit/UIKit.h>
+#import "UIColor+Translate.h"
+
 
 //宽高
 #define SCREENWIDTH [UIScreen mainScreen].bounds.size.width
@@ -23,4 +25,12 @@
 //Font
 #define FONT14 [UIFont systemFontOfSize:14.0]
 #define BOLDFONT14 [UIFont boldSystemFontOfSize:14.0]
+
+
+#define Color_87BA4B  [UIColor colorFromHexRGB:@"87BA4B"]
+#define Color_999999  [UIColor colorFromHexRGB:@"999999"]
+#define Color_FFFFFF  [UIColor colorFromHexRGB:@"FFFFFF"]
+
+
+
 #endif /* Home_pch */

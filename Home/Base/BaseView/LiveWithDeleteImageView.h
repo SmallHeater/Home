@@ -15,7 +15,7 @@
 @property (nonatomic,assign) SEL deleteAction;
 
 
-//实例化方法，传递图片的点击事件
+//实例化方法，传递本view的点击事件
 -(instancetype)initWithImage:(UIImage *)image andFrame:(CGRect)rect andTarget:(id)target andAction:(SEL)action andButtonTag:(NSUInteger)btnTag;
 
 
