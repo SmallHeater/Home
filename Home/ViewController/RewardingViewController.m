@@ -11,6 +11,8 @@
 #import "CommodityModel.h"
 #import "CommodityDataManager.h"
 #import "LiveWithDeleteImageView.h"
+#import "MBProgressHUD.h"
+
 
 #define VIEWHEIGHT 40
 #define VIEWWITHIMAGESHEIGHT 119
