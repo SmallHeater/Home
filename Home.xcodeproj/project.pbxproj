@@ -11,6 +11,11 @@
 		62282C6D1F9E2C02007E3ABE /* CommodityTableViewCell.m in Sources */ = {isa = PBXBuildFile; fileRef = 62282C6C1F9E2C02007E3ABE /* CommodityTableViewCell.m */; };
 		62282C711F9E2FB1007E3ABE /* NSString+CGSize.m in Sources */ = {isa = PBXBuildFile; fileRef = 62282C701F9E2FB1007E3ABE /* NSString+CGSize.m */; };
 		62B9C0081F9CC0A0006B5F66 /* DatePickView.m in Sources */ = {isa = PBXBuildFile; fileRef = 62B9C0071F9CC0A0006B5F66 /* DatePickView.m */; };
+		62DE4B401F9F41CB0086CE06 /* LiveWithDeleteImageView.m in Sources */ = {isa = PBXBuildFile; fileRef = 62DE4B3F1F9F41CB0086CE06 /* LiveWithDeleteImageView.m */; };
+		62DE4B451F9F42890086CE06 /* delete_ful@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = 62DE4B411F9F42890086CE06 /* delete_ful@2x.png */; };
+		62DE4B461F9F42890086CE06 /* delete_ful@3x.png in Resources */ = {isa = PBXBuildFile; fileRef = 62DE4B421F9F42890086CE06 /* delete_ful@3x.png */; };
+		62DE4B471F9F42890086CE06 /* photo_duf@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = 62DE4B431F9F42890086CE06 /* photo_duf@2x.png */; };
+		62DE4B481F9F42890086CE06 /* photo_duf@3x.png in Resources */ = {isa = PBXBuildFile; fileRef = 62DE4B441F9F42890086CE06 /* photo_duf@3x.png */; };
 		62F801311F9B5D780038DD5C /* AppDelegate.m in Sources */ = {isa = PBXBuildFile; fileRef = 62F801301F9B5D780038DD5C /* AppDelegate.m */; };
 		62F801341F9B5D780038DD5C /* ViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 62F801331F9B5D780038DD5C /* ViewController.m */; };
 		62F801371F9B5D780038DD5C /* Main.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 62F801351F9B5D780038DD5C /* Main.storyboard */; };
@@ -81,6 +86,12 @@
 		62282C701F9E2FB1007E3ABE /* NSString+CGSize.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = "NSString+CGSize.m"; sourceTree = "<group>"; };
 		62B9C0061F9CC0A0006B5F66 /* DatePickView.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = DatePickView.h; sourceTree = "<group>"; };
 		62B9C0071F9CC0A0006B5F66 /* DatePickView.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = DatePickView.m; sourceTree = "<group>"; };
+		62DE4B3E1F9F41CB0086CE06 /* LiveWithDeleteImageView.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = LiveWithDeleteImageView.h; sourceTree = "<group>"; };
+		62DE4B3F1F9F41CB0086CE06 /* LiveWithDeleteImageView.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = LiveWithDeleteImageView.m; sourceTree = "<group>"; };
+		62DE4B411F9F42890086CE06 /* delete_ful@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "delete_ful@2x.png"; sourceTree = "<group>"; };
+		62DE4B421F9F42890086CE06 /* delete_ful@3x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "delete_ful@3x.png"; sourceTree = "<group>"; };
+		62DE4B431F9F42890086CE06 /* photo_duf@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "photo_duf@2x.png"; sourceTree = "<group>"; };
+		62DE4B441F9F42890086CE06 /* photo_duf@3x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "photo_duf@3x.png"; sourceTree = "<group>"; };
 		62F8012C1F9B5D780038DD5C /* Home.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = Home.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		62F8012F1F9B5D780038DD5C /* AppDelegate.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = AppDelegate.h; sourceTree = "<group>"; };
 		62F801301F9B5D780038DD5C /* AppDelegate.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = AppDelegate.m; sourceTree = "<group>"; };
@@ -309,6 +320,8 @@
 		62F8016A1F9B5E9F0038DD5C /* BaseView */ = {
 			isa = PBXGroup;
 			children = (
+				62DE4B3E1F9F41CB0086CE06 /* LiveWithDeleteImageView.h */,
+				62DE4B3F1F9F41CB0086CE06 /* LiveWithDeleteImageView.m */,
 				62F801751F9B5F310038DD5C /* BaseView.h */,
 				62F801761F9B5F310038DD5C /* BaseView.m */,
 				62F801781F9B60EC0038DD5C /* CustomizedNavigationBar.h */,
@@ -344,6 +357,10 @@
 		62F8018F1F9B8C390038DD5C /* HomeSource */ = {
 			isa = PBXGroup;
 			children = (
+				62DE4B411F9F42890086CE06 /* delete_ful@2x.png */,
+				62DE4B421F9F42890086CE06 /* delete_ful@3x.png */,
+				62DE4B431F9F42890086CE06 /* photo_duf@2x.png */,
+				62DE4B441F9F42890086CE06 /* photo_duf@3x.png */,
 				62F801951F9B8CC20038DD5C /* 1.png */,
 				62F801941F9B8CC20038DD5C /* 2.png */,
 				62F801901F9B8C390038DD5C /* Info.plist */,
@@ -591,8 +608,12 @@
 			isa = PBXResourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				62DE4B461F9F42890086CE06 /* delete_ful@3x.png in Resources */,
+				62DE4B471F9F42890086CE06 /* photo_duf@2x.png in Resources */,
+				62DE4B481F9F42890086CE06 /* photo_duf@3x.png in Resources */,
 				62F801961F9B8CC20038DD5C /* 2.png in Resources */,
 				62F801971F9B8CC20038DD5C /* 1.png in Resources */,
+				62DE4B451F9F42890086CE06 /* delete_ful@2x.png in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -620,6 +641,7 @@
 				62F801741F9B5F030038DD5C /* BaseViewController.m in Sources */,
 				62F801861F9B69F50038DD5C /* TabBarController.m in Sources */,
 				62F801771F9B5F310038DD5C /* BaseView.m in Sources */,
+				62DE4B401F9F41CB0086CE06 /* LiveWithDeleteImageView.m in Sources */,
 				62F801691F9B5E2A0038DD5C /* CommodityListViewController.m in Sources */,
 				62282C711F9E2FB1007E3ABE /* NSString+CGSize.m in Sources */,
 				62F8013F1F9B5D780038DD5C /* main.m in Sources */,
@@ -748,7 +770,7 @@
 				GCC_WARN_UNINITIALIZED_AUTOS = YES_AGGRESSIVE;
 				GCC_WARN_UNUSED_FUNCTION = YES;
 				GCC_WARN_UNUSED_VARIABLE = YES;
-				IPHONEOS_DEPLOYMENT_TARGET = 11.0;
+				IPHONEOS_DEPLOYMENT_TARGET = 9.0;
 				MTL_ENABLE_DEBUG_INFO = YES;
 				ONLY_ACTIVE_ARCH = YES;
 				SDKROOT = iphoneos;
@@ -797,7 +819,7 @@
 				GCC_WARN_UNINITIALIZED_AUTOS = YES_AGGRESSIVE;
 				GCC_WARN_UNUSED_FUNCTION = YES;
 				GCC_WARN_UNUSED_VARIABLE = YES;
-				IPHONEOS_DEPLOYMENT_TARGET = 11.0;
+				IPHONEOS_DEPLOYMENT_TARGET = 9.0;
 				MTL_ENABLE_DEBUG_INFO = NO;
 				SDKROOT = iphoneos;
 				VALIDATE_PRODUCT = YES;

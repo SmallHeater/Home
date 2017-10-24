@@ -10,14 +10,14 @@
 #import "DatePickView.h"
 #import "CommodityModel.h"
 #import "CommodityDataManager.h"
-
+#import "LiveWithDeleteImageView.h"
 
 #define VIEWHEIGHT 40
-#define VIEWWITHIMAGESHEIGHT 90
+#define VIEWWITHIMAGESHEIGHT 119
 #define UITEXTFIEDLBASETAG  1230
 
 
-@interface RewardingViewController () <UITextFieldDelegate,DatePickViewDelegate>
+@interface RewardingViewController () <UITextFieldDelegate,DatePickViewDelegate,UIImagePickerControllerDelegate,UINavigationControllerDelegate>
 
 //完成按钮
 @property (nonatomic,strong) UIButton * finishBtn;
@@ -115,6 +115,13 @@
     self.model.shelfLife = selectedTime;
 }
 
+#pragma mark  ----  UIImagePickerControllerDelegate
+- (void)imagePickerController:(UIImagePickerController *)picker didFinishPickingImage:(UIImage *)image editingInfo:(NSDictionary *)editingInfo
+{
+    [picker dismissViewControllerAnimated:YES completion:^{
+    }];
+}
+
 #pragma mark  ----  自定义函数
 //重写返回方法
 -(void)backBtnClicked:(UIButton *)btn{
@@ -154,6 +161,57 @@
 -(void)shelfLiftLabelTaped:(UIGestureRecognizer *)ges{
     
     [self.view addSubview:self.datePickerView];
+}
+
+//添加商品图片点击的响应事件
+-(void)commodityImageViewTaped:(UIGestureRecognizer *)ges{
+
+    [self showImgSelect];
+}
+
+//弹出图片选择方式
+-(void)showImgSelect{
+    
+    UIAlertController * actionController = [UIAlertController alertControllerWithTitle:@"上传照片" message:nil preferredStyle:UIAlertControllerStyleActionSheet];
+    UIAlertAction * takePhotoAction = [UIAlertAction actionWithTitle:@"拍照" style:UIAlertActionStyleDefault handler:^(UIAlertAction * _Nonnull action) {
+        UIImagePickerControllerSourceType sourceType=UIImagePickerControllerSourceTypeCamera;
+        if(![UIImagePickerController isSourceTypeAvailable:UIImagePickerControllerSourceTypeCamera])
+        {
+            sourceType=UIImagePickerControllerSourceTypePhotoLibrary;
+        }
+        UIImagePickerController *picker=[[UIImagePickerController alloc]init];
+        picker.delegate=self;
+        picker.sourceType=sourceType;
+        picker.allowsEditing = NO;
+        
+        
+        [self  presentViewController:picker animated:YES completion:^{
+            
+        }];
+    }];
+    UIAlertAction * pictureAction = [UIAlertAction actionWithTitle:@"从相册选取" style:UIAlertActionStyleDefault handler:^(UIAlertAction * _Nonnull action) {
+        UIImagePickerControllerSourceType sourceType=UIImagePickerControllerSourceTypePhotoLibrary;
+        UIImagePickerController *picker=[[UIImagePickerController alloc]init];
+        picker.delegate=self;
+        picker.sourceType=sourceType;
+        picker.allowsEditing = NO;
+        
+        [self  presentViewController:picker animated:YES completion:^{
+            
+        }];
+    }];
+    UIAlertAction * cancleAction = [UIAlertAction actionWithTitle:@"取消" style:UIAlertActionStyleCancel handler:^(UIAlertAction * _Nonnull action) {
+        
+    }];
+    
+    [actionController addAction:takePhotoAction];
+    [actionController addAction:pictureAction];
+    [actionController addAction:cancleAction];
+    
+    
+    [self presentViewController:actionController animated:YES completion:^{
+        
+    }];
 }
 
 #pragma mark  ----  懒加载
@@ -239,9 +297,11 @@
         commodityImagesTitleLabel.text = @"物品图片:";
         [_commodityImageView addSubview:commodityImagesTitleLabel];
         //商品图片
-        UIImageView * commodityImageView = [[UIImageView alloc] initWithFrame:CGRectMake(20, VIEWHEIGHT + 5, 40, 40)];
-        commodityImageView.backgroundColor = [UIColor grayColor];
+
+        LiveWithDeleteImageView * commodityImageView = [[LiveWithDeleteImageView alloc] initWithImage:[UIImage imageNamed:@"HomeSource.bundle/photo_duf.tiff"] andFrame:CGRectMake(20, CGRectGetMaxY(commodityImagesTitleLabel.frame) + 5, 114, 69) andTarget:self andAction:@selector(commodityImageViewTaped:) andButtonTag:10 + 1];
         [_commodityImageView addSubview:commodityImageView];
+        
+        
         
         UILabel * bottomLineLabel = [[UILabel alloc] initWithFrame:CGRectMake(0, CGRectGetHeight(_commodityImageView.frame), SCREENWIDTH, 0.5)];
         bottomLineLabel.backgroundColor = [UIColor blackColor];
