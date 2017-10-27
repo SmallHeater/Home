@@ -233,6 +233,13 @@
 			path = View;
 			sourceTree = "<group>";
 		};
+		62DE4C661FA326B60086CE06 /* BaseNSObject */ = {
+			isa = PBXGroup;
+			children = (
+			);
+			path = BaseNSObject;
+			sourceTree = "<group>";
+		};
 		62F801231F9B5D780038DD5C = {
 			isa = PBXGroup;
 			children = (
@@ -327,6 +334,7 @@
 		62F801631F9B5DAD0038DD5C /* Base */ = {
 			isa = PBXGroup;
 			children = (
+				62DE4C661FA326B60086CE06 /* BaseNSObject */,
 				62F8020E1F9C998D0038DD5C /* BaseController */,
 				62F801B71F9C3EEE0038DD5C /* BaseModel */,
 				62F801AA1F9C33CE0038DD5C /* BaseCell */,
