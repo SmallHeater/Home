@@ -12,7 +12,7 @@
 #import "CommodityDataManager.h"
 #import "LiveWithDeleteImageView.h"
 #import "MBProgressHUD.h"
-
+#import "SHFMDBManager.h"
 
 #define VIEWHEIGHT 40
 #define VIEWWITHIMAGESHEIGHT 119
@@ -84,6 +84,18 @@
     [self.scrollView addSubview:self.hasShelfLifeView];
     
     [self.view addSubview:self.scrollView];
+}
+
+-(void)viewWillAppear:(BOOL)animated{
+    
+    [super viewWillAppear:animated];
+    [MobClick beginLogPageView:@"物品录入页面"];
+}
+
+-(void)viewWillDisappear:(BOOL)animated{
+    
+    [super viewWillDisappear:animated];
+    [MobClick endLogPageView:@"物品录入页面"];
 }
 
 - (void)didReceiveMemoryWarning {
@@ -165,6 +177,8 @@
     [self.model.commodityLocationImagesArray addObject:self.locationImageViewArray];
     [[CommodityDataManager sharedManager].dataArray addObject:self.model];
     [self.navigationController popViewControllerAnimated:YES];
+    
+    [[SHFMDBManager sharedManager]insertCommodityModel:self.model];
 }
 
 //有无保质期开关的响应

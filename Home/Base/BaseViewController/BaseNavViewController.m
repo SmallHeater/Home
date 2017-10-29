@@ -14,6 +14,7 @@
 -(void)viewDidLoad{
     
     [super viewDidLoad];
+    self.view.backgroundColor = [UIColor whiteColor];
     [self.view addSubview:self.navigationBar];
     [self.navigationBar.backBtn addTarget:self action:@selector(backBtnClicked:) forControlEvents:UIControlEventTouchUpInside];
 }

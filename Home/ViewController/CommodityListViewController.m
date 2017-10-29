@@ -10,6 +10,8 @@
 #import "CategorySelectViewController.h"
 #import "CommodityTableViewCell.h"
 #import "CommodityDataManager.h"
+#import "LogInViewController.h"
+#import "SHFMDBManager.h"
 
 
 @interface CommodityListViewController ()
@@ -30,11 +32,14 @@
     self.view.backgroundColor = [UIColor whiteColor];
     
     [self.navigationBar addSubview:self.rewardBtn];
+    
+    [SHFMDBManager sharedManager];
 }
 
 -(void)viewWillAppear:(BOOL)animated{
     
     [super viewWillAppear:animated];
+    [MobClick beginLogPageView:@"物品清单页面"];
     self.tabBarController.tabBar.hidden = NO;
     
     [self.dataArray removeAllObjects];
@@ -45,6 +50,7 @@
 -(void)viewWillDisappear:(BOOL)animated{
     
     [super viewWillDisappear:animated];
+    [MobClick endLogPageView:@"物品清单页面"];
     self.tabBarController.tabBar.hidden = YES;
 }
 
@@ -83,6 +89,9 @@
     
     CategorySelectViewController * categorySelectVC = [[CategorySelectViewController alloc] init];
     [self.navigationController pushViewController:categorySelectVC animated:YES];
+    
+//    LogInViewController * loginVC = [[LogInViewController alloc] init];
+//    [self.navigationController pushViewController:loginVC animated:YES];
 }
 
 #pragma mark  ----  懒加载

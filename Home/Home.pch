@@ -16,6 +16,10 @@
 #import <UIKit/UIKit.h>
 #import "UIColor+Translate.h"
 
+#import "Crasheye.h"                    //崩溃日志收集
+#import <UMCommon/UMCommon.h>           // 公共组件是所有友盟产品的基础组件，必选
+#import <UMAnalytics/MobClick.h>        // 统计组件
+
 
 //宽高
 #define SCREENWIDTH [UIScreen mainScreen].bounds.size.width

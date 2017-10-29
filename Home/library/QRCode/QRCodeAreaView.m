@@ -7,7 +7,7 @@
 //
 
 #import "QRCodeAreaView.h"
-#import "UIViewExt.h"
+//#import "UIViewExt.h"
 
 @interface QRCodeAreaView()
 
@@ -48,8 +48,8 @@
         self.backgroundColor = [UIColor clearColor];
         
         UIImageView *areaView = [[UIImageView alloc]initWithImage:[UIImage imageNamed:@"JHLivePlayBundle.bundle/frame_icon.tiff"]];
-        areaView.width = self.width;
-        areaView.height = self.height;
+        //areaView.width = self.width;
+        //areaView.height = self.height;
         [self addSubview:areaView];
         
         self.timer = [NSTimer scheduledTimerWithTimeInterval:0.01 target:self selector:@selector(setNeedsDisplay) userInfo:nil repeats:YES];

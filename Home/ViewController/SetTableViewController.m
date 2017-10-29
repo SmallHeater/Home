@@ -22,6 +22,7 @@
     [super viewDidLoad];
     
     self.navigationBar.titleLabel.text = @"设置";
+    self.navigationBar.backBtn.hidden = YES;
     self.view.backgroundColor = [UIColor grayColor];
     
     //指纹锁模型
@@ -50,6 +51,20 @@
     ModelWithTitle * rewardModel = [[ModelWithTitle alloc] init];
     rewardModel.title = @"打赏一元";
     [self.dataArray addObject:rewardModel];
+}
+
+-(void)viewWillAppear:(BOOL)animated{
+    
+    [super viewWillAppear:animated];
+    [MobClick beginLogPageView:@"设置页面"];
+    
+    self.tabBarController.tabBar.hidden = NO;
+}
+
+-(void)viewWillDisappear:(BOOL)animated{
+    
+    [super viewWillDisappear:animated];
+    [MobClick endLogPageView:@"设置页面"];
 }
 
 - (void)didReceiveMemoryWarning {

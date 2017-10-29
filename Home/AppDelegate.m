@@ -12,6 +12,7 @@
 #import "SetTableViewController.h"
 #import "BaseTabBarItem.h"
 
+
 @interface AppDelegate ()
 
 @end
@@ -21,6 +22,14 @@
 
 - (BOOL)application:(UIApplication *)application didFinishLaunchingWithOptions:(NSDictionary *)launchOptions {
     // Override point for customization after application launch.
+    
+    [Crasheye initWithAppKey:@"059063f0"];
+    
+    // 配置友盟SDK产品并并统一初始化
+    [UMConfigure setEncryptEnabled:YES]; // optional: 设置加密传输, 默认NO.
+    [UMConfigure initWithAppkey:@"59f471c88f4a9d6474000010" channel:@"App Store"];
+    // 统计组件配置
+    [MobClick setScenarioType:E_UM_NORMAL];
     
     BaseTabBarController * tabbarController = [[BaseTabBarController alloc] init];
     CommodityListViewController * listViewController = [[CommodityListViewController alloc] init];
