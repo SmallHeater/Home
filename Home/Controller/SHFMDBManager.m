@@ -29,7 +29,7 @@
         if ([manager.db open])
         {
             //4.创表（CommodityImageArray，CommodityLocationImageArray，存储前，数组归档(NSKeyedArchiver)为二进制数据，再存入数据库；从数据库取出时肯定也是取出的二进制数据，这时要将二进制数据解档（NSKeyedUnArchiver）为数组）
-            BOOL result = [manager.db executeUpdate:@"CREATE TABLE IF NOT EXISTS Home_CommodityTable (CommodityID text NOT NULL,CommodityName text NOT NULL,CommodityImageArray text NOT NULL,CategoryID text NOT NULL,CategoryName text NOT NULL,CommodityLocation text NOT NULL,CommodityLocationImageArray text NOT NULL,hasShelfLife BOOL,shelfLife text);"];
+            BOOL result = [manager.db executeUpdate:@"CREATE TABLE IF NOT EXISTS Home_CommodityTable (CommodityID text NOT NULL,CommodityName text NOT NULL,CommodityImageArray blob NOT NULL,CommodityCount integer,CategoryID text NOT NULL,CategoryName text NOT NULL,CommodityLocation text NOT NULL,CommodityLocationImageArray blob NOT NULL,hasShelfLife integer,shelfLife text);"];
             if (result)
             {
                 NSLog(@"创建表成功");
@@ -47,10 +47,12 @@
     BOOL result = NO;
     if ([self.db open]) {
         
-        NSData * commodityImageArrayData = [NSJSONSerialization dataWithJSONObject:model.commodityImageArray options:NSJSONWritingPrettyPrinted error:nil];
-        NSData * commodityLocationImageArrayData = [NSJSONSerialization dataWithJSONObject:model.commodityLocationImagesArray options:NSJSONWritingPrettyPrinted error:nil];
+        NSData * commodityImageArrayData = [NSKeyedArchiver archivedDataWithRootObject:model.commodityImageArray];
+        NSData * commodityLocationImageArrayData = [NSKeyedArchiver archivedDataWithRootObject:model.commodityLocationImagesArray];
         
-        result = [self.db executeUpdate:@"INSERT INTO Home_CommodityTable (CommodityID,CommodityName,CommodityImageArray,CategoryID,CategoryName,CommodityLocation,CommodityLocationImageArray,hasShelfLife,shelfLife) VALUES (?,?,?,?,?,?,?,?,?)",model.commodityID,model.commodityName,commodityImageArrayData,model.categoryID,model.category,model.commodityLocation,commodityLocationImageArrayData,model.hasShelfLife,model.shelfLife];
+        NSString * sql = [[NSString alloc] initWithFormat:@"INSERT INTO Home_CommodityTable(CommodityID,CommodityName,CommodityImageArray,CommodityCount,CategoryID,CategoryName,CommodityLocation,CommodityLocationImageArray,hasShelfLife,shelfLife) VALUES (?,?,?,?,?,?,?,?,?,?)"];
+        
+        result = [self.db executeUpdate:sql,model.commodityID,model.commodityName,commodityImageArrayData,[NSNumber numberWithUnsignedInteger:model.commodityCount],model.categoryID,model.category,model.commodityLocation,commodityLocationImageArrayData,[NSNumber numberWithBool:model.hasShelfLife],model.shelfLife];
         if (result) {
             
             NSLog(@"成功");
@@ -97,7 +99,7 @@
         NSData * commodityImageArrayData = [NSJSONSerialization dataWithJSONObject:model.commodityImageArray options:NSJSONWritingPrettyPrinted error:nil];
         NSData * commodityLocationImageArrayData = [NSJSONSerialization dataWithJSONObject:model.commodityLocationImagesArray options:NSJSONWritingPrettyPrinted error:nil];
         
-        result = [self.db executeUpdate:@"UPDATE Home_CommodityTable set CommodityName = '%@', CommodityImageArray = '%@', CategoryID = '%@', CategoryName = '%@', CommodityLocation = '%@', CommodityLocationImageArray = '%@', hasShelfLife = '%d', shelfLife = '%@' where CommodityID = '%d'",model.commodityName,commodityImageArrayData,model.categoryID,model.category,model.commodityLocation,commodityLocationImageArrayData,model.hasShelfLife,model.shelfLife,model.commodityID];
+        result = [self.db executeUpdate:@"UPDATE Home_CommodityTable set CommodityName = '%@', CommodityImageArray = '%@', CategoryID = '%@', CategoryName = '%@', CommodityLocation = '%@', CommodityLocationImageArray = '%@', hasShelfLife = '%d', shelfLife = '%@' where CommodityID = '%d'",model.commodityName,commodityImageArrayData,model.categoryID,model.category,model.commodityLocation,commodityLocationImageArrayData,model.hasShelfLife,@"rr",model.commodityID];
         if (result) {
             
             NSLog(@"成功");
@@ -126,22 +128,18 @@
             //创建对象
             CommodityModel * model = [[CommodityModel alloc]init];
             model.commodityID = [set stringForColumn:@"commodityID"];
-            model.category = [set stringForColumn:@"category"];
+            model.category = [set stringForColumn:@"CategoryName"];
             model.categoryID = [set stringForColumn:@"categoryID"];
             model.commodityName = [set stringForColumn:@"commodityName"];
             model.commodityCount = [set intForColumn:@"commodityCount"];
-            NSData * commodityImageArrayData = [set dataForColumn:@"shelfLife"];
-            /*
-            NSJSONReadingMutableContainers = (1UL << 0), // 返回的是一个可变数组或者字段
-            NSJSONReadingMutableLeaves = (1UL << 1), // 不仅返回的最外层是可变的, 内部的子数值或字典也是可变对象
-            NSJSONReadingAllowFragments = (1UL << 2) // 返回的最外侧可不是字典或者数组 可以是如 "10"
-            */
-            NSMutableArray * commodityImageArray = [NSJSONSerialization JSONObjectWithData:commodityImageArrayData options:NSJSONReadingMutableContainers error:nil];
+            NSData * commodityImageArrayData = [set dataForColumn:@"commodityImageArray"];
+            
+            NSMutableArray * commodityImageArray = [NSKeyedUnarchiver unarchiveObjectWithData:commodityImageArrayData];
             model.commodityImageArray = commodityImageArray;
             model.commodityLocation = [set stringForColumn:@"commodityLocation"];
             
-            NSData * commodityLocationImagesArrayData = [set dataForColumn:@"commodityLocationImagesArray"];
-            NSMutableArray * commodityLocationImagesArray = [NSJSONSerialization JSONObjectWithData:commodityLocationImagesArrayData options:NSJSONReadingMutableContainers error:nil];
+            NSData * commodityLocationImagesArrayData = [set dataForColumn:@"CommodityLocationImageArray"];
+            NSMutableArray * commodityLocationImagesArray = [NSKeyedUnarchiver unarchiveObjectWithData:commodityLocationImagesArrayData];
             model.commodityLocationImagesArray = commodityLocationImagesArray;
             model.hasShelfLife = [set boolForColumn:@"hasShelfLife"];
             model.shelfLife = [set stringForColumn:@"shelfLife"];

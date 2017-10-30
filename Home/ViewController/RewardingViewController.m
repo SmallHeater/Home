@@ -595,6 +595,8 @@
         _model = [[CommodityModel alloc] init];
         //生成唯一ID
         _model.commodityID = [[NSUUID UUID] UUIDString];
+        _model.categoryID = @"123";
+        _model.commodityCount = 1;
     }
     return _model;
 }

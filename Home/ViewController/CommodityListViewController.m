@@ -33,7 +33,7 @@
     
     [self.navigationBar addSubview:self.rewardBtn];
     
-    [SHFMDBManager sharedManager];
+    
 }
 
 -(void)viewWillAppear:(BOOL)animated{
@@ -44,6 +44,8 @@
     
     [self.dataArray removeAllObjects];
     [self.dataArray addObjectsFromArray:[CommodityDataManager sharedManager].dataArray];
+    NSMutableArray * dataArray = [[SHFMDBManager sharedManager] selecTable];
+    [self.dataArray addObjectsFromArray:dataArray];
     [self.tableView reloadData];
 }
 
