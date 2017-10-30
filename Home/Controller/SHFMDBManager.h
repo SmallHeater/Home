@@ -13,6 +13,12 @@
 @interface SHFMDBManager : NSObject
 +(SHFMDBManager *)sharedManager;
 
-
+//增
 -(BOOL)insertCommodityModel:(CommodityModel *)model;
+//删
+-(BOOL)deleteCommodityModel:(CommodityModel *)model;
+//改
+-(BOOL)updateCommodityModel:(CommodityModel *)model;
+//查
+-(NSMutableArray<CommodityModel *> *)selecTable;
 @end

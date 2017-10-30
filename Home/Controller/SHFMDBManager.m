@@ -34,27 +34,127 @@
             {
                 NSLog(@"创建表成功");
             }
+            [manager.db close];
         }
     });
     return manager;
 }
 
 #pragma mark  ----  自定义方法
+//增
 -(BOOL)insertCommodityModel:(CommodityModel *)model{
     
-    NSData * commodityImageArrayData = [NSJSONSerialization dataWithJSONObject:model.commodityImageArray options:NSJSONWritingPrettyPrinted error:nil];
-    NSData * commodityLocationImageArrayData = [NSJSONSerialization dataWithJSONObject:model.commodityLocationImagesArray options:NSJSONWritingPrettyPrinted error:nil];
+    BOOL result = NO;
+    if ([self.db open]) {
+        
+        NSData * commodityImageArrayData = [NSJSONSerialization dataWithJSONObject:model.commodityImageArray options:NSJSONWritingPrettyPrinted error:nil];
+        NSData * commodityLocationImageArrayData = [NSJSONSerialization dataWithJSONObject:model.commodityLocationImagesArray options:NSJSONWritingPrettyPrinted error:nil];
+        
+        result = [self.db executeUpdate:@"INSERT INTO Home_CommodityTable (CommodityID,CommodityName,CommodityImageArray,CategoryID,CategoryName,CommodityLocation,CommodityLocationImageArray,hasShelfLife,shelfLife) VALUES (?,?,?,?,?,?,?,?,?)",model.commodityID,model.commodityName,commodityImageArrayData,model.categoryID,model.category,model.commodityLocation,commodityLocationImageArrayData,model.hasShelfLife,model.shelfLife];
+        if (result) {
+            
+            NSLog(@"成功");
+        }
+        else{
+            
+            NSLog(@"失败");
+        }
+    }
+    //关闭数据库
+    [self.db close];
     
-    BOOL result = [self.db executeUpdate:@"INSERT INTO Home_CommodityTable (CommodityID,CommodityName,CommodityImageArray,CategoryID,CategoryName,CommodityLocation,CommodityLocationImageArray,hasShelfLife,shelfLife) VALUES (?,?,?,?,?,?,?,?,?)",model.commodityID,model.commodityName,commodityImageArrayData,model.categoryID,model.category,model.commodityLocation,commodityLocationImageArrayData,model.hasShelfLife,model.shelfLife];
-    if (result) {
-        
-        NSLog(@"成功");
-    }
-    else{
-        
-        NSLog(@"失败");
-    }
     return result;
+}
+
+//删
+-(BOOL)deleteCommodityModel:(CommodityModel *)model{
+    
+    BOOL result = NO;
+    if ([self.db open]) {
+        
+        result = [self.db executeUpdate:@"delete from Home_CommodityTable where CommodityID = '%@'",model.commodityID];
+        if (result) {
+            
+            NSLog(@"成功");
+        }
+        else{
+            
+            NSLog(@"失败");
+        }
+    }
+    //关闭数据库
+    [self.db close];
+    
+    return result;
+}
+
+//改
+-(BOOL)updateCommodityModel:(CommodityModel *)model{
+    
+    BOOL result = NO;
+    if ([self.db open]) {
+        
+        NSData * commodityImageArrayData = [NSJSONSerialization dataWithJSONObject:model.commodityImageArray options:NSJSONWritingPrettyPrinted error:nil];
+        NSData * commodityLocationImageArrayData = [NSJSONSerialization dataWithJSONObject:model.commodityLocationImagesArray options:NSJSONWritingPrettyPrinted error:nil];
+        
+        result = [self.db executeUpdate:@"UPDATE Home_CommodityTable set CommodityName = '%@', CommodityImageArray = '%@', CategoryID = '%@', CategoryName = '%@', CommodityLocation = '%@', CommodityLocationImageArray = '%@', hasShelfLife = '%d', shelfLife = '%@' where CommodityID = '%d'",model.commodityName,commodityImageArrayData,model.categoryID,model.category,model.commodityLocation,commodityLocationImageArrayData,model.hasShelfLife,model.shelfLife,model.commodityID];
+        if (result) {
+            
+            NSLog(@"成功");
+        }
+        else{
+            
+            NSLog(@"失败");
+        }
+    }
+    //关闭数据库
+    [self.db close];
+    
+    return result;
+}
+
+//查
+-(NSMutableArray<CommodityModel *> *)selecTable{
+
+    NSMutableArray * dataArray = [[NSMutableArray alloc] init];
+    if ([self.db open]) {
+        //创建sql语句
+        NSString *sql = @"select * from Home_CommodityTable";
+        //执行查询
+        FMResultSet *set = [self.db executeQuery:sql];
+        while ([set next]) {
+            //创建对象
+            CommodityModel * model = [[CommodityModel alloc]init];
+            model.commodityID = [set stringForColumn:@"commodityID"];
+            model.category = [set stringForColumn:@"category"];
+            model.categoryID = [set stringForColumn:@"categoryID"];
+            model.commodityName = [set stringForColumn:@"commodityName"];
+            model.commodityCount = [set intForColumn:@"commodityCount"];
+            NSData * commodityImageArrayData = [set dataForColumn:@"shelfLife"];
+            /*
+            NSJSONReadingMutableContainers = (1UL << 0), // 返回的是一个可变数组或者字段
+            NSJSONReadingMutableLeaves = (1UL << 1), // 不仅返回的最外层是可变的, 内部的子数值或字典也是可变对象
+            NSJSONReadingAllowFragments = (1UL << 2) // 返回的最外侧可不是字典或者数组 可以是如 "10"
+            */
+            NSMutableArray * commodityImageArray = [NSJSONSerialization JSONObjectWithData:commodityImageArrayData options:NSJSONReadingMutableContainers error:nil];
+            model.commodityImageArray = commodityImageArray;
+            model.commodityLocation = [set stringForColumn:@"commodityLocation"];
+            
+            NSData * commodityLocationImagesArrayData = [set dataForColumn:@"commodityLocationImagesArray"];
+            NSMutableArray * commodityLocationImagesArray = [NSJSONSerialization JSONObjectWithData:commodityLocationImagesArrayData options:NSJSONReadingMutableContainers error:nil];
+            model.commodityLocationImagesArray = commodityLocationImagesArray;
+            model.hasShelfLife = [set boolForColumn:@"hasShelfLife"];
+            model.shelfLife = [set stringForColumn:@"shelfLife"];
+            //加入数组
+            [dataArray addObject:model];
+        }
+    }else{
+        NSLog(@"打开数据库失败！");
+    }
+    //关闭数据库
+    [self.db close];
+    
+    return dataArray;
 }
 
 #pragma mark  ----  懒加载
