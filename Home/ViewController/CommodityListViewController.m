@@ -12,7 +12,8 @@
 #import "CommodityDataManager.h"
 #import "LogInViewController.h"
 #import "SHFMDBManager.h"
-
+//苹果自带内容索引
+#import <CoreSpotlight/CoreSpotlight.h>
 
 @interface CommodityListViewController ()
 //录入按钮
@@ -46,6 +47,7 @@
     [self.dataArray addObjectsFromArray:[CommodityDataManager sharedManager].dataArray];
     NSMutableArray * dataArray = [[SHFMDBManager sharedManager] selecTable];
     [self.dataArray addObjectsFromArray:dataArray];
+    [self saveApplyListWithArray:dataArray];
     [self.tableView reloadData];
 }
 
@@ -94,6 +96,56 @@
     
 //    LogInViewController * loginVC = [[LogInViewController alloc] init];
 //    [self.navigationController pushViewController:loginVC animated:YES];
+}
+
+#pragma mark  ----  添加内容索引
+-(void)saveApplyListWithArray:(NSArray *)arr{
+    
+    NSMutableArray * tempStoreModelArray = [[NSMutableArray alloc] init];
+    [tempStoreModelArray addObjectsFromArray:arr];
+    
+    dispatch_async(dispatch_get_global_queue(0, 0), ^{
+        
+        NSMutableArray <CSSearchableItem *> * searchableItem = [[NSMutableArray alloc] init];
+        
+        if (tempStoreModelArray.count > 0) {
+            
+            for (NSDictionary * dic in tempStoreModelArray) {
+                
+                if (dic && [dic isKindOfClass:[NSDictionary class]]) {
+                    
+                    CSSearchableItemAttributeSet * attritable = [[CSSearchableItemAttributeSet alloc] initWithItemContentType:@"image"];
+                    attritable.title = dic[@"storeName"];
+                    
+                    NSString * storeState;
+                    if ([dic[@"auditStatus"] intValue] == 0) {
+                        
+                        storeState = @"申请中";
+                    }
+                    else{
+                        
+                        storeState = @"审核中";
+                    }
+                    
+                    attritable.contentDescription = storeState;
+                    
+                    NSString * identifier = [[NSString alloc] initWithFormat:@"ApplyForSettled/%@",dic[@"storeId"]];
+                    
+                    CSSearchableItem * item = [[CSSearchableItem alloc] initWithUniqueIdentifier:identifier domainIdentifier:@"storeList" attributeSet:attritable];
+                    [searchableItem addObject:item];
+                }
+            }
+            
+            //注入
+            [[CSSearchableIndex defaultSearchableIndex] indexSearchableItems:searchableItem completionHandler:^(NSError * _Nullable error) {
+                
+                if (error) {
+                    
+                    NSLog(@"注入错误：%@",error);
+                }
+            }];
+        }
+    });
 }
 
 #pragma mark  ----  懒加载
