@@ -148,6 +148,16 @@
     });
 }
 
+//删除所有内容索引
+-(void)deleteAll{
+
+    [[CSSearchableIndex defaultSearchableIndex] deleteAllSearchableItemsWithCompletionHandler:^(NSError * _Nullable error) {
+        if (error) {
+            NSLog(@"%@", error.localizedDescription);
+        }
+    }];
+}
+
 #pragma mark  ----  懒加载
 -(UIButton *)rewardBtn{
     if (!_rewardBtn) {
