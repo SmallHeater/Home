@@ -137,4 +137,13 @@
     }
     return _tableView;
 }
+
+-(NSMutableArray *)dataArray{
+    
+    if (!_dataArray) {
+        
+        _dataArray = [[NSMutableArray alloc] init];
+    }
+    return _dataArray;
+}
 @end

@@ -6,8 +6,8 @@
 //  Copyright © 2017年 xianjunwang. All rights reserved.
 //  物品清单页面
 
-#import "BaseTableViewController.h"
+#import "BaseNavViewController.h"
 
-@interface CommodityListViewController : BaseTableViewController
+@interface CommodityListViewController : BaseNavViewController
 
 @end

@@ -8,19 +8,20 @@
 
 #import "CommodityListViewController.h"
 #import "CategorySelectViewController.h"
-#import "CommodityTableViewCell.h"
 #import "CommodityDataManager.h"
 #import "LogInViewController.h"
 #import "SHFMDBManager.h"
 //苹果自带内容索引
 #import <CoreSpotlight/CoreSpotlight.h>
 #import "CommodityModel.h"
-
+#import "SHPlainTableView.h"
 
 
 @interface CommodityListViewController ()
 //录入按钮
 @property (nonatomic,strong) UIButton * rewardBtn;
+
+@property (nonatomic,strong) SHPlainTableView * tableView;
 @end
 
 @implementation CommodityListViewController
@@ -35,7 +36,7 @@
     self.view.backgroundColor = [UIColor whiteColor];
     
     [self.navigationBar addSubview:self.rewardBtn];
-    
+    [self.view addSubview:self.tableView];
     
 }
 
@@ -45,18 +46,16 @@
     [MobClick beginLogPageView:@"物品清单页面"];
     
     
-    [self.dataArray removeAllObjects];
-    [self.dataArray addObjectsFromArray:[CommodityDataManager sharedManager].dataArray];
-    
-    if (self.dataArray.count == 0) {
-    
+    if ([CommodityDataManager sharedManager].dataArray.count == 0) {
+        
         NSMutableArray * dataArray = [[SHFMDBManager sharedManager] selecTable];
-        [self.dataArray addObjectsFromArray:dataArray];
         [[CommodityDataManager sharedManager].dataArray addObjectsFromArray:dataArray];
+        [self.tableView.dataArray addObjectsFromArray:[CommodityDataManager sharedManager].dataArray];
     }
-    
-    [self deleteAll];
-    [self saveApplyListWithArray:self.dataArray];
+    else{
+        
+        [self.tableView.dataArray addObjectsFromArray:[CommodityDataManager sharedManager].dataArray];
+    }
     [self.tableView reloadData];
 }
 
@@ -73,55 +72,6 @@
 }
 
 #pragma mark  ----  代理函数
-#pragma mark  ----  UITableViewDataSource
-
-- (NSInteger)tableView:(UITableView *)tableView numberOfRowsInSection:(NSInteger)section {
-    
-    return self.dataArray.count;
-}
-
-- (UITableViewCell *)tableView:(UITableView *)tableView cellForRowAtIndexPath:(NSIndexPath *)indexPath{
-    
-    CommodityTableViewCell * cell = [tableView dequeueReusableCellWithIdentifier:@"CommodityTableViewCell"];
-    if (!cell) {
-        
-        cell = [[CommodityTableViewCell alloc] initWithStyle:UITableViewCellStyleDefault reuseIdentifier:@"CommodityTableViewCell"];
-        cell.selectionStyle = UITableViewCellSelectionStyleNone;
-    }
-    cell.commodityModel = self.dataArray[indexPath.row];
-    return cell;
-}
-
-- (BOOL)tableView:(UITableView *)tableView canEditRowAtIndexPath:(NSIndexPath *)indexPath{
-    
-    return YES;
-}
-
-- (void)tableView:(UITableView *)tableView commitEditingStyle:(UITableViewCellEditingStyle)editingStyle forRowAtIndexPath:(NSIndexPath *)indexPath{
-    
-    [self.tableView setEditing:NO animated:YES];
-    if (editingStyle == UITableViewCellEditingStyleDelete) {
-        
-        //删除
-        [self.dataArray removeObjectAtIndex:indexPath.row];
-        [self.tableView reloadData];
-    }
-}
-
-#pragma mark  ----  UITableViewDelegate
-- (CGFloat)tableView:(UITableView *)tableView heightForRowAtIndexPath:(NSIndexPath *)indexPath{
-    
-    return 120.5;
-}
-
-- (UITableViewCellEditingStyle)tableView:(UITableView *)tableView editingStyleForRowAtIndexPath:(NSIndexPath *)indexPath{
-    
-    return UITableViewCellEditingStyleDelete;
-}
-- (nullable NSString *)tableView:(UITableView *)tableView titleForDeleteConfirmationButtonForRowAtIndexPath:(NSIndexPath *)indexPath{
-    
-    return @"删除";
-}
 
 #pragma mark  ----  自定义函数
 -(void)rewardBtnClicked:(UIButton *)btn{
@@ -200,5 +150,14 @@
         [_rewardBtn addTarget:self action:@selector(rewardBtnClicked:) forControlEvents:UIControlEventTouchUpInside];
     }
     return _rewardBtn;
+}
+
+-(SHPlainTableView *)tableView{
+    
+    if (!_tableView) {
+        
+        _tableView = [[SHPlainTableView alloc] initWithFrame:CGRectMake(0, 64, SCREENWIDTH, SCREENHEIGHT - 64) andType:CommodityTableView];
+    }
+    return _tableView;
 }
 @end

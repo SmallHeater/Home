@@ -35,10 +35,11 @@
 		62282D591FA6097C007E3ABE /* SHFMDBManager.m in Sources */ = {isa = PBXBuildFile; fileRef = 62282D581FA6097C007E3ABE /* SHFMDBManager.m */; };
 		622B8AE91FA9646F0080552F /* FirstViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 622B8AE81FA9646F0080552F /* FirstViewController.m */; };
 		622B8AEF1FA969A20080552F /* SearchViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 622B8AEE1FA969A20080552F /* SearchViewController.m */; };
-		622B8AF21FA96B140080552F /* QuanyiViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 622B8AF11FA96B140080552F /* QuanyiViewController.m */; };
+		622B8AF21FA96B140080552F /* PersonalRightsViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 622B8AF11FA96B140080552F /* PersonalRightsViewController.m */; };
 		622B8AF51FA96BBA0080552F /* PersonalRightsModel.m in Sources */ = {isa = PBXBuildFile; fileRef = 622B8AF41FA96BBA0080552F /* PersonalRightsModel.m */; };
 		622B8AF81FA9ACDC0080552F /* PersonalRightsCell.m in Sources */ = {isa = PBXBuildFile; fileRef = 622B8AF71FA9ACDC0080552F /* PersonalRightsCell.m */; };
 		622B8AFB1FA9ADBC0080552F /* SHPlainTableView.m in Sources */ = {isa = PBXBuildFile; fileRef = 622B8AFA1FA9ADBC0080552F /* SHPlainTableView.m */; };
+		622B8AFE1FAA0A6E0080552F /* PersonalRightsRewardingViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 622B8AFD1FAA0A6E0080552F /* PersonalRightsRewardingViewController.m */; };
 		62B9C0081F9CC0A0006B5F66 /* DatePickView.m in Sources */ = {isa = PBXBuildFile; fileRef = 62B9C0071F9CC0A0006B5F66 /* DatePickView.m */; };
 		62DE4B401F9F41CB0086CE06 /* LiveWithDeleteImageView.m in Sources */ = {isa = PBXBuildFile; fileRef = 62DE4B3F1F9F41CB0086CE06 /* LiveWithDeleteImageView.m */; };
 		62DE4B451F9F42890086CE06 /* delete_ful@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = 62DE4B411F9F42890086CE06 /* delete_ful@2x.png */; };
@@ -151,14 +152,16 @@
 		622B8AE81FA9646F0080552F /* FirstViewController.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = FirstViewController.m; sourceTree = "<group>"; };
 		622B8AED1FA969A20080552F /* SearchViewController.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = SearchViewController.h; sourceTree = "<group>"; };
 		622B8AEE1FA969A20080552F /* SearchViewController.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = SearchViewController.m; sourceTree = "<group>"; };
-		622B8AF01FA96B130080552F /* QuanyiViewController.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = QuanyiViewController.h; sourceTree = "<group>"; };
-		622B8AF11FA96B140080552F /* QuanyiViewController.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = QuanyiViewController.m; sourceTree = "<group>"; };
+		622B8AF01FA96B130080552F /* PersonalRightsViewController.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = PersonalRightsViewController.h; sourceTree = "<group>"; };
+		622B8AF11FA96B140080552F /* PersonalRightsViewController.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = PersonalRightsViewController.m; sourceTree = "<group>"; };
 		622B8AF31FA96BBA0080552F /* PersonalRightsModel.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = PersonalRightsModel.h; sourceTree = "<group>"; };
 		622B8AF41FA96BBA0080552F /* PersonalRightsModel.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = PersonalRightsModel.m; sourceTree = "<group>"; };
 		622B8AF61FA9ACDC0080552F /* PersonalRightsCell.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = PersonalRightsCell.h; sourceTree = "<group>"; };
 		622B8AF71FA9ACDC0080552F /* PersonalRightsCell.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = PersonalRightsCell.m; sourceTree = "<group>"; };
 		622B8AF91FA9ADBC0080552F /* SHPlainTableView.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = SHPlainTableView.h; sourceTree = "<group>"; };
 		622B8AFA1FA9ADBC0080552F /* SHPlainTableView.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = SHPlainTableView.m; sourceTree = "<group>"; };
+		622B8AFC1FAA0A6E0080552F /* PersonalRightsRewardingViewController.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = PersonalRightsRewardingViewController.h; sourceTree = "<group>"; };
+		622B8AFD1FAA0A6E0080552F /* PersonalRightsRewardingViewController.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = PersonalRightsRewardingViewController.m; sourceTree = "<group>"; };
 		62B9C0061F9CC0A0006B5F66 /* DatePickView.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = DatePickView.h; sourceTree = "<group>"; };
 		62B9C0071F9CC0A0006B5F66 /* DatePickView.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = DatePickView.m; sourceTree = "<group>"; };
 		62DE4B3E1F9F41CB0086CE06 /* LiveWithDeleteImageView.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = LiveWithDeleteImageView.h; sourceTree = "<group>"; };
@@ -572,8 +575,10 @@
 				622B8AE81FA9646F0080552F /* FirstViewController.m */,
 				622B8AED1FA969A20080552F /* SearchViewController.h */,
 				622B8AEE1FA969A20080552F /* SearchViewController.m */,
-				622B8AF01FA96B130080552F /* QuanyiViewController.h */,
-				622B8AF11FA96B140080552F /* QuanyiViewController.m */,
+				622B8AF01FA96B130080552F /* PersonalRightsViewController.h */,
+				622B8AF11FA96B140080552F /* PersonalRightsViewController.m */,
+				622B8AFC1FAA0A6E0080552F /* PersonalRightsRewardingViewController.h */,
+				622B8AFD1FAA0A6E0080552F /* PersonalRightsRewardingViewController.m */,
 			);
 			path = ViewController;
 			sourceTree = "<group>";
@@ -986,6 +991,7 @@
 				62F8017A1F9B60EC0038DD5C /* CustomizedNavigationBar.m in Sources */,
 				62F801B31F9C36280038DD5C /* TableViewCellWithSwitch.m in Sources */,
 				62F801B61F9C3D410038DD5C /* TableViewCellWithBottomLine.m in Sources */,
+				622B8AFE1FAA0A6E0080552F /* PersonalRightsRewardingViewController.m in Sources */,
 				62282D311FA5FDA3007E3ABE /* LogInViewController.m in Sources */,
 				62F801341F9B5D780038DD5C /* ViewController.m in Sources */,
 				62F801B01F9C34350038DD5C /* TableViewCellWithTitle.m in Sources */,
@@ -1004,7 +1010,7 @@
 				62282C711F9E2FB1007E3ABE /* NSString+CGSize.m in Sources */,
 				62F8013F1F9B5D780038DD5C /* main.m in Sources */,
 				62B9C0081F9CC0A0006B5F66 /* DatePickView.m in Sources */,
-				622B8AF21FA96B140080552F /* QuanyiViewController.m in Sources */,
+				622B8AF21FA96B140080552F /* PersonalRightsViewController.m in Sources */,
 				62F801891F9B7F5C0038DD5C /* BaseTabBarItem.m in Sources */,
 				62F801AD1F9C33E40038DD5C /* BaseTableViewCell.m in Sources */,
 				62F801311F9B5D780038DD5C /* AppDelegate.m in Sources */,

@@ -6,8 +6,8 @@
 //  Copyright © 2017年 xianjunwang. All rights reserved.
 //  个人权益列表页面
 
-#import "BaseTableViewController.h"
+#import "BaseNavViewController.h"
 
-@interface QuanyiViewController : BaseTableViewController
+@interface PersonalRightsViewController : BaseNavViewController
 
 @end
