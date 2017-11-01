@@ -174,11 +174,14 @@
 -(void)finishBtnClicked:(UIButton *)finishBtn{
     
     [self.model.commodityImageArray  addObjectsFromArray:self.commodityImageArray];
-    [self.model.commodityLocationImagesArray addObject:self.locationImageViewArray];
+    [self.model.commodityLocationImagesArray addObjectsFromArray:self.locationImageViewArray];
     [[CommodityDataManager sharedManager].dataArray addObject:self.model];
     [self.navigationController popViewControllerAnimated:YES];
     
-    [[SHFMDBManager sharedManager]insertCommodityModel:self.model];
+    dispatch_async(dispatch_get_global_queue(0, 0), ^{
+        
+        [[SHFMDBManager sharedManager] insertCommodityModel:self.model];
+    });
 }
 
 //有无保质期开关的响应

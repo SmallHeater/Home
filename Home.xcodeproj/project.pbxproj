@@ -33,6 +33,12 @@
 		62282D551FA60011007E3ABE /* libSocialQQ.a in Frameworks */ = {isa = PBXBuildFile; fileRef = 62282D491FA60011007E3ABE /* libSocialQQ.a */; };
 		62282D561FA60011007E3ABE /* libUMSocialLog.a in Frameworks */ = {isa = PBXBuildFile; fileRef = 62282D4B1FA60011007E3ABE /* libUMSocialLog.a */; };
 		62282D591FA6097C007E3ABE /* SHFMDBManager.m in Sources */ = {isa = PBXBuildFile; fileRef = 62282D581FA6097C007E3ABE /* SHFMDBManager.m */; };
+		622B8AE91FA9646F0080552F /* FirstViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 622B8AE81FA9646F0080552F /* FirstViewController.m */; };
+		622B8AEF1FA969A20080552F /* SearchViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 622B8AEE1FA969A20080552F /* SearchViewController.m */; };
+		622B8AF21FA96B140080552F /* QuanyiViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 622B8AF11FA96B140080552F /* QuanyiViewController.m */; };
+		622B8AF51FA96BBA0080552F /* PersonalRightsModel.m in Sources */ = {isa = PBXBuildFile; fileRef = 622B8AF41FA96BBA0080552F /* PersonalRightsModel.m */; };
+		622B8AF81FA9ACDC0080552F /* PersonalRightsCell.m in Sources */ = {isa = PBXBuildFile; fileRef = 622B8AF71FA9ACDC0080552F /* PersonalRightsCell.m */; };
+		622B8AFB1FA9ADBC0080552F /* SHPlainTableView.m in Sources */ = {isa = PBXBuildFile; fileRef = 622B8AFA1FA9ADBC0080552F /* SHPlainTableView.m */; };
 		62B9C0081F9CC0A0006B5F66 /* DatePickView.m in Sources */ = {isa = PBXBuildFile; fileRef = 62B9C0071F9CC0A0006B5F66 /* DatePickView.m */; };
 		62DE4B401F9F41CB0086CE06 /* LiveWithDeleteImageView.m in Sources */ = {isa = PBXBuildFile; fileRef = 62DE4B3F1F9F41CB0086CE06 /* LiveWithDeleteImageView.m */; };
 		62DE4B451F9F42890086CE06 /* delete_ful@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = 62DE4B411F9F42890086CE06 /* delete_ful@2x.png */; };
@@ -141,6 +147,18 @@
 		62282D4B1FA60011007E3ABE /* libUMSocialLog.a */ = {isa = PBXFileReference; lastKnownFileType = archive.ar; path = libUMSocialLog.a; sourceTree = "<group>"; };
 		62282D571FA6097C007E3ABE /* SHFMDBManager.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = SHFMDBManager.h; sourceTree = "<group>"; };
 		62282D581FA6097C007E3ABE /* SHFMDBManager.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = SHFMDBManager.m; sourceTree = "<group>"; };
+		622B8AE71FA9646F0080552F /* FirstViewController.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = FirstViewController.h; sourceTree = "<group>"; };
+		622B8AE81FA9646F0080552F /* FirstViewController.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = FirstViewController.m; sourceTree = "<group>"; };
+		622B8AED1FA969A20080552F /* SearchViewController.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = SearchViewController.h; sourceTree = "<group>"; };
+		622B8AEE1FA969A20080552F /* SearchViewController.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = SearchViewController.m; sourceTree = "<group>"; };
+		622B8AF01FA96B130080552F /* QuanyiViewController.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = QuanyiViewController.h; sourceTree = "<group>"; };
+		622B8AF11FA96B140080552F /* QuanyiViewController.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = QuanyiViewController.m; sourceTree = "<group>"; };
+		622B8AF31FA96BBA0080552F /* PersonalRightsModel.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = PersonalRightsModel.h; sourceTree = "<group>"; };
+		622B8AF41FA96BBA0080552F /* PersonalRightsModel.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = PersonalRightsModel.m; sourceTree = "<group>"; };
+		622B8AF61FA9ACDC0080552F /* PersonalRightsCell.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = PersonalRightsCell.h; sourceTree = "<group>"; };
+		622B8AF71FA9ACDC0080552F /* PersonalRightsCell.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = PersonalRightsCell.m; sourceTree = "<group>"; };
+		622B8AF91FA9ADBC0080552F /* SHPlainTableView.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = SHPlainTableView.h; sourceTree = "<group>"; };
+		622B8AFA1FA9ADBC0080552F /* SHPlainTableView.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = SHPlainTableView.m; sourceTree = "<group>"; };
 		62B9C0061F9CC0A0006B5F66 /* DatePickView.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = DatePickView.h; sourceTree = "<group>"; };
 		62B9C0071F9CC0A0006B5F66 /* DatePickView.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = DatePickView.m; sourceTree = "<group>"; };
 		62DE4B3E1F9F41CB0086CE06 /* LiveWithDeleteImageView.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = LiveWithDeleteImageView.h; sourceTree = "<group>"; };
@@ -456,6 +474,8 @@
 			children = (
 				62B9C0061F9CC0A0006B5F66 /* DatePickView.h */,
 				62B9C0071F9CC0A0006B5F66 /* DatePickView.m */,
+				622B8AF91FA9ADBC0080552F /* SHPlainTableView.h */,
+				622B8AFA1FA9ADBC0080552F /* SHPlainTableView.m */,
 			);
 			path = View;
 			sourceTree = "<group>";
@@ -548,6 +568,12 @@
 				62F801CD1F9C6BFE0038DD5C /* RewardingViewController.m */,
 				62282D2F1FA5FDA3007E3ABE /* LogInViewController.h */,
 				62282D301FA5FDA3007E3ABE /* LogInViewController.m */,
+				622B8AE71FA9646F0080552F /* FirstViewController.h */,
+				622B8AE81FA9646F0080552F /* FirstViewController.m */,
+				622B8AED1FA969A20080552F /* SearchViewController.h */,
+				622B8AEE1FA969A20080552F /* SearchViewController.m */,
+				622B8AF01FA96B130080552F /* QuanyiViewController.h */,
+				622B8AF11FA96B140080552F /* QuanyiViewController.m */,
 			);
 			path = ViewController;
 			sourceTree = "<group>";
@@ -686,6 +712,8 @@
 				62F801C61F9C689B0038DD5C /* CategoryModel.m */,
 				62282C681F9CCF8F007E3ABE /* CommodityModel.h */,
 				62282C691F9CCF8F007E3ABE /* CommodityModel.m */,
+				622B8AF31FA96BBA0080552F /* PersonalRightsModel.h */,
+				622B8AF41FA96BBA0080552F /* PersonalRightsModel.m */,
 			);
 			path = Model;
 			sourceTree = "<group>";
@@ -697,6 +725,8 @@
 				62F801CA1F9C6AFE0038DD5C /* CategoryTableViewCell.m */,
 				62282C6B1F9E2C02007E3ABE /* CommodityTableViewCell.h */,
 				62282C6C1F9E2C02007E3ABE /* CommodityTableViewCell.m */,
+				622B8AF61FA9ACDC0080552F /* PersonalRightsCell.h */,
+				622B8AF71FA9ACDC0080552F /* PersonalRightsCell.m */,
 			);
 			path = Cell;
 			sourceTree = "<group>";
@@ -951,6 +981,7 @@
 				62282C6D1F9E2C02007E3ABE /* CommodityTableViewCell.m in Sources */,
 				62F801831F9B68F40038DD5C /* BaseTabBarController.m in Sources */,
 				62F801C71F9C689B0038DD5C /* CategoryModel.m in Sources */,
+				622B8AF81FA9ACDC0080552F /* PersonalRightsCell.m in Sources */,
 				62282C6A1F9CCF8F007E3ABE /* CommodityModel.m in Sources */,
 				62F8017A1F9B60EC0038DD5C /* CustomizedNavigationBar.m in Sources */,
 				62F801B31F9C36280038DD5C /* TableViewCellWithSwitch.m in Sources */,
@@ -961,15 +992,19 @@
 				62F801A91F9B93A50038DD5C /* BaseTableViewController.m in Sources */,
 				62F801C31F9C67330038DD5C /* CategorySelectViewController.m in Sources */,
 				62F802111F9C99BF0038DD5C /* BaseController.m in Sources */,
+				622B8AEF1FA969A20080552F /* SearchViewController.m in Sources */,
 				62F802141F9C9AC70038DD5C /* CommodityDataManager.m in Sources */,
 				62F801741F9B5F030038DD5C /* BaseViewController.m in Sources */,
+				622B8AF51FA96BBA0080552F /* PersonalRightsModel.m in Sources */,
 				62F801861F9B69F50038DD5C /* TabBarController.m in Sources */,
 				62F801771F9B5F310038DD5C /* BaseView.m in Sources */,
 				62DE4B401F9F41CB0086CE06 /* LiveWithDeleteImageView.m in Sources */,
+				622B8AE91FA9646F0080552F /* FirstViewController.m in Sources */,
 				62F801691F9B5E2A0038DD5C /* CommodityListViewController.m in Sources */,
 				62282C711F9E2FB1007E3ABE /* NSString+CGSize.m in Sources */,
 				62F8013F1F9B5D780038DD5C /* main.m in Sources */,
 				62B9C0081F9CC0A0006B5F66 /* DatePickView.m in Sources */,
+				622B8AF21FA96B140080552F /* QuanyiViewController.m in Sources */,
 				62F801891F9B7F5C0038DD5C /* BaseTabBarItem.m in Sources */,
 				62F801AD1F9C33E40038DD5C /* BaseTableViewCell.m in Sources */,
 				62F801311F9B5D780038DD5C /* AppDelegate.m in Sources */,
@@ -979,6 +1014,7 @@
 				62282D591FA6097C007E3ABE /* SHFMDBManager.m in Sources */,
 				62F801BA1F9C3F010038DD5C /* BaseModel.m in Sources */,
 				62F801BD1F9C3F210038DD5C /* ModelWithTitle.m in Sources */,
+				622B8AFB1FA9ADBC0080552F /* SHPlainTableView.m in Sources */,
 				62282C741F9F7998007E3ABE /* UIColor+Translate.m in Sources */,
 				62F801CE1F9C6BFE0038DD5C /* RewardingViewController.m in Sources */,
 				62F801711F9B5EC60038DD5C /* BaseNavViewController.m in Sources */,
