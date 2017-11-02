@@ -108,4 +108,115 @@
     return _startTimeLabel;
 }
 
+-(UILabel *)endTimeTitleLabel{
+
+    if (!_endTimeTitleLabel) {
+        
+        NSString * str = @"结束时间";
+        float width = [NSString widthWithStr:str andFont:FONT14 andMaxHeight:MAXHEIGHT];
+        
+        _endTimeTitleLabel = [[UILabel alloc] initWithFrame:CGRectMake(20, CGRectGetMaxY(self.startTimeTitleLabel.frame) + 10, width, MAXHEIGHT)];
+        _endTimeTitleLabel.font = FONT14;
+        _endTimeTitleLabel.text = str;
+    }
+    return _endTimeTitleLabel;
+}
+
+-(UILabel *)endTimeLabel{
+
+    if (!_endTimeLabel) {
+        
+        _endTimeLabel = [[UILabel alloc] initWithFrame:CGRectMake(CGRectGetMaxX(self.endTimeTitleLabel.frame) + 5, CGRectGetMinY(self.endTimeTitleLabel.frame), SCREENWIDTH - 10 - CGRectGetMaxX(self.endTimeTitleLabel.frame), MAXHEIGHT)];
+        _endTimeLabel.text = @"请选择结束时间";
+    }
+    return _endTimeLabel;
+}
+
+-(UILabel *)personalRightsFromTitleLabel{
+
+    if (!_personalRightsFromTitleLabel) {
+        
+        NSString * str = @"权益来源：";
+        float width = [NSString widthWithStr:str andFont:FONT14 andMaxHeight:MAXHEIGHT];
+        
+        _personalRightsFromTitleLabel = [[UILabel alloc] initWithFrame:CGRectMake(20, CGRectGetMaxY(self.endTimeTitleLabel.frame) + 10, width, MAXHEIGHT)];
+        _personalRightsFromTitleLabel.text = str;
+    }
+    return _personalRightsFromTitleLabel;
+}
+
+-(UITextField *)personalRightsFromTextField{
+
+    if (!_personalRightsFromTextField) {
+        
+        _personalRightsFromTextField = [[UITextField alloc] initWithFrame:CGRectMake(CGRectGetMaxX(self.personalRightsFromTitleLabel.frame) + 5, CGRectGetMinY(self.personalRightsFromTitleLabel.frame), SCREENWIDTH - 10 - CGRectGetMaxX(self.personalRightsFromTitleLabel.frame), MAXHEIGHT)];
+        _personalRightsFromTextField.placeholder = @"请输入权益来源";
+    }
+    return _personalRightsFromTextField;
+}
+
+-(UILabel *)useConditionsTitleLabel{
+
+    if (!_useConditionsTitleLabel) {
+        
+        _useConditionsTitleLabel = [[UILabel alloc] initWithFrame:CGRectMake(20, CGRectGetMaxY(self.personalRightsFromTitleLabel.frame) + 10, SCREENWIDTH - 40, MAXHEIGHT)];
+        _useConditionsTitleLabel.text = @"使用条件：";
+        _useConditionsTitleLabel.font = FONT14;
+    }
+    return _useConditionsTitleLabel;
+}
+
+-(UITextView *)useConditionsTextView{
+
+    if (!_useConditionsTextView) {
+        
+        _useConditionsTextView = [[UITextView alloc] initWithFrame:CGRectMake(20, CGRectGetMaxY(self.useConditionsTitleLabel.frame) + 10, SCREENWIDTH - 40, 100)];
+        _useConditionsTextView.text = @"请输入使用条件";
+    }
+    return _useConditionsTextView;
+}
+
+
+-(UILabel *)enjoyConditionsTitleLabel{
+    
+    if (!_enjoyConditionsTitleLabel) {
+        
+        _enjoyConditionsTitleLabel = [[UILabel alloc] initWithFrame:CGRectMake(20, CGRectGetMaxY(self.useConditionsTextView.frame) + 10, SCREENWIDTH - 40, MAXHEIGHT)];
+        _enjoyConditionsTitleLabel.text = @"享受条件：";
+        _enjoyConditionsTitleLabel.font = FONT14;
+    }
+    return _enjoyConditionsTitleLabel;
+}
+
+-(UITextView *)enjoyConditionsTextView{
+    
+    if (!_enjoyConditionsTextView) {
+        
+        _enjoyConditionsTextView = [[UITextView alloc] initWithFrame:CGRectMake(20, CGRectGetMaxY(self.enjoyConditionsTitleLabel.frame) + 10, SCREENWIDTH - 40, 100)];
+        _enjoyConditionsTextView.text = @"请输入享受条件";
+    }
+    return _enjoyConditionsTextView;
+}
+
+-(UILabel *)photoRecordTitleLabel{
+
+    if (!_photoRecordTitleLabel) {
+        
+        _photoRecordTitleLabel = [[UILabel alloc] initWithFrame:CGRectMake(20, CGRectGetMaxY(self.enjoyConditionsTextView.frame) + 10, SCREENWIDTH - 40, MAXHEIGHT)];
+        _photoRecordTitleLabel.font = FONT14;
+        _photoRecordTitleLabel.text = @"照片记录";
+    }
+    return _photoRecordTitleLabel;
+}
+
+-(UIView *)photoRecordView{
+
+    if (!_photoRecordView) {
+        
+        _photoRecordView = [[UIView alloc] initWithFrame:CGRectMake(0, CGRectGetMaxY(self.photoRecordTitleLabel.frame) + 10, SCREENWIDTH, 60)];
+    }
+    return _photoRecordView;
+}
+
+
 @end
