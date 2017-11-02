@@ -7,11 +7,19 @@
 //
 
 #import "PersonalRightsRewardingViewController.h"
+#import "DatePickView.h"
+#import "LiveWithDeleteImageView.h"
+
+
+
 
 
 #define MAXHEIGHT 14.0
+#define USECONDITIONSSTR  @"请输入使用条件"
+#define ENJOYCONDITIONSSTR  @"请输入享受条件"
 
-@interface PersonalRightsRewardingViewController ()
+
+@interface PersonalRightsRewardingViewController ()<UITextFieldDelegate,UITextViewDelegate,DatePickViewDelegate>
 //权益名称Title
 @property (nonatomic,strong) UILabel * personalRightsTitleLabel;
 //权益名称TF
@@ -38,8 +46,17 @@
 @property (nonatomic,strong) UITextView * enjoyConditionsTextView;
 //照片记录Title
 @property (nonatomic,strong) UILabel * photoRecordTitleLabel;
+//添加图片的view
+@property (nonatomic,strong) LiveWithDeleteImageView * addImageView;
 //照片记录View
 @property (nonatomic,strong) UIView * photoRecordView;
+
+
+//日期选择view
+@property (nonatomic,strong) DatePickView * datePickerView;
+
+//是否是选择权益开始时间
+@property (nonatomic,assign) BOOL isSelectStartTime;
 @end
 
 @implementation PersonalRightsRewardingViewController
@@ -50,11 +67,86 @@
     [super viewDidLoad];
     // Do any additional setup after loading the view.
     self.navigationBar.titleLabel.text = @"个人权益录入";
+    
+    [self.view addSubview:self.personalRightsTitleLabel];
+    [self.view addSubview:self.personalRightsTextField];
+    [self.view addSubview:self.startTimeTitleLabel];
+    [self.view addSubview:self.startTimeLabel];
+    [self.view addSubview:self.endTimeTitleLabel];
+    [self.view addSubview:self.endTimeLabel];
+    [self.view addSubview:self.personalRightsFromTitleLabel];
+    [self.view addSubview:self.personalRightsFromTextField];
+    [self.view addSubview:self.useConditionsTitleLabel];
+    [self.view addSubview:self.useConditionsTextView];
+    [self.view addSubview:self.enjoyConditionsTitleLabel];
+    [self.view addSubview:self.enjoyConditionsTextView];
+    [self.view addSubview:self.photoRecordTitleLabel];
+    [self.view addSubview:self.photoRecordView];
 }
 
 - (void)didReceiveMemoryWarning {
     [super didReceiveMemoryWarning];
     // Dispose of any resources that can be recreated.
+}
+
+#pragma mark  ----  代理函数
+#pragma mark  ----  UITextFieldDelegate
+- (BOOL)textFieldShouldReturn:(UITextField *)textField{
+
+    [textField resignFirstResponder];
+    return YES;
+}
+#pragma mark  ----  UITextViewDelegate
+- (BOOL)textViewShouldBeginEditing:(UITextView *)textView{
+
+    textView.text = @"";
+    return YES;
+}
+
+- (void)textViewDidEndEditing:(UITextView *)textView{
+
+    if (textView.text.length == 0) {
+        
+        if ([textView isEqual:self.useConditionsTextView]) {
+            
+            self.useConditionsTextView.text = USECONDITIONSSTR;
+        }
+        else if ([textView isEqual:self.enjoyConditionsTextView]){
+        
+            self.enjoyConditionsTextView.text = ENJOYCONDITIONSSTR;
+        }
+    }
+}
+
+#pragma mark  ----  DatePickViewDelegate
+-(void)finishSelectedWithTimeStr:(NSString *)selectedTime{
+
+    if (self.isSelectStartTime) {
+    
+        NSString * startTimeStr = [[NSString alloc] initWithString:selectedTime];
+        self.startTimeLabel.text = startTimeStr;
+    }
+    else{
+    
+        NSString * endTimeStr = [[NSString alloc] initWithString:selectedTime];
+        self.endTimeLabel.text = endTimeStr;
+    }
+}
+
+#pragma mark  ----  自定义函数
+//选择权益开始时间
+-(void)startTimeLabelTaped{
+
+    self.isSelectStartTime = YES;
+    [self.view addSubview:self.datePickerView];
+}
+
+
+//选择权益结束时间
+-(void)endTimeLabelTaped{
+
+    self.isSelectStartTime = NO;
+    [self.view addSubview:self.datePickerView];
 }
 
 #pragma mark  ------  懒加载
@@ -103,7 +195,11 @@
     if (!_startTimeLabel) {
         
         _startTimeLabel = [[UILabel alloc] initWithFrame:CGRectMake(CGRectGetMaxX(self.startTimeTitleLabel.frame) + 5, CGRectGetMinY(self.startTimeTitleLabel.frame), SCREENWIDTH - 10 - CGRectGetMaxX(self.startTimeTitleLabel.frame), MAXHEIGHT)];
+        _startTimeLabel.userInteractionEnabled = YES;
         _startTimeLabel.text = @"请选择开始时间";
+        
+        UITapGestureRecognizer * tap = [[UITapGestureRecognizer alloc] initWithTarget:self action:@selector(startTimeLabelTaped)];
+        [_startTimeLabel addGestureRecognizer:tap];
     }
     return _startTimeLabel;
 }
@@ -127,7 +223,11 @@
     if (!_endTimeLabel) {
         
         _endTimeLabel = [[UILabel alloc] initWithFrame:CGRectMake(CGRectGetMaxX(self.endTimeTitleLabel.frame) + 5, CGRectGetMinY(self.endTimeTitleLabel.frame), SCREENWIDTH - 10 - CGRectGetMaxX(self.endTimeTitleLabel.frame), MAXHEIGHT)];
+        _endTimeLabel.userInteractionEnabled = YES;
         _endTimeLabel.text = @"请选择结束时间";
+        
+        UITapGestureRecognizer * tap = [[UITapGestureRecognizer alloc] initWithTarget:self action:@selector(endTimeLabelTaped)];
+        [_endTimeLabel addGestureRecognizer:tap];
     }
     return _endTimeLabel;
 }
@@ -171,7 +271,7 @@
     if (!_useConditionsTextView) {
         
         _useConditionsTextView = [[UITextView alloc] initWithFrame:CGRectMake(20, CGRectGetMaxY(self.useConditionsTitleLabel.frame) + 10, SCREENWIDTH - 40, 100)];
-        _useConditionsTextView.text = @"请输入使用条件";
+        _useConditionsTextView.text = USECONDITIONSSTR;
     }
     return _useConditionsTextView;
 }
@@ -193,7 +293,7 @@
     if (!_enjoyConditionsTextView) {
         
         _enjoyConditionsTextView = [[UITextView alloc] initWithFrame:CGRectMake(20, CGRectGetMaxY(self.enjoyConditionsTitleLabel.frame) + 10, SCREENWIDTH - 40, 100)];
-        _enjoyConditionsTextView.text = @"请输入享受条件";
+        _enjoyConditionsTextView.text = ENJOYCONDITIONSSTR;
     }
     return _enjoyConditionsTextView;
 }
@@ -209,6 +309,15 @@
     return _photoRecordTitleLabel;
 }
 
+-(LiveWithDeleteImageView *)addImageView{
+
+    if (!_addImageView) {
+        
+        _addImageView = [[LiveWithDeleteImageView alloc] initWithImage:[UIImage imageNamed:@"HomeSource.bundle/photo_duf.tiff"] andFrame:CGRectMake(0, 0, 114, 69) andTarget:self andAction:@selector(addImageViewTaped:) andButtonTag:0];;
+    }
+    return _addImageView;
+}
+
 -(UIView *)photoRecordView{
 
     if (!_photoRecordView) {
@@ -218,5 +327,15 @@
     return _photoRecordView;
 }
 
+
+-(DatePickView *)datePickerView{
+    
+    if (!_datePickerView) {
+        
+        _datePickerView = [[DatePickView alloc] init];
+        _datePickerView.delegate = self;
+    }
+    return _datePickerView;
+}
 
 @end

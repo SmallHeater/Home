@@ -480,7 +480,7 @@
         storageLocationImagesTitleLabel.text = @"存放位置图片:";
         [_storageLocationImageView addSubview:storageLocationImagesTitleLabel];
         //存放位置照片
-        LiveWithDeleteImageView * locationImageView = [[LiveWithDeleteImageView alloc] initWithImage:[UIImage imageNamed:@"HomeSource.bundle/photo_duf.tiff"] andFrame:CGRectMake(0, 0, 114, 69) andTarget:self andAction:@selector(addLocationImageViewTaped:) andButtonTag:nil];
+        LiveWithDeleteImageView * locationImageView = [[LiveWithDeleteImageView alloc] initWithImage:[UIImage imageNamed:@"HomeSource.bundle/photo_duf.tiff"] andFrame:CGRectMake(0, 0, 114, 69) andTarget:self andAction:@selector(addLocationImageViewTaped:) andButtonTag:0];
         locationImageView.tag = LOCATIONIMAGEBASETAG;
         [self.locationImageViewScrollView addSubview:locationImageView];
         [_storageLocationImageView addSubview:self.locationImageViewScrollView];
