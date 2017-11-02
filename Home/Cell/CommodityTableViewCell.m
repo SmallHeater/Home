@@ -11,7 +11,7 @@
 #import "CommodityModel.h"
 
 
-#define LABELHEIGHT 14
+#define LABELHEIGHT 20
 
 @interface CommodityTableViewCell ()
 //物品图片
@@ -89,7 +89,7 @@
         NSString * str = @"物品名:";
         float commodityNameTitleLabelWidth = [NSString widthWithStr:str andFont:FONT14 andMaxHeight:LABELHEIGHT];
         
-        _commodityNameTitleLabel = [[UILabel alloc] initWithFrame:CGRectMake(CGRectGetMaxX(self.commodityImageView.frame) + 10, 10, commodityNameTitleLabelWidth, LABELHEIGHT)];
+        _commodityNameTitleLabel = [[UILabel alloc] initWithFrame:CGRectMake(CGRectGetMaxX(self.commodityImageView.frame) + 10, 14, commodityNameTitleLabelWidth, LABELHEIGHT)];
         _commodityNameTitleLabel.font = FONT14;
         _commodityNameTitleLabel.text = str;
     }
@@ -113,7 +113,7 @@
         NSString * str = @"物品存放位置:";
         float commodityLocationTitleLabelWidth = [NSString widthWithStr:str andFont:FONT14 andMaxHeight:LABELHEIGHT];
         
-        _commodityLocationTitleLabel = [[UILabel alloc] initWithFrame:CGRectMake(CGRectGetMaxX(self.commodityImageView.frame) + 10, CGRectGetMaxY(self.commodityNameTitleLabel.frame) + 10, commodityLocationTitleLabelWidth, LABELHEIGHT)];
+        _commodityLocationTitleLabel = [[UILabel alloc] initWithFrame:CGRectMake(CGRectGetMaxX(self.commodityImageView.frame) + 10, CGRectGetMaxY(self.commodityNameTitleLabel.frame) + 4, commodityLocationTitleLabelWidth, LABELHEIGHT)];
         _commodityLocationTitleLabel.font = FONT14;
         _commodityLocationTitleLabel.text = str;
     }
@@ -137,7 +137,7 @@
         NSString * str = @"物品数量:";
         float commodityCountTitleLabelWidth = [NSString widthWithStr:str andFont:FONT14 andMaxHeight:LABELHEIGHT];
         
-        _commodityCountTitleLabel = [[UILabel alloc] initWithFrame:CGRectMake(CGRectGetMaxX(self.commodityImageView.frame) + 10, CGRectGetMaxY(self.commodityLocationTitleLabel.frame) + 10, commodityCountTitleLabelWidth, LABELHEIGHT)];
+        _commodityCountTitleLabel = [[UILabel alloc] initWithFrame:CGRectMake(CGRectGetMaxX(self.commodityImageView.frame) + 10, CGRectGetMaxY(self.commodityLocationTitleLabel.frame) + 4, commodityCountTitleLabelWidth, LABELHEIGHT)];
         _commodityCountTitleLabel.font = FONT14;
         _commodityCountTitleLabel.text = str;
     }
@@ -148,7 +148,7 @@
     
     if (!_commodityCountLabel) {
         
-        _commodityCountLabel = [[UILabel alloc] initWithFrame:CGRectMake(CGRectGetMaxX(self.commodityCountTitleLabel.frame), CGRectGetMinY(self.commodityCountTitleLabel.frame), 20, CGRectGetHeight(self.commodityCountTitleLabel.frame))];
+        _commodityCountLabel = [[UILabel alloc] initWithFrame:CGRectMake(CGRectGetMaxX(self.commodityCountTitleLabel.frame), CGRectGetMinY(self.commodityCountTitleLabel.frame), SCREENWIDTH - 10 - CGRectGetMaxX(self.commodityCountTitleLabel.frame), CGRectGetHeight(self.commodityCountTitleLabel.frame))];
         _commodityCountLabel.font = FONT14;
     }
     return _commodityCountLabel;
@@ -161,7 +161,7 @@
         NSString * str = @"物品到期时间:";
         float commodityShelfLifeTitleLabelWidth = [NSString widthWithStr:str andFont:FONT14 andMaxHeight:LABELHEIGHT];
         
-        _commodityShelfLifeTitleLabel = [[UILabel alloc] initWithFrame:CGRectMake(CGRectGetMaxX(self.commodityImageView.frame) + 10, CGRectGetMaxY(self.commodityCountTitleLabel.frame) + 10, commodityShelfLifeTitleLabelWidth, LABELHEIGHT)];
+        _commodityShelfLifeTitleLabel = [[UILabel alloc] initWithFrame:CGRectMake(CGRectGetMaxX(self.commodityImageView.frame) + 10, CGRectGetMaxY(self.commodityCountTitleLabel.frame) + 4, commodityShelfLifeTitleLabelWidth, LABELHEIGHT)];
         _commodityShelfLifeTitleLabel.font = FONT14;
         _commodityShelfLifeTitleLabel.text = str;
     }

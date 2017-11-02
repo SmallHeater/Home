@@ -9,10 +9,14 @@
 #import "BaseController.h"
 
 
-@class CommodityModel;
+@class CommodityModel,PersonalRightsModel;
 @interface CommodityDataManager : BaseController
 
+//物品列表数组
 @property (nonatomic,strong) NSMutableArray<CommodityModel *> * dataArray;
+//权益列表数组
+@property (nonatomic,strong) NSMutableArray<PersonalRightsModel *> * personalRightsArray;
+
 
 
 //初始化方法

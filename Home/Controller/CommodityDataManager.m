@@ -34,4 +34,13 @@
     return _dataArray;
 }
 
+-(NSMutableArray<PersonalRightsModel *> *)personalRightsArray{
+    
+    if (!_personalRightsArray) {
+        
+        _personalRightsArray = [[NSMutableArray alloc] init];
+    }
+    return _personalRightsArray;
+}
+
 @end

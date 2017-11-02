@@ -180,7 +180,7 @@
     
     dispatch_async(dispatch_get_global_queue(0, 0), ^{
         
-        [[SHFMDBManager sharedManager] insertCommodityModel:self.model];
+        [[SHFMDBManager sharedManager] insertModel:self.model];
     });
 }
 
@@ -345,6 +345,7 @@
     if (!_finishBtn) {
         
         _finishBtn = [UIButton buttonWithType:UIButtonTypeCustom];
+        _finishBtn.titleLabel.font = FONT14;
         _finishBtn.frame = CGRectMake(SCREENWIDTH - 44 - 20, 20, 44, 44);
         [_finishBtn setTitle:@"完成" forState:UIControlStateNormal];
         [_finishBtn addTarget:self action:@selector(finishBtnClicked:) forControlEvents:UIControlEventTouchUpInside];
@@ -368,13 +369,16 @@
     if (!_categoryView) {
         
         _categoryView = [[UIView alloc] initWithFrame:CGRectMake(0, 0, SCREENWIDTH, VIEWHEIGHT)];
+        
+        NSString * str = @"品类：";
+        float width = [NSString widthWithStr:str andFont:BOLDFONT14 andMaxHeight:VIEWHEIGHT];
         //品类标题
-        UILabel * categoryTitleLabel = [[UILabel alloc] initWithFrame:CGRectMake(20, 0, 100, CGRectGetHeight(_categoryView.frame))];
+        UILabel * categoryTitleLabel = [[UILabel alloc] initWithFrame:CGRectMake(20, 0, width, VIEWHEIGHT)];
         categoryTitleLabel.font = BOLDFONT14;
-        categoryTitleLabel.text = @"品类:";
+        categoryTitleLabel.text = str;
         [_categoryView addSubview:categoryTitleLabel];
         //品类
-        UILabel * categoryLabel = [[UILabel alloc] initWithFrame:CGRectMake(120, 0, SCREENWIDTH - 120, CGRectGetHeight(_categoryView.frame))];
+        UILabel * categoryLabel = [[UILabel alloc] initWithFrame:CGRectMake(CGRectGetMaxX(categoryTitleLabel.frame) + 5, 0, SCREENWIDTH - CGRectGetMaxX(categoryTitleLabel.frame), VIEWHEIGHT)];
         categoryLabel.font = FONT14;
         categoryLabel.text = [self.categoryStr copy];
         [_categoryView addSubview:categoryLabel];
@@ -391,13 +395,15 @@
     if (!_commodityView) {
         
         _commodityView = [[UIView alloc] initWithFrame:CGRectMake(0, CGRectGetMaxY(self.categoryView.frame), SCREENWIDTH, VIEWHEIGHT)];
+        NSString * str = @"物品：";
+        float width = [NSString widthWithStr:str andFont:BOLDFONT14 andMaxHeight:VIEWHEIGHT];
         //商品标题
-        UILabel * commodityTitleLabel = [[UILabel alloc] initWithFrame:CGRectMake(20, 0, 100, CGRectGetHeight(_commodityView.frame))];
+        UILabel * commodityTitleLabel = [[UILabel alloc] initWithFrame:CGRectMake(20, 0, width, VIEWHEIGHT)];
         commodityTitleLabel.font = BOLDFONT14;
-        commodityTitleLabel.text = @"物品:";
+        commodityTitleLabel.text = str;
         [_commodityView addSubview:commodityTitleLabel];
         //商品
-        UITextField * commodityTextField = [[UITextField alloc] initWithFrame:CGRectMake(120, 0, SCREENWIDTH - 120, CGRectGetHeight(_commodityView.frame))];
+        UITextField * commodityTextField = [[UITextField alloc] initWithFrame:CGRectMake(CGRectGetMaxX(commodityTitleLabel.frame) + 5, 0, SCREENWIDTH - CGRectGetMaxX(commodityTitleLabel.frame), VIEWHEIGHT)];
         commodityTextField.font = FONT14;
         commodityTextField.delegate = self;
         commodityTextField.tag = UITEXTFIEDLBASETAG;
@@ -417,12 +423,12 @@
         
         _commodityImageView = [[UIView alloc] initWithFrame:CGRectMake(0, CGRectGetMaxY(self.commodityView.frame), SCREENWIDTH, VIEWWITHIMAGESHEIGHT)];
         //商品图片标题
-        UILabel * commodityImagesTitleLabel = [[UILabel alloc] initWithFrame:CGRectMake(20, 0, 100, VIEWHEIGHT)];
+        UILabel * commodityImagesTitleLabel = [[UILabel alloc] initWithFrame:CGRectMake(20, 0, SCREENWIDTH - 40, VIEWHEIGHT)];
         commodityImagesTitleLabel.font = BOLDFONT14;
-        commodityImagesTitleLabel.text = @"物品图片:";
+        commodityImagesTitleLabel.text = @"物品图片：";
         [_commodityImageView addSubview:commodityImagesTitleLabel];
         //商品图片
-        LiveWithDeleteImageView * commodityImageView = [[LiveWithDeleteImageView alloc] initWithImage:[UIImage imageNamed:@"HomeSource.bundle/photo_duf.tiff"] andFrame:CGRectMake(0, 0, 114, 69) andTarget:self andAction:@selector(addCommodityImageViewTaped:) andButtonTag:nil];
+        LiveWithDeleteImageView * commodityImageView = [[LiveWithDeleteImageView alloc] initWithImage:[UIImage imageNamed:@"HomeSource.bundle/photo_duf.tiff"] andFrame:CGRectMake(0, 0, 114, 69) andTarget:self andAction:@selector(addCommodityImageViewTaped:) andButtonTag:0];
         commodityImageView.tag = COMMODITUIMAGEVIEWBASETAG;
         [self.commodityImageViewScrollView addSubview:commodityImageView];
         [_commodityImageView addSubview:self.commodityImageViewScrollView];
@@ -449,13 +455,15 @@
     if (!_storageLocationView) {
         
         _storageLocationView = [[UIView alloc] initWithFrame:CGRectMake(0, CGRectGetMaxY(self.commodityImageView.frame), SCREENWIDTH, VIEWHEIGHT)];
+        NSString * str = @"存放位置：";
+        float width = [NSString widthWithStr:str andFont:BOLDFONT14 andMaxHeight:VIEWHEIGHT];
         //存放位置标题
-        UILabel * storageLocationTitleLabel = [[UILabel alloc] initWithFrame:CGRectMake(20, 0, 100, CGRectGetHeight(_storageLocationView.frame))];
+        UILabel * storageLocationTitleLabel = [[UILabel alloc] initWithFrame:CGRectMake(20, 0, width, VIEWHEIGHT)];
         storageLocationTitleLabel.font = BOLDFONT14;
-        storageLocationTitleLabel.text = @"存放位置:";
+        storageLocationTitleLabel.text = str;
         [_storageLocationView addSubview:storageLocationTitleLabel];
         //存放位置
-        UITextField * storageLocationTextField = [[UITextField alloc] initWithFrame:CGRectMake(120, 0, SCREENWIDTH - 120, CGRectGetHeight(_storageLocationView.frame))];
+        UITextField * storageLocationTextField = [[UITextField alloc] initWithFrame:CGRectMake(CGRectGetMaxX(storageLocationTitleLabel.frame) + 5, 0, SCREENWIDTH - CGRectGetMaxX(storageLocationTitleLabel.frame), VIEWHEIGHT)];
         storageLocationTextField.font = FONT14;
         storageLocationTextField.delegate = self;
         storageLocationTextField.tag = UITEXTFIEDLBASETAG + 1;
@@ -475,9 +483,9 @@
         
         _storageLocationImageView = [[UIView alloc] initWithFrame:CGRectMake(0, CGRectGetMaxY(self.storageLocationView.frame), SCREENWIDTH, VIEWWITHIMAGESHEIGHT)];
         //存放位置照片标题
-        UILabel * storageLocationImagesTitleLabel = [[UILabel alloc] initWithFrame:CGRectMake(20, 0, 100, VIEWHEIGHT)];
+        UILabel * storageLocationImagesTitleLabel = [[UILabel alloc] initWithFrame:CGRectMake(20, 0, SCREENWIDTH - 40, VIEWHEIGHT)];
         storageLocationImagesTitleLabel.font = BOLDFONT14;
-        storageLocationImagesTitleLabel.text = @"存放位置图片:";
+        storageLocationImagesTitleLabel.text = @"存放位置图片：";
         [_storageLocationImageView addSubview:storageLocationImagesTitleLabel];
         //存放位置照片
         LiveWithDeleteImageView * locationImageView = [[LiveWithDeleteImageView alloc] initWithImage:[UIImage imageNamed:@"HomeSource.bundle/photo_duf.tiff"] andFrame:CGRectMake(0, 0, 114, 69) andTarget:self andAction:@selector(addLocationImageViewTaped:) andButtonTag:0];
@@ -509,12 +517,15 @@
         
         _quantityView = [[UIView alloc] initWithFrame:CGRectMake(0, CGRectGetMaxY(self.storageLocationImageView.frame), SCREENWIDTH, VIEWHEIGHT)];
         //数量标题
-        UILabel * numberTitleLabel = [[UILabel alloc] initWithFrame:CGRectMake(20, 0, 100, CGRectGetHeight(_quantityView.frame))];
+        NSString * str = @"数量：";
+        float width = [NSString widthWithStr:str andFont:BOLDFONT14 andMaxHeight:VIEWHEIGHT];
+        
+        UILabel * numberTitleLabel = [[UILabel alloc] initWithFrame:CGRectMake(20, 0, width, VIEWHEIGHT)];
         numberTitleLabel.font = BOLDFONT14;
-        numberTitleLabel.text = @"数量:";
+        numberTitleLabel.text = str;
         [_quantityView addSubview:numberTitleLabel];
         //商品数量
-        UITextField * numberTextField = [[UITextField alloc] initWithFrame:CGRectMake(120, 0, SCREENWIDTH - 120, CGRectGetHeight(_quantityView.frame))];
+        UITextField * numberTextField = [[UITextField alloc] initWithFrame:CGRectMake(CGRectGetMaxX(numberTitleLabel.frame) + 5, 0, SCREENWIDTH - CGRectGetMaxX(numberTitleLabel.frame), VIEWHEIGHT)];
         numberTextField.font = FONT14;
         numberTextField.delegate = self;
         numberTextField.tag = UITEXTFIEDLBASETAG + 2;
@@ -534,14 +545,16 @@
     if (!_hasShelfLifeView) {
         
         _hasShelfLifeView = [[UIView alloc] initWithFrame:CGRectMake(0, CGRectGetMaxY(self.quantityView.frame), SCREENWIDTH, VIEWHEIGHT)];
+        NSString * str = @"有无保质期：";
+        float width = [NSString widthWithStr:str andFont:BOLDFONT14 andMaxHeight:VIEWHEIGHT];
         //有无保质期标题
-        UILabel * hasShelfLifeTitleLabel = [[UILabel alloc] initWithFrame:CGRectMake(20, 0, 100, CGRectGetHeight(_hasShelfLifeView.frame))];
+        UILabel * hasShelfLifeTitleLabel = [[UILabel alloc] initWithFrame:CGRectMake(20, 0, width, VIEWHEIGHT)];
         hasShelfLifeTitleLabel.font = BOLDFONT14;
-        hasShelfLifeTitleLabel.text = @"有无保质期:";
+        hasShelfLifeTitleLabel.text = str;
         [_hasShelfLifeView addSubview:hasShelfLifeTitleLabel];
         
         //有无保质期开关
-        UISwitch * shelfSwitch = [[UISwitch alloc] initWithFrame:CGRectMake(SCREENWIDTH - 51 - 10, (40 - 31) / 2, 51, 31)];
+        UISwitch * shelfSwitch = [[UISwitch alloc] initWithFrame:CGRectMake(SCREENWIDTH - 51 - 20, (40 - 31) / 2, 51, 31)];
         [shelfSwitch addTarget:self action:@selector(shelfSwitchValueChanged:) forControlEvents:UIControlEventValueChanged];
         [_hasShelfLifeView addSubview:shelfSwitch];
         
@@ -557,13 +570,15 @@
     if (!_shelfLifeView) {
         
         _shelfLifeView = [[UIView alloc] initWithFrame:CGRectMake(0, CGRectGetMaxY(self.hasShelfLifeView.frame), SCREENWIDTH, VIEWHEIGHT)];
+        NSString * str = @"保质期：";
+        float width = [NSString widthWithStr:str andFont:BOLDFONT14 andMaxHeight:VIEWHEIGHT];
         //保质期标题
-        UILabel * shelfLifeTitleLabel = [[UILabel alloc] initWithFrame:CGRectMake(20, 0, 100, CGRectGetHeight(_shelfLifeView.frame))];
+        UILabel * shelfLifeTitleLabel = [[UILabel alloc] initWithFrame:CGRectMake(20, 0, width, VIEWHEIGHT)];
         shelfLifeTitleLabel.font = BOLDFONT14;
-        shelfLifeTitleLabel.text = @"保质期:";
+        shelfLifeTitleLabel.text = str;
         [_shelfLifeView addSubview:shelfLifeTitleLabel];
         //保质期
-        UILabel * shelfLifeLabel = [[UILabel alloc] initWithFrame:CGRectMake(120, 0, SCREENWIDTH - 120, CGRectGetHeight(_shelfLifeView.frame))];
+        UILabel * shelfLifeLabel = [[UILabel alloc] initWithFrame:CGRectMake(CGRectGetMaxX(shelfLifeTitleLabel.frame) + 5, 0, SCREENWIDTH - CGRectGetMaxX(shelfLifeTitleLabel.frame), VIEWHEIGHT)];
         shelfLifeLabel.font = FONT14;
         shelfLifeLabel.text = @"请选择物品到期时间";
         [_shelfLifeView addSubview:shelfLifeLabel];

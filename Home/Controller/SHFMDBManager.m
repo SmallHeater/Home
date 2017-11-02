@@ -9,7 +9,7 @@
 #import "SHFMDBManager.h"
 #import "FMDB.h"
 #import "CommodityModel.h"
-
+#import "PersonalRightsModel.h"
 
 @interface SHFMDBManager ()
 @property (nonatomic,strong) FMDatabase * db;
@@ -29,11 +29,19 @@
         if ([manager.db open])
         {
             //4.创表（CommodityImageArray，CommodityLocationImageArray，存储前，数组归档(NSKeyedArchiver)为二进制数据，再存入数据库；从数据库取出时肯定也是取出的二进制数据，这时要将二进制数据解档（NSKeyedUnArchiver）为数组）
-            BOOL result = [manager.db executeUpdate:@"CREATE TABLE IF NOT EXISTS Home_CommodityTable (CommodityID text NOT NULL,CommodityName text NOT NULL,CommodityImageArray blob NOT NULL,CommodityCount integer,CategoryID text NOT NULL,CategoryName text NOT NULL,CommodityLocation text NOT NULL,CommodityLocationImageArray blob NOT NULL,hasShelfLife integer,shelfLife text);"];
-            if (result)
+            BOOL commodityResult = [manager.db executeUpdate:@"CREATE TABLE IF NOT EXISTS Home_CommodityTable (CommodityID text NOT NULL,CommodityName text NOT NULL,CommodityImageArray blob NOT NULL,CommodityCount integer,CategoryID text NOT NULL,CategoryName text NOT NULL,CommodityLocation text NOT NULL,CommodityLocationImageArray blob NOT NULL,hasShelfLife integer,shelfLife text);"];
+            if (commodityResult)
             {
-                NSLog(@"创建表成功");
+                NSLog(@"创建物品表成功");
             }
+            
+            
+            BOOL personalRightsResult = [manager.db executeUpdate:@"CREATE TABLE IF NOT EXISTS Home_PersonalRightsTable (PersonalRightsID text NOT NULL,PersonalRightsName text NOT NULL,PersonalRightsStartTime text NOT NULL,PersonalRightsEndTime text NOT NULL,PersonalRightsFrom text NOT NULL,PersonalRightsUsedConditions text NOT NULL,PersonalRightsEnjoyConditions text NOT NULL,PersonalRightsArray blob NOT NULL);"];
+            if (personalRightsResult)
+            {
+                NSLog(@"创建权益表成功");
+            }
+            
             [manager.db close];
         }
     });
@@ -42,24 +50,46 @@
 
 #pragma mark  ----  自定义方法
 //增
--(BOOL)insertCommodityModel:(CommodityModel *)model{
+-(BOOL)insertModel:(BaseModel *)model{
     
     BOOL result = NO;
     if ([self.db open]) {
         
-        NSData * commodityImageArrayData = [NSKeyedArchiver archivedDataWithRootObject:model.commodityImageArray];
-        NSData * commodityLocationImageArrayData = [NSKeyedArchiver archivedDataWithRootObject:model.commodityLocationImagesArray];
-        
-        NSString * sql = [[NSString alloc] initWithFormat:@"INSERT INTO Home_CommodityTable(CommodityID,CommodityName,CommodityImageArray,CommodityCount,CategoryID,CategoryName,CommodityLocation,CommodityLocationImageArray,hasShelfLife,shelfLife) VALUES (?,?,?,?,?,?,?,?,?,?)"];
-        
-        result = [self.db executeUpdate:sql,model.commodityID,model.commodityName,commodityImageArrayData,[NSNumber numberWithUnsignedInteger:model.commodityCount],model.categoryID,model.category,model.commodityLocation,commodityLocationImageArrayData,[NSNumber numberWithBool:model.hasShelfLife],model.shelfLife];
-        if (result) {
+        if ([model isKindOfClass:[CommodityModel class]]) {
             
-            NSLog(@"成功");
+            CommodityModel * commodityModel = (CommodityModel *)model;
+            NSData * commodityImageArrayData = [NSKeyedArchiver archivedDataWithRootObject:commodityModel.commodityImageArray];
+            NSData * commodityLocationImageArrayData = [NSKeyedArchiver archivedDataWithRootObject:commodityModel.commodityLocationImagesArray];
+            
+            NSString * sql = [[NSString alloc] initWithFormat:@"INSERT INTO Home_CommodityTable(CommodityID,CommodityName,CommodityImageArray,CommodityCount,CategoryID,CategoryName,CommodityLocation,CommodityLocationImageArray,hasShelfLife,shelfLife) VALUES (?,?,?,?,?,?,?,?,?,?)"];
+            
+            result = [self.db executeUpdate:sql,commodityModel.commodityID,commodityModel.commodityName,commodityImageArrayData,[NSNumber numberWithUnsignedInteger:commodityModel.commodityCount],commodityModel.categoryID,commodityModel.category,commodityModel.commodityLocation,commodityLocationImageArrayData,[NSNumber numberWithBool:commodityModel.hasShelfLife],commodityModel.shelfLife];
+            if (result) {
+                
+                NSLog(@"成功");
+            }
+            else{
+                
+                NSLog(@"失败");
+            }
         }
-        else{
+        else if ([model isKindOfClass:[PersonalRightsModel class]]){
             
-            NSLog(@"失败");
+            PersonalRightsModel * personalRightsModel = (PersonalRightsModel *)model;
+            NSData * personalRightsPhotoData = [NSKeyedArchiver archivedDataWithRootObject:personalRightsModel.personalRightsPhotoArray];
+            
+            
+            NSString * sql = [[NSString alloc] initWithFormat:@"INSERT INTO Home_PersonalRightsTable(PersonalRightsID,PersonalRightsName,PersonalRightsStartTime,PersonalRightsEndTime,PersonalRightsFrom,PersonalRightsUsedConditions,PersonalRightsEnjoyConditions,PersonalRightsArray) VALUES (?,?,?,?,?,?,?,?)"];
+            
+            result = [self.db executeUpdate:sql,personalRightsModel.personalRightsID,personalRightsModel.personalRightsName,personalRightsModel.personalRightsStartTime,personalRightsModel.personalRightsEndTime,personalRightsModel.personalRightsFrom,personalRightsModel.personalRightsUsedConditions,personalRightsModel.personalRightsEnjoyConditions,personalRightsPhotoData];
+            if (result) {
+                
+                NSLog(@"成功");
+            }
+            else{
+                
+                NSLog(@"失败");
+            }
         }
     }
     //关闭数据库

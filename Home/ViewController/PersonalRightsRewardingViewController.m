@@ -9,54 +9,57 @@
 #import "PersonalRightsRewardingViewController.h"
 #import "DatePickView.h"
 #import "LiveWithDeleteImageView.h"
-
-
-
+#import "PersonalRightsModel.h"
+#import "CommodityDataManager.h"
+#import "SHFMDBManager.h"
 
 
 #define MAXHEIGHT 14.0
+#define VIEWHEIGHT 40
 #define USECONDITIONSSTR  @"请输入使用条件"
 #define ENJOYCONDITIONSSTR  @"请输入享受条件"
 
 
-@interface PersonalRightsRewardingViewController ()<UITextFieldDelegate,UITextViewDelegate,DatePickViewDelegate>
-//权益名称Title
-@property (nonatomic,strong) UILabel * personalRightsTitleLabel;
+@interface PersonalRightsRewardingViewController ()<UITextFieldDelegate,UITextViewDelegate,DatePickViewDelegate>{
+    
+    //是否是选择权益开始时间
+    BOOL isSelectStartTime;
+}
+
+//完成按钮
+@property (nonatomic,strong) UIButton * finishBtn;
+//权益名称view
+@property (nonatomic,strong) UIView * personalRightsView;
+//开始结束时间view
+@property (nonatomic,strong) UIView * timeView;
+//权益来源view
+@property (nonatomic,strong) UIView * rightsFromView;
+//使用条件view
+@property (nonatomic,strong) UIView * useConditionsView;
+//享受条件
+@property (nonatomic,strong) UIView * enjoyConditionsView;
+//照片记录view
+@property (nonatomic,strong) UIView * photoRecordView;
+//存放照片的scrollView
+@property (nonatomic,strong) UIScrollView * photoScrollView;
+
 //权益名称TF
 @property (nonatomic,strong) UITextField * personalRightsTextField;
-//开始时间Title
-@property (nonatomic,strong) UILabel * startTimeTitleLabel;
 //开始时间Label
 @property (nonatomic,strong) UILabel * startTimeLabel;
-//结束时间Title
-@property (nonatomic,strong) UILabel * endTimeTitleLabel;
 //结束时间Label
 @property (nonatomic,strong) UILabel * endTimeLabel;
-//权益来源Title
-@property (nonatomic,strong) UILabel * personalRightsFromTitleLabel;
 //权益来源TF
 @property (nonatomic,strong) UITextField * personalRightsFromTextField;
-//使用条件Title
-@property (nonatomic,strong) UILabel * useConditionsTitleLabel;
 //使用条件TV
 @property (nonatomic,strong) UITextView * useConditionsTextView;
-//享受条件Title
-@property (nonatomic,strong) UILabel * enjoyConditionsTitleLabel;
 //享受条件TV
 @property (nonatomic,strong) UITextView * enjoyConditionsTextView;
-//照片记录Title
-@property (nonatomic,strong) UILabel * photoRecordTitleLabel;
-//添加图片的view
-@property (nonatomic,strong) LiveWithDeleteImageView * addImageView;
-//照片记录View
-@property (nonatomic,strong) UIView * photoRecordView;
-
-
 //日期选择view
 @property (nonatomic,strong) DatePickView * datePickerView;
 
-//是否是选择权益开始时间
-@property (nonatomic,assign) BOOL isSelectStartTime;
+//权益模型
+@property (nonatomic,strong) PersonalRightsModel * personalRightsModel;
 @end
 
 @implementation PersonalRightsRewardingViewController
@@ -67,21 +70,16 @@
     [super viewDidLoad];
     // Do any additional setup after loading the view.
     self.navigationBar.titleLabel.text = @"个人权益录入";
+    [self.navigationBar addSubview:self.finishBtn];
     
-    [self.view addSubview:self.personalRightsTitleLabel];
-    [self.view addSubview:self.personalRightsTextField];
-    [self.view addSubview:self.startTimeTitleLabel];
-    [self.view addSubview:self.startTimeLabel];
-    [self.view addSubview:self.endTimeTitleLabel];
-    [self.view addSubview:self.endTimeLabel];
-    [self.view addSubview:self.personalRightsFromTitleLabel];
-    [self.view addSubview:self.personalRightsFromTextField];
-    [self.view addSubview:self.useConditionsTitleLabel];
-    [self.view addSubview:self.useConditionsTextView];
-    [self.view addSubview:self.enjoyConditionsTitleLabel];
-    [self.view addSubview:self.enjoyConditionsTextView];
-    [self.view addSubview:self.photoRecordTitleLabel];
+    
+    [self.view addSubview:self.personalRightsView];
+    [self.view addSubview:self.timeView];
+    [self.view addSubview:self.rightsFromView];
+    [self.view addSubview:self.useConditionsView];
+    [self.view addSubview:self.enjoyConditionsView];
     [self.view addSubview:self.photoRecordView];
+    
 }
 
 - (void)didReceiveMemoryWarning {
@@ -96,6 +94,21 @@
     [textField resignFirstResponder];
     return YES;
 }
+
+- (void)textFieldDidEndEditing:(UITextField *)textField{
+    
+    if ([textField isEqual:self.personalRightsTextField]) {
+        
+        //权益名称
+        self.personalRightsModel.personalRightsName = self.personalRightsTextField.text;
+    }
+    else if ([textField isEqual:self.personalRightsFromTextField]){
+        
+        //权益来源
+        self.personalRightsModel.personalRightsFrom = self.personalRightsFromTextField.text;
+    }
+}
+
 #pragma mark  ----  UITextViewDelegate
 - (BOOL)textViewShouldBeginEditing:(UITextView *)textView{
 
@@ -105,15 +118,26 @@
 
 - (void)textViewDidEndEditing:(UITextView *)textView{
 
-    if (textView.text.length == 0) {
+    if ([textView isEqual:self.useConditionsTextView]) {
         
-        if ([textView isEqual:self.useConditionsTextView]) {
+        if (textView.text.length == 0) {
             
             self.useConditionsTextView.text = USECONDITIONSSTR;
         }
-        else if ([textView isEqual:self.enjoyConditionsTextView]){
-        
-            self.enjoyConditionsTextView.text = ENJOYCONDITIONSSTR;
+        else{
+            
+            self.personalRightsModel.personalRightsUsedConditions = self.useConditionsTextView.text;
+        }
+    }
+    else if ([textView isEqual:self.enjoyConditionsTextView]){
+    
+        if (textView.text.length == 0) {
+            
+            self.enjoyConditionsTextView.text = USECONDITIONSSTR;
+        }
+        else{
+            
+            self.personalRightsModel.personalRightsEnjoyConditions = self.enjoyConditionsTextView.text;
         }
     }
 }
@@ -121,15 +145,17 @@
 #pragma mark  ----  DatePickViewDelegate
 -(void)finishSelectedWithTimeStr:(NSString *)selectedTime{
 
-    if (self.isSelectStartTime) {
+    if (isSelectStartTime) {
     
         NSString * startTimeStr = [[NSString alloc] initWithString:selectedTime];
         self.startTimeLabel.text = startTimeStr;
+        self.personalRightsModel.personalRightsStartTime = startTimeStr;
     }
     else{
     
         NSString * endTimeStr = [[NSString alloc] initWithString:selectedTime];
         self.endTimeLabel.text = endTimeStr;
+        self.personalRightsModel.personalRightsEndTime = endTimeStr;
     }
 }
 
@@ -137,7 +163,7 @@
 //选择权益开始时间
 -(void)startTimeLabelTaped{
 
-    self.isSelectStartTime = YES;
+    isSelectStartTime = YES;
     [self.view addSubview:self.datePickerView];
 }
 
@@ -145,186 +171,231 @@
 //选择权益结束时间
 -(void)endTimeLabelTaped{
 
-    self.isSelectStartTime = NO;
+    isSelectStartTime = NO;
     [self.view addSubview:self.datePickerView];
 }
 
+//添加记录图片
+-(void)addImageViewTaped:(UIGestureRecognizer *)ges{
+    
+}
+
+//完成按钮的响应事件
+-(void)finishBtnClicked:(UIButton *)finishBtn{
+    
+    [self.personalRightsModel.personalRightsPhotoArray addObject:@"12345"];
+    [[CommodityDataManager sharedManager].personalRightsArray addObject:self.personalRightsModel];
+    [self.navigationController popViewControllerAnimated:YES];
+    
+    dispatch_async(dispatch_get_global_queue(0, 0), ^{
+        
+        [[SHFMDBManager sharedManager] insertModel:self.personalRightsModel];
+    });
+}
+
 #pragma mark  ------  懒加载
-
--(UILabel *)personalRightsTitleLabel{
+-(UIButton *)finishBtn{
     
-    if (!_personalRightsTitleLabel) {
+    if (!_finishBtn) {
         
-        NSString * str = @"权益名称";
+        _finishBtn = [UIButton buttonWithType:UIButtonTypeCustom];
+        _finishBtn.titleLabel.font = FONT14;
+        _finishBtn.frame = CGRectMake(SCREENWIDTH - 44 - 20, 20, 44, 44);
+        [_finishBtn setTitle:@"完成" forState:UIControlStateNormal];
+        [_finishBtn addTarget:self action:@selector(finishBtnClicked:) forControlEvents:UIControlEventTouchUpInside];
+    }
+    return _finishBtn;
+}
+
+-(UIView *)personalRightsView{
+    
+    if (!_personalRightsView) {
+        
+        _personalRightsView = [[UIView alloc] initWithFrame:CGRectMake(0, 64, SCREENWIDTH, VIEWHEIGHT)];
+        
+        NSString * str = @"权益名称：";
+        float width = [NSString widthWithStr:str andFont:BOLDFONT14 andMaxHeight:MAXHEIGHT];
+        UILabel * personalRightsTitleLabel = [[UILabel alloc] initWithFrame:CGRectMake(20, 0, width, VIEWHEIGHT)];
+        personalRightsTitleLabel.font = BOLDFONT14;
+        personalRightsTitleLabel.text = str;
+        [_personalRightsView addSubview:personalRightsTitleLabel];
+        
+        UITextField * personalRightsTextField = [[UITextField alloc] initWithFrame:CGRectMake(CGRectGetMaxX(personalRightsTitleLabel.frame) + 5, 0, SCREENWIDTH - 10 - CGRectGetMaxX(personalRightsTitleLabel.frame), VIEWHEIGHT)];
+        personalRightsTextField.delegate = self;
+        personalRightsTextField.placeholder = @"请输入权益名称";
+        personalRightsTextField.font = FONT14;
+        [_personalRightsView addSubview:personalRightsTextField];
+        self.personalRightsTextField = personalRightsTextField;
+        
+        UILabel * bottomLineLabel = [[UILabel alloc] initWithFrame:CGRectMake(0, CGRectGetHeight(_personalRightsView.frame), SCREENWIDTH, 0.5)];
+        bottomLineLabel.backgroundColor = [UIColor blackColor];
+        [_personalRightsView addSubview:bottomLineLabel];
+        
+    }
+    return _personalRightsView;
+}
+
+
+-(UIView *)timeView{
+    
+    if (!_timeView) {
+        
+        _timeView = [[UIView alloc] initWithFrame:CGRectMake(0, CGRectGetMaxY(self.personalRightsView.frame), SCREENWIDTH, VIEWHEIGHT * 2)];
+        
+        NSString * str = @"开始时间：";
         float width = [NSString widthWithStr:str andFont:FONT14 andMaxHeight:MAXHEIGHT];
         
-        _personalRightsTitleLabel = [[UILabel alloc] initWithFrame:CGRectMake(20, 74, width, MAXHEIGHT)];
-        _personalRightsTitleLabel.font = FONT14;
-        _personalRightsTitleLabel.text = str;
-    }
-    return _personalRightsTitleLabel;
-}
-
-
--(UITextField *)personalRightsTextField{
-    
-    if (!_personalRightsTextField) {
+        UILabel * startTimeTitleLabel = [[UILabel alloc] initWithFrame:CGRectMake(20, 0, width, VIEWHEIGHT)];
+        startTimeTitleLabel.font = FONT14;
+        startTimeTitleLabel.text = str;
+        [_timeView addSubview:startTimeTitleLabel];
         
-        _personalRightsTextField = [[UITextField alloc] initWithFrame:CGRectMake(CGRectGetMaxX(self.personalRightsTitleLabel.frame) + 5, CGRectGetMinY(self.personalRightsTitleLabel.frame), SCREENWIDTH - 10 - CGRectGetMaxX(self.personalRightsTitleLabel.frame), MAXHEIGHT)];
-        _personalRightsTextField.placeholder = @"请输入权益名称";
-    }
-    return _personalRightsTextField;
-}
-
--(UILabel *)startTimeTitleLabel{
-    
-    if (!_startTimeTitleLabel) {
         
-        NSString * str = @"开始时间";
-        float width = [NSString widthWithStr:str andFont:FONT14 andMaxHeight:MAXHEIGHT];
-        
-        _startTimeTitleLabel = [[UILabel alloc] initWithFrame:CGRectMake(20, CGRectGetMaxY(self.personalRightsTitleLabel.frame) + 10, width, MAXHEIGHT)];
-        _startTimeTitleLabel.font = FONT14;
-        _startTimeTitleLabel.text = str;
-    }
-    return _startTimeTitleLabel;
-}
-
--(UILabel *)startTimeLabel{
-    
-    if (!_startTimeLabel) {
-        
-        _startTimeLabel = [[UILabel alloc] initWithFrame:CGRectMake(CGRectGetMaxX(self.startTimeTitleLabel.frame) + 5, CGRectGetMinY(self.startTimeTitleLabel.frame), SCREENWIDTH - 10 - CGRectGetMaxX(self.startTimeTitleLabel.frame), MAXHEIGHT)];
-        _startTimeLabel.userInteractionEnabled = YES;
-        _startTimeLabel.text = @"请选择开始时间";
+        UILabel * startTimeLabel = [[UILabel alloc] initWithFrame:CGRectMake(CGRectGetMaxX(startTimeTitleLabel.frame) + 5, 0, SCREENWIDTH - 10 - CGRectGetMaxX(startTimeTitleLabel.frame), VIEWHEIGHT)];
+        startTimeLabel.userInteractionEnabled = YES;
+        startTimeLabel.font = FONT14;
+        startTimeLabel.text = @"请选择开始时间";
+        [_timeView addSubview:startTimeLabel];
+        self.startTimeLabel = startTimeLabel;
         
         UITapGestureRecognizer * tap = [[UITapGestureRecognizer alloc] initWithTarget:self action:@selector(startTimeLabelTaped)];
-        [_startTimeLabel addGestureRecognizer:tap];
+        [startTimeLabel addGestureRecognizer:tap];
+        
+        
+        NSString * endStr = @"结束时间：";
+        float endWidth = [NSString widthWithStr:endStr andFont:FONT14 andMaxHeight:VIEWHEIGHT];
+        
+        UILabel * endTimeTitleLabel = [[UILabel alloc] initWithFrame:CGRectMake(20, CGRectGetMaxY(startTimeTitleLabel.frame), endWidth, VIEWHEIGHT)];
+        endTimeTitleLabel.font = FONT14;
+        endTimeTitleLabel.text = endStr;
+        [_timeView addSubview:endTimeTitleLabel];
+        
+        UILabel * endTimeLabel = [[UILabel alloc] initWithFrame:CGRectMake(CGRectGetMaxX(endTimeTitleLabel.frame) + 5, CGRectGetMinY(endTimeTitleLabel.frame), SCREENWIDTH - 10 - CGRectGetMaxX(endTimeTitleLabel.frame), VIEWHEIGHT)];
+        endTimeLabel.userInteractionEnabled = YES;
+        endTimeLabel.font = FONT14;
+        endTimeLabel.text = @"请选择结束时间";
+        [_timeView addSubview:endTimeLabel];
+        self.endTimeLabel = endTimeLabel;
+        
+        UITapGestureRecognizer * endTap = [[UITapGestureRecognizer alloc] initWithTarget:self action:@selector(endTimeLabelTaped)];
+        [endTimeLabel addGestureRecognizer:endTap];
+        
+        
+        UILabel * bottomLineLabel = [[UILabel alloc] initWithFrame:CGRectMake(0, CGRectGetHeight(_timeView.frame), SCREENWIDTH, 0.5)];
+        bottomLineLabel.backgroundColor = [UIColor blackColor];
+        [_timeView addSubview:bottomLineLabel];
     }
-    return _startTimeLabel;
+    return _timeView;
 }
 
--(UILabel *)endTimeTitleLabel{
-
-    if (!_endTimeTitleLabel) {
+-(UIView *)rightsFromView{
+    
+    if (!_rightsFromView) {
         
-        NSString * str = @"结束时间";
-        float width = [NSString widthWithStr:str andFont:FONT14 andMaxHeight:MAXHEIGHT];
-        
-        _endTimeTitleLabel = [[UILabel alloc] initWithFrame:CGRectMake(20, CGRectGetMaxY(self.startTimeTitleLabel.frame) + 10, width, MAXHEIGHT)];
-        _endTimeTitleLabel.font = FONT14;
-        _endTimeTitleLabel.text = str;
-    }
-    return _endTimeTitleLabel;
-}
-
--(UILabel *)endTimeLabel{
-
-    if (!_endTimeLabel) {
-        
-        _endTimeLabel = [[UILabel alloc] initWithFrame:CGRectMake(CGRectGetMaxX(self.endTimeTitleLabel.frame) + 5, CGRectGetMinY(self.endTimeTitleLabel.frame), SCREENWIDTH - 10 - CGRectGetMaxX(self.endTimeTitleLabel.frame), MAXHEIGHT)];
-        _endTimeLabel.userInteractionEnabled = YES;
-        _endTimeLabel.text = @"请选择结束时间";
-        
-        UITapGestureRecognizer * tap = [[UITapGestureRecognizer alloc] initWithTarget:self action:@selector(endTimeLabelTaped)];
-        [_endTimeLabel addGestureRecognizer:tap];
-    }
-    return _endTimeLabel;
-}
-
--(UILabel *)personalRightsFromTitleLabel{
-
-    if (!_personalRightsFromTitleLabel) {
+        _rightsFromView = [[UIView alloc] initWithFrame:CGRectMake(0, CGRectGetMaxY(self.timeView.frame), SCREENWIDTH, VIEWHEIGHT)];
         
         NSString * str = @"权益来源：";
         float width = [NSString widthWithStr:str andFont:FONT14 andMaxHeight:MAXHEIGHT];
         
-        _personalRightsFromTitleLabel = [[UILabel alloc] initWithFrame:CGRectMake(20, CGRectGetMaxY(self.endTimeTitleLabel.frame) + 10, width, MAXHEIGHT)];
-        _personalRightsFromTitleLabel.text = str;
-    }
-    return _personalRightsFromTitleLabel;
-}
-
--(UITextField *)personalRightsFromTextField{
-
-    if (!_personalRightsFromTextField) {
+        UILabel * personalRightsFromTitleLabel = [[UILabel alloc] initWithFrame:CGRectMake(20, 0, width, VIEWHEIGHT)];
+        personalRightsFromTitleLabel.font = FONT14;
+        personalRightsFromTitleLabel.text = str;
+        [_rightsFromView addSubview:personalRightsFromTitleLabel];
         
-        _personalRightsFromTextField = [[UITextField alloc] initWithFrame:CGRectMake(CGRectGetMaxX(self.personalRightsFromTitleLabel.frame) + 5, CGRectGetMinY(self.personalRightsFromTitleLabel.frame), SCREENWIDTH - 10 - CGRectGetMaxX(self.personalRightsFromTitleLabel.frame), MAXHEIGHT)];
-        _personalRightsFromTextField.placeholder = @"请输入权益来源";
-    }
-    return _personalRightsFromTextField;
-}
-
--(UILabel *)useConditionsTitleLabel{
-
-    if (!_useConditionsTitleLabel) {
+        UITextField * personalRightsFromTextField = [[UITextField alloc] initWithFrame:CGRectMake(CGRectGetMaxX(personalRightsFromTitleLabel.frame) + 5, 0, SCREENWIDTH - 10 - CGRectGetMaxX(personalRightsFromTitleLabel.frame), VIEWHEIGHT)];
+        personalRightsFromTextField.delegate = self;
+        personalRightsFromTextField.font = FONT14;
+        personalRightsFromTextField.placeholder = @"请输入权益来源";
+        [_rightsFromView addSubview:personalRightsFromTextField];
+        self.personalRightsFromTextField = personalRightsFromTextField;
         
-        _useConditionsTitleLabel = [[UILabel alloc] initWithFrame:CGRectMake(20, CGRectGetMaxY(self.personalRightsFromTitleLabel.frame) + 10, SCREENWIDTH - 40, MAXHEIGHT)];
-        _useConditionsTitleLabel.text = @"使用条件：";
-        _useConditionsTitleLabel.font = FONT14;
+        UILabel * bottomLineLabel = [[UILabel alloc] initWithFrame:CGRectMake(0, CGRectGetHeight(_rightsFromView.frame), SCREENWIDTH, 0.5)];
+        bottomLineLabel.backgroundColor = [UIColor blackColor];
+        [_rightsFromView addSubview:bottomLineLabel];
     }
-    return _useConditionsTitleLabel;
-}
-
--(UITextView *)useConditionsTextView{
-
-    if (!_useConditionsTextView) {
-        
-        _useConditionsTextView = [[UITextView alloc] initWithFrame:CGRectMake(20, CGRectGetMaxY(self.useConditionsTitleLabel.frame) + 10, SCREENWIDTH - 40, 100)];
-        _useConditionsTextView.text = USECONDITIONSSTR;
-    }
-    return _useConditionsTextView;
+    return _rightsFromView;
 }
 
 
--(UILabel *)enjoyConditionsTitleLabel{
+-(UIView *)useConditionsView{
     
-    if (!_enjoyConditionsTitleLabel) {
+    if (!_useConditionsView) {
         
-        _enjoyConditionsTitleLabel = [[UILabel alloc] initWithFrame:CGRectMake(20, CGRectGetMaxY(self.useConditionsTextView.frame) + 10, SCREENWIDTH - 40, MAXHEIGHT)];
-        _enjoyConditionsTitleLabel.text = @"享受条件：";
-        _enjoyConditionsTitleLabel.font = FONT14;
+        _useConditionsView = [[UIView alloc] initWithFrame:CGRectMake(0, CGRectGetMaxY(self.rightsFromView.frame), SCREENWIDTH, VIEWHEIGHT * 3)];
+        
+        UILabel * useConditionsTitleLabel = [[UILabel alloc] initWithFrame:CGRectMake(20, 0, SCREENWIDTH - 40, VIEWHEIGHT)];
+        useConditionsTitleLabel.text = @"使用条件：";
+        useConditionsTitleLabel.font = FONT14;
+        [_useConditionsView addSubview:useConditionsTitleLabel];
+        
+        UITextView * useConditionsTextView = [[UITextView alloc] initWithFrame:CGRectMake(20, CGRectGetMaxY(useConditionsTitleLabel.frame), SCREENWIDTH - 40, VIEWHEIGHT * 2 - 0.5)];
+        useConditionsTextView.delegate = self;
+        useConditionsTextView.text = USECONDITIONSSTR;
+        [_useConditionsView addSubview:useConditionsTextView];
+        self.useConditionsTextView = useConditionsTextView;
+        
+        
+        UILabel * bottomLineLabel = [[UILabel alloc] initWithFrame:CGRectMake(0, CGRectGetHeight(_useConditionsView.frame), SCREENWIDTH, 0.5)];
+        bottomLineLabel.backgroundColor = [UIColor blackColor];
+        [_useConditionsView addSubview:bottomLineLabel];
     }
-    return _enjoyConditionsTitleLabel;
+    return _useConditionsView;
 }
 
--(UITextView *)enjoyConditionsTextView{
+
+-(UIView *)enjoyConditionsView{
     
-    if (!_enjoyConditionsTextView) {
+    if (!_enjoyConditionsView) {
         
-        _enjoyConditionsTextView = [[UITextView alloc] initWithFrame:CGRectMake(20, CGRectGetMaxY(self.enjoyConditionsTitleLabel.frame) + 10, SCREENWIDTH - 40, 100)];
-        _enjoyConditionsTextView.text = ENJOYCONDITIONSSTR;
-    }
-    return _enjoyConditionsTextView;
-}
-
--(UILabel *)photoRecordTitleLabel{
-
-    if (!_photoRecordTitleLabel) {
+        _enjoyConditionsView = [[UIView alloc] initWithFrame:CGRectMake(0, CGRectGetMaxY(self.useConditionsView.frame), SCREENWIDTH, VIEWHEIGHT * 3)];
         
-        _photoRecordTitleLabel = [[UILabel alloc] initWithFrame:CGRectMake(20, CGRectGetMaxY(self.enjoyConditionsTextView.frame) + 10, SCREENWIDTH - 40, MAXHEIGHT)];
-        _photoRecordTitleLabel.font = FONT14;
-        _photoRecordTitleLabel.text = @"照片记录";
-    }
-    return _photoRecordTitleLabel;
-}
-
--(LiveWithDeleteImageView *)addImageView{
-
-    if (!_addImageView) {
+        UILabel * enjoyConditionsTitleLabel = [[UILabel alloc] initWithFrame:CGRectMake(20,0, SCREENWIDTH - 40, VIEWHEIGHT)];
+        enjoyConditionsTitleLabel.text = @"享受条件：";
+        enjoyConditionsTitleLabel.font = FONT14;
+        [_enjoyConditionsView addSubview:enjoyConditionsTitleLabel];
         
-        _addImageView = [[LiveWithDeleteImageView alloc] initWithImage:[UIImage imageNamed:@"HomeSource.bundle/photo_duf.tiff"] andFrame:CGRectMake(0, 0, 114, 69) andTarget:self andAction:@selector(addImageViewTaped:) andButtonTag:0];;
+        UITextView * enjoyConditionsTextView = [[UITextView alloc] initWithFrame:CGRectMake(20, CGRectGetMaxY(enjoyConditionsTitleLabel.frame), SCREENWIDTH - 40, VIEWHEIGHT * 2 - 0.5)];
+        enjoyConditionsTextView.delegate = self;
+        enjoyConditionsTextView.text = ENJOYCONDITIONSSTR;
+        [_enjoyConditionsView addSubview:enjoyConditionsTextView];
+        self.enjoyConditionsTextView = enjoyConditionsTextView;
+        
+        UILabel * bottomLineLabel = [[UILabel alloc] initWithFrame:CGRectMake(0, CGRectGetHeight(_enjoyConditionsView.frame), SCREENWIDTH, 0.5)];
+        bottomLineLabel.backgroundColor = [UIColor blackColor];
+        [_enjoyConditionsView addSubview:bottomLineLabel];
     }
-    return _addImageView;
+    return _enjoyConditionsView;
 }
 
 -(UIView *)photoRecordView{
-
+    
     if (!_photoRecordView) {
         
-        _photoRecordView = [[UIView alloc] initWithFrame:CGRectMake(0, CGRectGetMaxY(self.photoRecordTitleLabel.frame) + 10, SCREENWIDTH, 60)];
+        _photoRecordView = [[UIView alloc] initWithFrame:CGRectMake(0, CGRectGetMaxY(self.enjoyConditionsView.frame), SCREENWIDTH, VIEWHEIGHT + 74.5)];
+        UILabel * photoRecordTitleLabel = [[UILabel alloc] initWithFrame:CGRectMake(20, 0, SCREENWIDTH - 40, VIEWHEIGHT)];
+        photoRecordTitleLabel.font = FONT14;
+        photoRecordTitleLabel.text = @"照片记录：";
+        [_photoRecordView addSubview:photoRecordTitleLabel];
+        
+        LiveWithDeleteImageView * addImageView = [[LiveWithDeleteImageView alloc] initWithImage:[UIImage imageNamed:@"HomeSource.bundle/photo_duf.tiff"] andFrame:CGRectMake(0, 0, 114, 69) andTarget:self andAction:@selector(addImageViewTaped:) andButtonTag:0];;
+        [self.photoScrollView addSubview:addImageView];
+        [_photoRecordView addSubview:self.photoScrollView];
+        
+        UILabel * bottomLineLabel = [[UILabel alloc] initWithFrame:CGRectMake(0, CGRectGetHeight(_photoRecordView.frame), SCREENWIDTH, 0.5)];
+        bottomLineLabel.backgroundColor = [UIColor blackColor];
+        [_photoRecordView addSubview:bottomLineLabel];
     }
     return _photoRecordView;
+}
+
+-(UIScrollView *)photoScrollView{
+    
+    if (!_photoScrollView) {
+        
+        _photoScrollView = [[UIScrollView alloc] initWithFrame:CGRectMake(20, VIEWHEIGHT, SCREENWIDTH - 40, 69)];
+        _photoScrollView.contentSize = CGSizeMake(SCREENWIDTH - 40, 69);
+    }
+    return _photoScrollView;
 }
 
 
@@ -336,6 +407,16 @@
         _datePickerView.delegate = self;
     }
     return _datePickerView;
+}
+
+-(PersonalRightsModel *)personalRightsModel{
+    
+    if (!_personalRightsModel) {
+        
+        _personalRightsModel = [[PersonalRightsModel alloc] init];
+        _personalRightsModel.personalRightsID = [[NSUUID UUID] UUIDString];
+    }
+    return _personalRightsModel;
 }
 
 @end

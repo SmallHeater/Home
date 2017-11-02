@@ -16,7 +16,7 @@
 #import "CommodityModel.h"
 #import "SHPlainTableView.h"
 
-
+#import "PersonalRightsRewardingViewController.h"
 @interface CommodityListViewController ()
 //录入按钮
 @property (nonatomic,strong) UIButton * rewardBtn;
@@ -74,13 +74,17 @@
 #pragma mark  ----  代理函数
 
 #pragma mark  ----  自定义函数
+//录入按钮的响应
 -(void)rewardBtnClicked:(UIButton *)btn{
     
-    CategorySelectViewController * categorySelectVC = [[CategorySelectViewController alloc] init];
-    [self.navigationController pushViewController:categorySelectVC animated:YES];
+//    CategorySelectViewController * categorySelectVC = [[CategorySelectViewController alloc] init];
+//    [self.navigationController pushViewController:categorySelectVC animated:YES];
     
 //    LogInViewController * loginVC = [[LogInViewController alloc] init];
 //    [self.navigationController pushViewController:loginVC animated:YES];
+    
+    PersonalRightsRewardingViewController * vc = [[PersonalRightsRewardingViewController alloc] init];
+    [self.navigationController pushViewController:vc animated:YES];
 }
 
 #pragma mark  ----  添加内容索引

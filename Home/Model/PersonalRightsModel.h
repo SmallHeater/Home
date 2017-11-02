@@ -24,5 +24,5 @@
 //享受条件
 @property (nonatomic,strong) NSString * personalRightsEnjoyConditions;
 //照片记录
-@property (nonatomic,strong) NSMutableArray * personalRightsArray;
+@property (nonatomic,strong) NSMutableArray * personalRightsPhotoArray;
 @end
