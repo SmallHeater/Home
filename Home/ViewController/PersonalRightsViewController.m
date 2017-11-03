@@ -8,6 +8,9 @@
 
 #import "PersonalRightsViewController.h"
 #import "SHPlainTableView.h"
+#import "PersonalRightsRewardingViewController.h"
+#import "CommodityDataManager.h"
+#import "SHFMDBManager.h"
 
 
 @interface PersonalRightsViewController ()
@@ -32,6 +35,32 @@
     [self.view addSubview:self.tableView];
 }
 
+-(void)viewWillAppear:(BOOL)animated{
+    
+    [super viewWillAppear:animated];
+    [MobClick beginLogPageView:@"个人权益列表页面"];
+    
+    
+    if ([CommodityDataManager sharedManager].personalRightsArray.count == 0) {
+        
+        NSMutableArray * dataArray = [[SHFMDBManager sharedManager] selectPersonalRightsTable];
+        [[CommodityDataManager sharedManager].personalRightsArray addObjectsFromArray:dataArray];
+        [self.tableView.dataArray addObjectsFromArray:[CommodityDataManager sharedManager].personalRightsArray];
+    }
+    else{
+        
+        [self.tableView.dataArray addObjectsFromArray:[CommodityDataManager sharedManager].personalRightsArray];
+    }
+    [self.tableView reloadData];
+}
+
+-(void)viewWillDisappear:(BOOL)animated{
+    
+    [super viewWillDisappear:animated];
+    [MobClick endLogPageView:@"个人权益列表页面"];
+    
+}
+
 - (void)didReceiveMemoryWarning {
     [super didReceiveMemoryWarning];
     // Dispose of any resources that can be recreated.
@@ -40,6 +69,8 @@
 #pragma mark  ----  自定义函数
 -(void)rewardBtnClicked:(UIButton *)btn{
     
+    PersonalRightsRewardingViewController * personalRightsVC = [[PersonalRightsRewardingViewController alloc] init];
+    [self.navigationController pushViewController:personalRightsVC animated:YES];
 }
 
 #pragma mark  ----  懒加载

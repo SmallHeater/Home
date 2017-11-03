@@ -8,7 +8,7 @@
 
 #import <Foundation/Foundation.h>
 
-@class BaseModel;
+@class BaseModel,CommodityModel,PersonalRightsModel;
 
 @interface SHFMDBManager : NSObject
 +(SHFMDBManager *)sharedManager;
@@ -20,5 +20,6 @@
 //改
 -(BOOL)updateCommodityModel:(BaseModel *)model;
 //查
--(NSMutableArray<BaseModel *> *)selecTable;
+-(NSMutableArray<CommodityModel *> *)selectCommodityTable;
+-(NSMutableArray<PersonalRightsModel *> *)selectPersonalRightsTable;
 @end

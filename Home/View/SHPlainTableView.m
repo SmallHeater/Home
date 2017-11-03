@@ -11,6 +11,8 @@
 #import "CommodityTableViewCell.h"
 #import "PersonalRightsModel.h"
 #import "PersonalRightsCell.h"
+#import "CategoryTableViewCell.h"
+#import "CommodityRewardingViewController.h"
 
 
 @interface SHPlainTableView ()<UITableViewDelegate,UITableViewDataSource>
@@ -70,6 +72,17 @@
             cell.commodityModel = self.dataArray[indexPath.row];
             return cell;
         }
+        case CategoryTableView:
+        {
+            CategoryTableViewCell * cell = [tableView dequeueReusableCellWithIdentifier:@"CategoryTableViewCell"];
+            if (!cell) {
+                
+                cell = [[CategoryTableViewCell alloc] initWithStyle:UITableViewCellStyleDefault reuseIdentifier:@"CategoryTableViewCell"];
+                cell.selectionStyle = UITableViewCellSelectionStyleNone;
+            }
+            cell.categoryModel = self.dataArray[indexPath.row];
+            return cell;
+        }
             break;
         default:
             break;
@@ -103,6 +116,9 @@
         case PersonalRightsTableView:
             return 100;
             break;
+        case CategoryTableView:
+            return 40;
+            break;
         default:
             break;
     }
@@ -118,11 +134,60 @@
     return @"删除";
 }
 
+- (void)tableView:(UITableView *)tableView didSelectRowAtIndexPath:(NSIndexPath *)indexPath{
+    
+    switch (self.type) {
+        case CommodityTableView:
+        {
+        }
+            break;
+        case PersonalRightsTableView:
+        {
+        }
+            break;
+        case CategoryTableView:
+        {
+            CategoryModel * selectedModel = self.dataArray[indexPath.row];
+            CommodityRewardingViewController * rewardingViewController = [[CommodityRewardingViewController alloc] init];
+            rewardingViewController.categoryStr = selectedModel.categoryName;
+            
+            UIViewController * vc = [self viewController];
+            
+            if (vc) {
+                
+                [vc.navigationController pushViewController:rewardingViewController animated:YES];
+            }
+        }
+            break;
+        default:
+            break;
+    }
+}
+
+
 #pragma mark  ----  自定义函数
 -(void)reloadData{
  
     [self.tableView reloadData];
 }
+
+/**
+ *  返回当前视图的控制器
+ */
+- (UIViewController *)viewController {
+    
+    for (UIView* next = [self superview]; next; next = next.superview) {
+        
+        UIResponder *nextResponder = [next nextResponder];
+        if ([nextResponder isKindOfClass:[UIViewController class]]) {
+            
+            return (UIViewController *)nextResponder;
+        }
+    }
+    return nil;
+}
+
+
 
 #pragma mark  ----  懒加载
 -(UITableView *)tableView{

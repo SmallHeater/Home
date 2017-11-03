@@ -6,14 +6,16 @@
 //  Copyright © 2017年 xianjunwang. All rights reserved.
 //
 
-#import "FirstViewController.h"
+#import "HomeViewController.h"
 #import "CommodityListViewController.h"
 #import "SearchViewController.h"
+#import "PersonalRightsViewController.h"
+
 
 #define BTNTAGBASE  1301
 
 
-@interface FirstViewController ()
+@interface HomeViewController ()
 //物品列表
 @property (nonatomic,strong) UIButton * commodityListBtn;
 //每日必做
@@ -26,7 +28,7 @@
 @property (nonatomic,strong) UIButton * rewardBtn;
 @end
 
-@implementation FirstViewController
+@implementation HomeViewController
 
 #pragma mark  ----  生命周期函数
 
@@ -71,12 +73,14 @@
             break;
         case 1:
         {
-            SearchViewController * searchVC = [[SearchViewController alloc] initWithSearchResultsController:self];
-            [self.navigationController pushViewController:searchVC animated:YES];
+           
         }
             break;
         case 2:
-            
+        {
+            PersonalRightsViewController * personalRightsViewController = [[PersonalRightsViewController alloc] init];
+            [self.navigationController pushViewController:personalRightsViewController animated:YES];
+        }
             break;
         case 3:
             

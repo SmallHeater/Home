@@ -16,7 +16,7 @@
 #import "CommodityModel.h"
 #import "SHPlainTableView.h"
 
-#import "PersonalRightsRewardingViewController.h"
+
 @interface CommodityListViewController ()
 //录入按钮
 @property (nonatomic,strong) UIButton * rewardBtn;
@@ -32,9 +32,6 @@
     [super viewDidLoad];
     
     self.navigationBar.titleLabel.text = @"物品列表";
-    
-    self.view.backgroundColor = [UIColor whiteColor];
-    
     [self.navigationBar addSubview:self.rewardBtn];
     [self.view addSubview:self.tableView];
     
@@ -46,15 +43,16 @@
     [MobClick beginLogPageView:@"物品清单页面"];
     
     
-    if ([CommodityDataManager sharedManager].dataArray.count == 0) {
+    if ([CommodityDataManager sharedManager].commodityDataArray.count == 0) {
         
-        NSMutableArray * dataArray = [[SHFMDBManager sharedManager] selecTable];
-        [[CommodityDataManager sharedManager].dataArray addObjectsFromArray:dataArray];
-        [self.tableView.dataArray addObjectsFromArray:[CommodityDataManager sharedManager].dataArray];
+        NSMutableArray * dataArray = [[SHFMDBManager sharedManager] selectCommodityTable];
+        [[CommodityDataManager sharedManager].commodityDataArray addObjectsFromArray:dataArray];
+        [self.tableView.dataArray addObjectsFromArray:[CommodityDataManager sharedManager].commodityDataArray];
     }
     else{
         
-        [self.tableView.dataArray addObjectsFromArray:[CommodityDataManager sharedManager].dataArray];
+        [self.tableView.dataArray removeAllObjects];
+        [self.tableView.dataArray addObjectsFromArray:[CommodityDataManager sharedManager].commodityDataArray];
     }
     [self.tableView reloadData];
 }
@@ -63,7 +61,6 @@
     
     [super viewWillDisappear:animated];
     [MobClick endLogPageView:@"物品清单页面"];
-    
 }
 
 - (void)didReceiveMemoryWarning {
@@ -77,14 +74,11 @@
 //录入按钮的响应
 -(void)rewardBtnClicked:(UIButton *)btn{
     
-//    CategorySelectViewController * categorySelectVC = [[CategorySelectViewController alloc] init];
-//    [self.navigationController pushViewController:categorySelectVC animated:YES];
+    CategorySelectViewController * categorySelectVC = [[CategorySelectViewController alloc] init];
+    [self.navigationController pushViewController:categorySelectVC animated:YES];
     
 //    LogInViewController * loginVC = [[LogInViewController alloc] init];
 //    [self.navigationController pushViewController:loginVC animated:YES];
-    
-    PersonalRightsRewardingViewController * vc = [[PersonalRightsRewardingViewController alloc] init];
-    [self.navigationController pushViewController:vc animated:YES];
 }
 
 #pragma mark  ----  添加内容索引

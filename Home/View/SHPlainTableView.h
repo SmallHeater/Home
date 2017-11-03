@@ -12,7 +12,8 @@
 typedef NS_ENUM(NSInteger, SHUITableViewType) {
     
     CommodityTableView,//物品列表
-    PersonalRightsTableView//个人权益
+    PersonalRightsTableView,//个人权益
+    CategoryTableView//品类选择
 };
 
 @interface SHPlainTableView : BaseView

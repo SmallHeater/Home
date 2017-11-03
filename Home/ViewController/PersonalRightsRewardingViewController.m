@@ -12,6 +12,8 @@
 #import "PersonalRightsModel.h"
 #import "CommodityDataManager.h"
 #import "SHFMDBManager.h"
+#import "SHUIImagePickerControllerLibrary.h"
+#import "SHAssetModel.h"
 
 
 #define MAXHEIGHT 14.0
@@ -177,7 +179,15 @@
 
 //添加记录图片
 -(void)addImageViewTaped:(UIGestureRecognizer *)ges{
-    
+ 
+    [SHUIImagePickerControllerLibrary goToSHUIImagePickerViewControllerWithMaxImageSelectCount:9 anResultBlock:^(NSMutableArray *arr) {
+        
+        for (NSUInteger i = 0; i < arr.count; i++) {
+            
+            SHAssetModel * model = arr[i];
+            [self.personalRightsModel.personalRightsPhotoArray addObject:model.previewImage];
+        }
+    }];
 }
 
 //完成按钮的响应事件

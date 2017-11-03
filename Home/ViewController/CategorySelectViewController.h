@@ -8,7 +8,7 @@
 
 #import "BaseTableViewController.h"
 
-@interface CategorySelectViewController : BaseTableViewController
+@interface CategorySelectViewController : BaseNavViewController
 
 @end
 

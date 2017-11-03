@@ -8,6 +8,6 @@
 
 #import "BaseNavViewController.h"
 
-@interface FirstViewController : BaseNavViewController
+@interface HomeViewController : BaseNavViewController
 
 @end

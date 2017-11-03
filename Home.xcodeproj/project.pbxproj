@@ -33,15 +33,21 @@
 		62282D551FA60011007E3ABE /* libSocialQQ.a in Frameworks */ = {isa = PBXBuildFile; fileRef = 62282D491FA60011007E3ABE /* libSocialQQ.a */; };
 		62282D561FA60011007E3ABE /* libUMSocialLog.a in Frameworks */ = {isa = PBXBuildFile; fileRef = 62282D4B1FA60011007E3ABE /* libUMSocialLog.a */; };
 		62282D591FA6097C007E3ABE /* SHFMDBManager.m in Sources */ = {isa = PBXBuildFile; fileRef = 62282D581FA6097C007E3ABE /* SHFMDBManager.m */; };
-		622B8AE91FA9646F0080552F /* FirstViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 622B8AE81FA9646F0080552F /* FirstViewController.m */; };
+		622B8AE91FA9646F0080552F /* HomeViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 622B8AE81FA9646F0080552F /* HomeViewController.m */; };
 		622B8AEF1FA969A20080552F /* SearchViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 622B8AEE1FA969A20080552F /* SearchViewController.m */; };
 		622B8AF21FA96B140080552F /* PersonalRightsViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 622B8AF11FA96B140080552F /* PersonalRightsViewController.m */; };
 		622B8AF51FA96BBA0080552F /* PersonalRightsModel.m in Sources */ = {isa = PBXBuildFile; fileRef = 622B8AF41FA96BBA0080552F /* PersonalRightsModel.m */; };
 		622B8AF81FA9ACDC0080552F /* PersonalRightsCell.m in Sources */ = {isa = PBXBuildFile; fileRef = 622B8AF71FA9ACDC0080552F /* PersonalRightsCell.m */; };
 		622B8AFB1FA9ADBC0080552F /* SHPlainTableView.m in Sources */ = {isa = PBXBuildFile; fileRef = 622B8AFA1FA9ADBC0080552F /* SHPlainTableView.m */; };
 		622B8AFE1FAA0A6E0080552F /* PersonalRightsRewardingViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 622B8AFD1FAA0A6E0080552F /* PersonalRightsRewardingViewController.m */; };
+		6275CED41FAC144600A1C616 /* ModelWithState.m in Sources */ = {isa = PBXBuildFile; fileRef = 6275CED11FAC144600A1C616 /* ModelWithState.m */; };
+		6275CED51FAC144600A1C616 /* ModelWithTitle.m in Sources */ = {isa = PBXBuildFile; fileRef = 6275CED31FAC144600A1C616 /* ModelWithTitle.m */; };
+		6275CED81FAC14AF00A1C616 /* LiveWithDeleteImageView.m in Sources */ = {isa = PBXBuildFile; fileRef = 6275CED71FAC14AF00A1C616 /* LiveWithDeleteImageView.m */; };
+		6275CEDD1FAC14CD00A1C616 /* TableViewCellWithSwitch.m in Sources */ = {isa = PBXBuildFile; fileRef = 6275CEDA1FAC14CD00A1C616 /* TableViewCellWithSwitch.m */; };
+		6275CEDE1FAC14CD00A1C616 /* TableViewCellWithTitle.m in Sources */ = {isa = PBXBuildFile; fileRef = 6275CEDC1FAC14CD00A1C616 /* TableViewCellWithTitle.m */; };
+		6275CEE31FAC34C000A1C616 /* libSHUIImagePickerControllerLibrary.a in Frameworks */ = {isa = PBXBuildFile; fileRef = 6275CEE01FAC34C000A1C616 /* libSHUIImagePickerControllerLibrary.a */; };
+		6275CEE41FAC34C000A1C616 /* SHUIImagePickerControllerLibrarySource.bundle in Resources */ = {isa = PBXBuildFile; fileRef = 6275CEE21FAC34C000A1C616 /* SHUIImagePickerControllerLibrarySource.bundle */; };
 		62B9C0081F9CC0A0006B5F66 /* DatePickView.m in Sources */ = {isa = PBXBuildFile; fileRef = 62B9C0071F9CC0A0006B5F66 /* DatePickView.m */; };
-		62DE4B401F9F41CB0086CE06 /* LiveWithDeleteImageView.m in Sources */ = {isa = PBXBuildFile; fileRef = 62DE4B3F1F9F41CB0086CE06 /* LiveWithDeleteImageView.m */; };
 		62DE4B451F9F42890086CE06 /* delete_ful@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = 62DE4B411F9F42890086CE06 /* delete_ful@2x.png */; };
 		62DE4B461F9F42890086CE06 /* delete_ful@3x.png in Resources */ = {isa = PBXBuildFile; fileRef = 62DE4B421F9F42890086CE06 /* delete_ful@3x.png */; };
 		62DE4B471F9F42890086CE06 /* photo_duf@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = 62DE4B431F9F42890086CE06 /* photo_duf@2x.png */; };
@@ -69,16 +75,12 @@
 		62F801A61F9B916E0038DD5C /* SetTableViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 62F801A51F9B916E0038DD5C /* SetTableViewController.m */; };
 		62F801A91F9B93A50038DD5C /* BaseTableViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 62F801A81F9B93A50038DD5C /* BaseTableViewController.m */; };
 		62F801AD1F9C33E40038DD5C /* BaseTableViewCell.m in Sources */ = {isa = PBXBuildFile; fileRef = 62F801AC1F9C33E40038DD5C /* BaseTableViewCell.m */; };
-		62F801B01F9C34350038DD5C /* TableViewCellWithTitle.m in Sources */ = {isa = PBXBuildFile; fileRef = 62F801AF1F9C34350038DD5C /* TableViewCellWithTitle.m */; };
-		62F801B31F9C36280038DD5C /* TableViewCellWithSwitch.m in Sources */ = {isa = PBXBuildFile; fileRef = 62F801B21F9C36280038DD5C /* TableViewCellWithSwitch.m */; };
 		62F801B61F9C3D410038DD5C /* TableViewCellWithBottomLine.m in Sources */ = {isa = PBXBuildFile; fileRef = 62F801B51F9C3D410038DD5C /* TableViewCellWithBottomLine.m */; };
 		62F801BA1F9C3F010038DD5C /* BaseModel.m in Sources */ = {isa = PBXBuildFile; fileRef = 62F801B91F9C3F010038DD5C /* BaseModel.m */; };
-		62F801BD1F9C3F210038DD5C /* ModelWithTitle.m in Sources */ = {isa = PBXBuildFile; fileRef = 62F801BC1F9C3F210038DD5C /* ModelWithTitle.m */; };
-		62F801C01F9C3F540038DD5C /* ModelWithState.m in Sources */ = {isa = PBXBuildFile; fileRef = 62F801BF1F9C3F540038DD5C /* ModelWithState.m */; };
 		62F801C31F9C67330038DD5C /* CategorySelectViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 62F801C21F9C67330038DD5C /* CategorySelectViewController.m */; };
 		62F801C71F9C689B0038DD5C /* CategoryModel.m in Sources */ = {isa = PBXBuildFile; fileRef = 62F801C61F9C689B0038DD5C /* CategoryModel.m */; };
 		62F801CB1F9C6AFE0038DD5C /* CategoryTableViewCell.m in Sources */ = {isa = PBXBuildFile; fileRef = 62F801CA1F9C6AFE0038DD5C /* CategoryTableViewCell.m */; };
-		62F801CE1F9C6BFE0038DD5C /* RewardingViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 62F801CD1F9C6BFE0038DD5C /* RewardingViewController.m */; };
+		62F801CE1F9C6BFE0038DD5C /* CommodityRewardingViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 62F801CD1F9C6BFE0038DD5C /* CommodityRewardingViewController.m */; };
 		62F802111F9C99BF0038DD5C /* BaseController.m in Sources */ = {isa = PBXBuildFile; fileRef = 62F802101F9C99BF0038DD5C /* BaseController.m */; };
 		62F802141F9C9AC70038DD5C /* CommodityDataManager.m in Sources */ = {isa = PBXBuildFile; fileRef = 62F802131F9C9AC70038DD5C /* CommodityDataManager.m */; };
 		BD38B92939FD3C19D29989AF /* libPods-Home.a in Frameworks */ = {isa = PBXBuildFile; fileRef = EDE216328AA40022747E69E6 /* libPods-Home.a */; };
@@ -148,8 +150,8 @@
 		62282D4B1FA60011007E3ABE /* libUMSocialLog.a */ = {isa = PBXFileReference; lastKnownFileType = archive.ar; path = libUMSocialLog.a; sourceTree = "<group>"; };
 		62282D571FA6097C007E3ABE /* SHFMDBManager.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = SHFMDBManager.h; sourceTree = "<group>"; };
 		62282D581FA6097C007E3ABE /* SHFMDBManager.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = SHFMDBManager.m; sourceTree = "<group>"; };
-		622B8AE71FA9646F0080552F /* FirstViewController.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = FirstViewController.h; sourceTree = "<group>"; };
-		622B8AE81FA9646F0080552F /* FirstViewController.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = FirstViewController.m; sourceTree = "<group>"; };
+		622B8AE71FA9646F0080552F /* HomeViewController.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = HomeViewController.h; sourceTree = "<group>"; };
+		622B8AE81FA9646F0080552F /* HomeViewController.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = HomeViewController.m; sourceTree = "<group>"; };
 		622B8AED1FA969A20080552F /* SearchViewController.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = SearchViewController.h; sourceTree = "<group>"; };
 		622B8AEE1FA969A20080552F /* SearchViewController.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = SearchViewController.m; sourceTree = "<group>"; };
 		622B8AF01FA96B130080552F /* PersonalRightsViewController.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = PersonalRightsViewController.h; sourceTree = "<group>"; };
@@ -162,10 +164,22 @@
 		622B8AFA1FA9ADBC0080552F /* SHPlainTableView.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = SHPlainTableView.m; sourceTree = "<group>"; };
 		622B8AFC1FAA0A6E0080552F /* PersonalRightsRewardingViewController.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = PersonalRightsRewardingViewController.h; sourceTree = "<group>"; };
 		622B8AFD1FAA0A6E0080552F /* PersonalRightsRewardingViewController.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = PersonalRightsRewardingViewController.m; sourceTree = "<group>"; };
+		6275CED01FAC144600A1C616 /* ModelWithState.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = ModelWithState.h; sourceTree = "<group>"; };
+		6275CED11FAC144600A1C616 /* ModelWithState.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = ModelWithState.m; sourceTree = "<group>"; };
+		6275CED21FAC144600A1C616 /* ModelWithTitle.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = ModelWithTitle.h; sourceTree = "<group>"; };
+		6275CED31FAC144600A1C616 /* ModelWithTitle.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = ModelWithTitle.m; sourceTree = "<group>"; };
+		6275CED61FAC14AF00A1C616 /* LiveWithDeleteImageView.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = LiveWithDeleteImageView.h; sourceTree = "<group>"; };
+		6275CED71FAC14AF00A1C616 /* LiveWithDeleteImageView.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = LiveWithDeleteImageView.m; sourceTree = "<group>"; };
+		6275CED91FAC14CD00A1C616 /* TableViewCellWithSwitch.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = TableViewCellWithSwitch.h; sourceTree = "<group>"; };
+		6275CEDA1FAC14CD00A1C616 /* TableViewCellWithSwitch.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = TableViewCellWithSwitch.m; sourceTree = "<group>"; };
+		6275CEDB1FAC14CD00A1C616 /* TableViewCellWithTitle.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = TableViewCellWithTitle.h; sourceTree = "<group>"; };
+		6275CEDC1FAC14CD00A1C616 /* TableViewCellWithTitle.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = TableViewCellWithTitle.m; sourceTree = "<group>"; };
+		6275CEE01FAC34C000A1C616 /* libSHUIImagePickerControllerLibrary.a */ = {isa = PBXFileReference; lastKnownFileType = archive.ar; path = libSHUIImagePickerControllerLibrary.a; sourceTree = "<group>"; };
+		6275CEE11FAC34C000A1C616 /* SHUIImagePickerControllerLibrary.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = SHUIImagePickerControllerLibrary.h; sourceTree = "<group>"; };
+		6275CEE21FAC34C000A1C616 /* SHUIImagePickerControllerLibrarySource.bundle */ = {isa = PBXFileReference; lastKnownFileType = "wrapper.plug-in"; path = SHUIImagePickerControllerLibrarySource.bundle; sourceTree = "<group>"; };
+		6275CEE51FAC359800A1C616 /* SHAssetModel.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = SHAssetModel.h; sourceTree = "<group>"; };
 		62B9C0061F9CC0A0006B5F66 /* DatePickView.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = DatePickView.h; sourceTree = "<group>"; };
 		62B9C0071F9CC0A0006B5F66 /* DatePickView.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = DatePickView.m; sourceTree = "<group>"; };
-		62DE4B3E1F9F41CB0086CE06 /* LiveWithDeleteImageView.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = LiveWithDeleteImageView.h; sourceTree = "<group>"; };
-		62DE4B3F1F9F41CB0086CE06 /* LiveWithDeleteImageView.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = LiveWithDeleteImageView.m; sourceTree = "<group>"; };
 		62DE4B411F9F42890086CE06 /* delete_ful@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "delete_ful@2x.png"; sourceTree = "<group>"; };
 		62DE4B421F9F42890086CE06 /* delete_ful@3x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "delete_ful@3x.png"; sourceTree = "<group>"; };
 		62DE4B431F9F42890086CE06 /* photo_duf@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "photo_duf@2x.png"; sourceTree = "<group>"; };
@@ -216,26 +230,18 @@
 		62F801A81F9B93A50038DD5C /* BaseTableViewController.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = BaseTableViewController.m; sourceTree = "<group>"; };
 		62F801AB1F9C33E40038DD5C /* BaseTableViewCell.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = BaseTableViewCell.h; sourceTree = "<group>"; };
 		62F801AC1F9C33E40038DD5C /* BaseTableViewCell.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = BaseTableViewCell.m; sourceTree = "<group>"; };
-		62F801AE1F9C34350038DD5C /* TableViewCellWithTitle.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = TableViewCellWithTitle.h; sourceTree = "<group>"; };
-		62F801AF1F9C34350038DD5C /* TableViewCellWithTitle.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = TableViewCellWithTitle.m; sourceTree = "<group>"; };
-		62F801B11F9C36280038DD5C /* TableViewCellWithSwitch.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = TableViewCellWithSwitch.h; sourceTree = "<group>"; };
-		62F801B21F9C36280038DD5C /* TableViewCellWithSwitch.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = TableViewCellWithSwitch.m; sourceTree = "<group>"; };
 		62F801B41F9C3D410038DD5C /* TableViewCellWithBottomLine.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = TableViewCellWithBottomLine.h; sourceTree = "<group>"; };
 		62F801B51F9C3D410038DD5C /* TableViewCellWithBottomLine.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = TableViewCellWithBottomLine.m; sourceTree = "<group>"; };
 		62F801B81F9C3F010038DD5C /* BaseModel.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = BaseModel.h; sourceTree = "<group>"; };
 		62F801B91F9C3F010038DD5C /* BaseModel.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = BaseModel.m; sourceTree = "<group>"; };
-		62F801BB1F9C3F210038DD5C /* ModelWithTitle.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = ModelWithTitle.h; sourceTree = "<group>"; };
-		62F801BC1F9C3F210038DD5C /* ModelWithTitle.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = ModelWithTitle.m; sourceTree = "<group>"; };
-		62F801BE1F9C3F540038DD5C /* ModelWithState.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = ModelWithState.h; sourceTree = "<group>"; };
-		62F801BF1F9C3F540038DD5C /* ModelWithState.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = ModelWithState.m; sourceTree = "<group>"; };
 		62F801C11F9C67330038DD5C /* CategorySelectViewController.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = CategorySelectViewController.h; sourceTree = "<group>"; };
 		62F801C21F9C67330038DD5C /* CategorySelectViewController.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = CategorySelectViewController.m; sourceTree = "<group>"; };
 		62F801C51F9C689B0038DD5C /* CategoryModel.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = CategoryModel.h; sourceTree = "<group>"; };
 		62F801C61F9C689B0038DD5C /* CategoryModel.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = CategoryModel.m; sourceTree = "<group>"; };
 		62F801C91F9C6AFE0038DD5C /* CategoryTableViewCell.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = CategoryTableViewCell.h; sourceTree = "<group>"; };
 		62F801CA1F9C6AFE0038DD5C /* CategoryTableViewCell.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = CategoryTableViewCell.m; sourceTree = "<group>"; };
-		62F801CC1F9C6BFE0038DD5C /* RewardingViewController.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = RewardingViewController.h; sourceTree = "<group>"; };
-		62F801CD1F9C6BFE0038DD5C /* RewardingViewController.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = RewardingViewController.m; sourceTree = "<group>"; };
+		62F801CC1F9C6BFE0038DD5C /* CommodityRewardingViewController.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = CommodityRewardingViewController.h; sourceTree = "<group>"; };
+		62F801CD1F9C6BFE0038DD5C /* CommodityRewardingViewController.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = CommodityRewardingViewController.m; sourceTree = "<group>"; };
 		62F8020F1F9C99BF0038DD5C /* BaseController.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = BaseController.h; sourceTree = "<group>"; };
 		62F802101F9C99BF0038DD5C /* BaseController.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = BaseController.m; sourceTree = "<group>"; };
 		62F802121F9C9AC70038DD5C /* CommodityDataManager.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = CommodityDataManager.h; sourceTree = "<group>"; };
@@ -268,6 +274,7 @@
 				62282D511FA60011007E3ABE /* libSocialSMS.a in Frameworks */,
 				62282D561FA60011007E3ABE /* libUMSocialLog.a in Frameworks */,
 				62282D531FA60011007E3ABE /* libSocialWeChat.a in Frameworks */,
+				6275CEE31FAC34C000A1C616 /* libSHUIImagePickerControllerLibrary.a in Frameworks */,
 				62282D141FA49F6E007E3ABE /* libCrasheye.a in Frameworks */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
@@ -319,6 +326,7 @@
 		62282D091FA49F6E007E3ABE /* library */ = {
 			isa = PBXGroup;
 			children = (
+				6275CEDF1FAC34C000A1C616 /* SHUIImagePickerControllerLibrary */,
 				62282D241FA4A76B007E3ABE /* umeng_sdk_ios */,
 				62282D0A1FA49F6E007E3ABE /* crasheye_ios_v2.5.2 */,
 			);
@@ -472,9 +480,22 @@
 			path = UMSocialSDKPlugin;
 			sourceTree = "<group>";
 		};
+		6275CEDF1FAC34C000A1C616 /* SHUIImagePickerControllerLibrary */ = {
+			isa = PBXGroup;
+			children = (
+				6275CEE51FAC359800A1C616 /* SHAssetModel.h */,
+				6275CEE01FAC34C000A1C616 /* libSHUIImagePickerControllerLibrary.a */,
+				6275CEE11FAC34C000A1C616 /* SHUIImagePickerControllerLibrary.h */,
+				6275CEE21FAC34C000A1C616 /* SHUIImagePickerControllerLibrarySource.bundle */,
+			);
+			path = SHUIImagePickerControllerLibrary;
+			sourceTree = "<group>";
+		};
 		62B9C0051F9CBFD6006B5F66 /* View */ = {
 			isa = PBXGroup;
 			children = (
+				6275CED61FAC14AF00A1C616 /* LiveWithDeleteImageView.h */,
+				6275CED71FAC14AF00A1C616 /* LiveWithDeleteImageView.m */,
 				62B9C0061F9CC0A0006B5F66 /* DatePickView.h */,
 				62B9C0071F9CC0A0006B5F66 /* DatePickView.m */,
 				622B8AF91FA9ADBC0080552F /* SHPlainTableView.h */,
@@ -567,12 +588,12 @@
 				62F801A51F9B916E0038DD5C /* SetTableViewController.m */,
 				62F801C11F9C67330038DD5C /* CategorySelectViewController.h */,
 				62F801C21F9C67330038DD5C /* CategorySelectViewController.m */,
-				62F801CC1F9C6BFE0038DD5C /* RewardingViewController.h */,
-				62F801CD1F9C6BFE0038DD5C /* RewardingViewController.m */,
+				62F801CC1F9C6BFE0038DD5C /* CommodityRewardingViewController.h */,
+				62F801CD1F9C6BFE0038DD5C /* CommodityRewardingViewController.m */,
 				62282D2F1FA5FDA3007E3ABE /* LogInViewController.h */,
 				62282D301FA5FDA3007E3ABE /* LogInViewController.m */,
-				622B8AE71FA9646F0080552F /* FirstViewController.h */,
-				622B8AE81FA9646F0080552F /* FirstViewController.m */,
+				622B8AE71FA9646F0080552F /* HomeViewController.h */,
+				622B8AE81FA9646F0080552F /* HomeViewController.m */,
 				622B8AED1FA969A20080552F /* SearchViewController.h */,
 				622B8AEE1FA969A20080552F /* SearchViewController.m */,
 				622B8AF01FA96B130080552F /* PersonalRightsViewController.h */,
@@ -609,8 +630,6 @@
 		62F8016A1F9B5E9F0038DD5C /* BaseView */ = {
 			isa = PBXGroup;
 			children = (
-				62DE4B3E1F9F41CB0086CE06 /* LiveWithDeleteImageView.h */,
-				62DE4B3F1F9F41CB0086CE06 /* LiveWithDeleteImageView.m */,
 				62F801751F9B5F310038DD5C /* BaseView.h */,
 				62F801761F9B5F310038DD5C /* BaseView.m */,
 				62F801781F9B60EC0038DD5C /* CustomizedNavigationBar.h */,
@@ -687,10 +706,6 @@
 			children = (
 				62F801AB1F9C33E40038DD5C /* BaseTableViewCell.h */,
 				62F801AC1F9C33E40038DD5C /* BaseTableViewCell.m */,
-				62F801AE1F9C34350038DD5C /* TableViewCellWithTitle.h */,
-				62F801AF1F9C34350038DD5C /* TableViewCellWithTitle.m */,
-				62F801B11F9C36280038DD5C /* TableViewCellWithSwitch.h */,
-				62F801B21F9C36280038DD5C /* TableViewCellWithSwitch.m */,
 				62F801B41F9C3D410038DD5C /* TableViewCellWithBottomLine.h */,
 				62F801B51F9C3D410038DD5C /* TableViewCellWithBottomLine.m */,
 			);
@@ -702,10 +717,6 @@
 			children = (
 				62F801B81F9C3F010038DD5C /* BaseModel.h */,
 				62F801B91F9C3F010038DD5C /* BaseModel.m */,
-				62F801BB1F9C3F210038DD5C /* ModelWithTitle.h */,
-				62F801BC1F9C3F210038DD5C /* ModelWithTitle.m */,
-				62F801BE1F9C3F540038DD5C /* ModelWithState.h */,
-				62F801BF1F9C3F540038DD5C /* ModelWithState.m */,
 			);
 			path = BaseModel;
 			sourceTree = "<group>";
@@ -713,6 +724,10 @@
 		62F801C41F9C68880038DD5C /* Model */ = {
 			isa = PBXGroup;
 			children = (
+				6275CED01FAC144600A1C616 /* ModelWithState.h */,
+				6275CED11FAC144600A1C616 /* ModelWithState.m */,
+				6275CED21FAC144600A1C616 /* ModelWithTitle.h */,
+				6275CED31FAC144600A1C616 /* ModelWithTitle.m */,
 				62F801C51F9C689B0038DD5C /* CategoryModel.h */,
 				62F801C61F9C689B0038DD5C /* CategoryModel.m */,
 				62282C681F9CCF8F007E3ABE /* CommodityModel.h */,
@@ -726,6 +741,10 @@
 		62F801C81F9C6AC40038DD5C /* Cell */ = {
 			isa = PBXGroup;
 			children = (
+				6275CED91FAC14CD00A1C616 /* TableViewCellWithSwitch.h */,
+				6275CEDA1FAC14CD00A1C616 /* TableViewCellWithSwitch.m */,
+				6275CEDB1FAC14CD00A1C616 /* TableViewCellWithTitle.h */,
+				6275CEDC1FAC14CD00A1C616 /* TableViewCellWithTitle.m */,
 				62F801C91F9C6AFE0038DD5C /* CategoryTableViewCell.h */,
 				62F801CA1F9C6AFE0038DD5C /* CategoryTableViewCell.m */,
 				62282C6B1F9E2C02007E3ABE /* CommodityTableViewCell.h */,
@@ -891,6 +910,7 @@
 				62F801A01F9B90170038DD5C /* HomeSource.bundle in Resources */,
 				62282D4F1FA60011007E3ABE /* UMSocialSDKPromptResources.bundle in Resources */,
 				62F8013C1F9B5D780038DD5C /* LaunchScreen.storyboard in Resources */,
+				6275CEE41FAC34C000A1C616 /* SHUIImagePickerControllerLibrarySource.bundle in Resources */,
 				62F801391F9B5D780038DD5C /* Assets.xcassets in Resources */,
 				62F801371F9B5D780038DD5C /* Main.storyboard in Resources */,
 				62282D4C1FA60011007E3ABE /* UMSocialSDKResources.bundle in Resources */,
@@ -989,12 +1009,11 @@
 				622B8AF81FA9ACDC0080552F /* PersonalRightsCell.m in Sources */,
 				62282C6A1F9CCF8F007E3ABE /* CommodityModel.m in Sources */,
 				62F8017A1F9B60EC0038DD5C /* CustomizedNavigationBar.m in Sources */,
-				62F801B31F9C36280038DD5C /* TableViewCellWithSwitch.m in Sources */,
+				6275CED41FAC144600A1C616 /* ModelWithState.m in Sources */,
 				62F801B61F9C3D410038DD5C /* TableViewCellWithBottomLine.m in Sources */,
 				622B8AFE1FAA0A6E0080552F /* PersonalRightsRewardingViewController.m in Sources */,
 				62282D311FA5FDA3007E3ABE /* LogInViewController.m in Sources */,
 				62F801341F9B5D780038DD5C /* ViewController.m in Sources */,
-				62F801B01F9C34350038DD5C /* TableViewCellWithTitle.m in Sources */,
 				62F801A91F9B93A50038DD5C /* BaseTableViewController.m in Sources */,
 				62F801C31F9C67330038DD5C /* CategorySelectViewController.m in Sources */,
 				62F802111F9C99BF0038DD5C /* BaseController.m in Sources */,
@@ -1003,26 +1022,27 @@
 				62F801741F9B5F030038DD5C /* BaseViewController.m in Sources */,
 				622B8AF51FA96BBA0080552F /* PersonalRightsModel.m in Sources */,
 				62F801861F9B69F50038DD5C /* TabBarController.m in Sources */,
+				6275CED51FAC144600A1C616 /* ModelWithTitle.m in Sources */,
 				62F801771F9B5F310038DD5C /* BaseView.m in Sources */,
-				62DE4B401F9F41CB0086CE06 /* LiveWithDeleteImageView.m in Sources */,
-				622B8AE91FA9646F0080552F /* FirstViewController.m in Sources */,
+				6275CEDD1FAC14CD00A1C616 /* TableViewCellWithSwitch.m in Sources */,
+				622B8AE91FA9646F0080552F /* HomeViewController.m in Sources */,
 				62F801691F9B5E2A0038DD5C /* CommodityListViewController.m in Sources */,
 				62282C711F9E2FB1007E3ABE /* NSString+CGSize.m in Sources */,
+				6275CED81FAC14AF00A1C616 /* LiveWithDeleteImageView.m in Sources */,
 				62F8013F1F9B5D780038DD5C /* main.m in Sources */,
 				62B9C0081F9CC0A0006B5F66 /* DatePickView.m in Sources */,
 				622B8AF21FA96B140080552F /* PersonalRightsViewController.m in Sources */,
 				62F801891F9B7F5C0038DD5C /* BaseTabBarItem.m in Sources */,
 				62F801AD1F9C33E40038DD5C /* BaseTableViewCell.m in Sources */,
 				62F801311F9B5D780038DD5C /* AppDelegate.m in Sources */,
-				62F801C01F9C3F540038DD5C /* ModelWithState.m in Sources */,
 				62F801CB1F9C6AFE0038DD5C /* CategoryTableViewCell.m in Sources */,
 				62F801A61F9B916E0038DD5C /* SetTableViewController.m in Sources */,
 				62282D591FA6097C007E3ABE /* SHFMDBManager.m in Sources */,
 				62F801BA1F9C3F010038DD5C /* BaseModel.m in Sources */,
-				62F801BD1F9C3F210038DD5C /* ModelWithTitle.m in Sources */,
 				622B8AFB1FA9ADBC0080552F /* SHPlainTableView.m in Sources */,
+				6275CEDE1FAC14CD00A1C616 /* TableViewCellWithTitle.m in Sources */,
 				62282C741F9F7998007E3ABE /* UIColor+Translate.m in Sources */,
-				62F801CE1F9C6BFE0038DD5C /* RewardingViewController.m in Sources */,
+				62F801CE1F9C6BFE0038DD5C /* CommodityRewardingViewController.m in Sources */,
 				62F801711F9B5EC60038DD5C /* BaseNavViewController.m in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
@@ -1221,6 +1241,7 @@
 					"$(PROJECT_DIR)/Home/library/umeng_sdk_ios/UMSocial/SocialLibraries/Sina",
 					"$(PROJECT_DIR)/Home/library/umeng_sdk_ios/UMSocial/SocialLibraries/QQ",
 					"$(PROJECT_DIR)/Home/library/umeng_sdk_ios/UMSocial/UMSocialSDKPlugin",
+					"$(PROJECT_DIR)/Home/library/SHUIImagePickerControllerLibrary",
 				);
 				OTHER_LDFLAGS = (
 					"$(inherited)",
@@ -1266,6 +1287,7 @@
 					"$(PROJECT_DIR)/Home/library/umeng_sdk_ios/UMSocial/SocialLibraries/Sina",
 					"$(PROJECT_DIR)/Home/library/umeng_sdk_ios/UMSocial/SocialLibraries/QQ",
 					"$(PROJECT_DIR)/Home/library/umeng_sdk_ios/UMSocial/UMSocialSDKPlugin",
+					"$(PROJECT_DIR)/Home/library/SHUIImagePickerControllerLibrary",
 				);
 				OTHER_LDFLAGS = (
 					"$(inherited)",

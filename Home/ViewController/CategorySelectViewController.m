@@ -7,13 +7,12 @@
 //
 
 #import "CategorySelectViewController.h"
-#import "CategoryTableViewCell.h"
 #import "CategoryModel.h"
-#import "RewardingViewController.h"
-
+#import "SHPlainTableView.h"
 
 @interface CategorySelectViewController ()
-
+@property (nonatomic,strong) NSArray * categoryNameArray;
+@property (nonatomic,strong) SHPlainTableView * tableView;
 @end
 
 @implementation CategorySelectViewController
@@ -26,13 +25,14 @@
     
     self.navigationBar.titleLabel.text = @"选择品类";
     
-    NSArray * categoryNameArray = [[NSArray alloc] initWithObjects:@"衣服",@"鞋",@"包",@"美妆",@"钟表",@"手机",@"数码",@"电脑",@"办公用品",@"家用电器",@"食品",@"生鲜",@"酒水",@"玩具",@"乐器",@"汽车用品",@"家居厨具",@"礼品",@"邮币",@"工具", nil];
-    for (NSUInteger i = 0; i < categoryNameArray.count; i++) {
+    for (NSUInteger i = 0; i < self.categoryNameArray.count; i++) {
         
         CategoryModel * model = [[CategoryModel alloc] init];
-        model.categoryName = categoryNameArray[i];
-        [self.dataArray addObject:model];
+        model.categoryName = self.categoryNameArray[i];
+        [self.tableView.dataArray addObject:model];
     }
+    
+    [self.tableView reloadData];
 }
 
 -(void)viewWillAppear:(BOOL)animated{
@@ -52,41 +52,23 @@
     // Dispose of any resources that can be recreated.
 }
 
-#pragma mark  ----  代理函数
-#pragma mark  ----  UITableViewDataSource
+#pragma mark  ----  懒加载
+-(NSArray *)categoryNameArray{
 
-- (NSInteger)tableView:(UITableView *)tableView numberOfRowsInSection:(NSInteger)section {
-    
-    return self.dataArray.count;
-}
-
-- (UITableViewCell *)tableView:(UITableView *)tableView cellForRowAtIndexPath:(NSIndexPath *)indexPath{
-
-    CategoryTableViewCell * cell = [tableView dequeueReusableCellWithIdentifier:@"CategoryTableViewCell"];
-    if (!cell) {
+    if (!_categoryNameArray) {
         
-        cell = [[CategoryTableViewCell alloc] initWithStyle:UITableViewCellStyleDefault reuseIdentifier:@"CategoryTableViewCell"];
-        cell.selectionStyle = UITableViewCellSelectionStyleNone;
+        _categoryNameArray = [[NSMutableArray alloc] initWithObjects:@"衣服",@"鞋",@"包",@"美妆",@"钟表",@"手机",@"数码",@"电脑",@"办公用品",@"家用电器",@"食品",@"生鲜",@"酒水",@"玩具",@"乐器",@"汽车用品",@"家居厨具",@"礼品",@"邮币",@"工具", nil];
     }
-    cell.categoryModel = self.dataArray[indexPath.row];
-    
-    return cell;
+    return _categoryNameArray;
 }
 
-#pragma mark  ----  UITableViewDataSource
-- (CGFloat)tableView:(UITableView *)tableView heightForRowAtIndexPath:(NSIndexPath *)indexPath{
+-(SHPlainTableView *)tableView{
     
-    return 40.0;
+    if (!_tableView) {
+        
+        _tableView = [[SHPlainTableView alloc] initWithFrame:CGRectMake(0, 64, SCREENWIDTH, SCREENHEIGHT - 64) andType:CategoryTableView];
+    }
+    return _tableView;
 }
-
-- (void)tableView:(UITableView *)tableView didSelectRowAtIndexPath:(NSIndexPath *)indexPath{
-    
-    CategoryModel * selectedModel = self.dataArray[indexPath.row];
-    RewardingViewController * rewardingViewController = [[RewardingViewController alloc] init];
-    rewardingViewController.categoryStr = selectedModel.categoryName;
-    [self.navigationController pushViewController:rewardingViewController animated:YES];
-}
-
-
 
 @end

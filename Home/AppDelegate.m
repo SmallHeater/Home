@@ -8,7 +8,7 @@
 
 #import "AppDelegate.h"
 #import "BaseTabBarController.h"
-#import "FirstViewController.h"
+#import "HomeViewController.h"
 #import "SetTableViewController.h"
 #import "BaseTabBarItem.h"
 
@@ -32,10 +32,10 @@
     [MobClick setScenarioType:E_UM_NORMAL];
     
     BaseTabBarController * tabbarController = [[BaseTabBarController alloc] init];
-    FirstViewController * firstViewController = [[FirstViewController alloc] init];
+    HomeViewController * homeViewController = [[HomeViewController alloc] init];
     BaseTabBarItem * listNavTabBarItem = [[BaseTabBarItem alloc] initWithTitle:@"首页" image:[UIImage imageNamed:@"HomeSource.bundle/1.png"] tag:0];
-    firstViewController.tabBarItem = listNavTabBarItem;
-    UINavigationController * listNav = [[UINavigationController alloc] initWithRootViewController:firstViewController];
+    homeViewController.tabBarItem = listNavTabBarItem;
+    UINavigationController * listNav = [[UINavigationController alloc] initWithRootViewController:homeViewController];
     
     SetTableViewController * setViewController = [[SetTableViewController alloc] init];
     BaseTabBarItem * setNavTabBarItem = [[BaseTabBarItem alloc] initWithTitle:@"设置" image:[UIImage imageNamed:@"HomeSource.bundle/2.png"] tag:1];

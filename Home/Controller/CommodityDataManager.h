@@ -13,7 +13,7 @@
 @interface CommodityDataManager : BaseController
 
 //物品列表数组
-@property (nonatomic,strong) NSMutableArray<CommodityModel *> * dataArray;
+@property (nonatomic,strong) NSMutableArray<CommodityModel *> * commodityDataArray;
 //权益列表数组
 @property (nonatomic,strong) NSMutableArray<PersonalRightsModel *> * personalRightsArray;
 

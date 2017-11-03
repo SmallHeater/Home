@@ -1,12 +1,12 @@
 //
-//  RewardingViewController.m
+//  CommodityRewardingViewController.m
 //  Home
 //
 //  Created by xianjunwang on 2017/10/22.
 //  Copyright © 2017年 xianjunwang. All rights reserved.
 //
 
-#import "RewardingViewController.h"
+#import "CommodityRewardingViewController.h"
 #import "DatePickView.h"
 #import "CommodityModel.h"
 #import "CommodityDataManager.h"
@@ -20,7 +20,7 @@
 #define COMMODITUIMAGEVIEWBASETAG  1300
 #define LOCATIONIMAGEBASETAG  1400
 
-@interface RewardingViewController () <UITextFieldDelegate,DatePickViewDelegate,UIImagePickerControllerDelegate,UINavigationControllerDelegate>
+@interface CommodityRewardingViewController () <UITextFieldDelegate,DatePickViewDelegate,UIImagePickerControllerDelegate,UINavigationControllerDelegate>
 
 //完成按钮
 @property (nonatomic,strong) UIButton * finishBtn;
@@ -63,7 +63,7 @@
 
 @end
 
-@implementation RewardingViewController
+@implementation CommodityRewardingViewController
 
 #pragma mark  ----  生命周期函数
 
@@ -175,7 +175,7 @@
     
     [self.model.commodityImageArray  addObjectsFromArray:self.commodityImageArray];
     [self.model.commodityLocationImagesArray addObjectsFromArray:self.locationImageViewArray];
-    [[CommodityDataManager sharedManager].dataArray addObject:self.model];
+    [[CommodityDataManager sharedManager].commodityDataArray addObject:self.model];
     [self.navigationController popViewControllerAnimated:YES];
     
     dispatch_async(dispatch_get_global_queue(0, 0), ^{

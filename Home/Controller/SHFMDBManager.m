@@ -146,7 +146,7 @@
 }
 
 //查
--(NSMutableArray<CommodityModel *> *)selecTable{
+-(NSMutableArray<CommodityModel *> *)selectCommodityTable{
 
     NSMutableArray * dataArray = [[NSMutableArray alloc] init];
     if ([self.db open]) {
@@ -184,6 +184,42 @@
     
     return dataArray;
 }
+
+-(NSMutableArray<PersonalRightsModel *> *)selectPersonalRightsTable{
+
+    NSMutableArray * dataArray = [[NSMutableArray alloc] init];
+    if ([self.db open]) {
+        //创建sql语句
+        NSString *sql = @"select * from Home_PersonalRightsTable";
+        //执行查询
+        FMResultSet *set = [self.db executeQuery:sql];
+        while ([set next]) {
+            //创建对象
+            PersonalRightsModel * model = [[PersonalRightsModel alloc]init];
+            model.personalRightsID = [set stringForColumn:@"personalRightsID"];
+            model.personalRightsName = [set stringForColumn:@"personalRightsName"];
+            model.personalRightsStartTime = [set stringForColumn:@"personalRightsStartTime"];
+            model.personalRightsEndTime = [set stringForColumn:@"personalRightsEndTime"];
+            model.personalRightsFrom = [set stringForColumn:@"personalRightsFrom"];
+            model.personalRightsUsedConditions = [set stringForColumn:@"personalRightsUsedConditions"];
+            model.personalRightsEnjoyConditions = [set stringForColumn:@"personalRightsEnjoyConditions"];
+            
+            NSData * personalRightsPhotoArrayData = [set dataForColumn:@"personalRightsPhotoArray"];
+            
+            NSMutableArray * personalRightsPhotoArray = [NSKeyedUnarchiver unarchiveObjectWithData:personalRightsPhotoArrayData];
+            model.personalRightsPhotoArray = personalRightsPhotoArray;
+            //加入数组
+            [dataArray addObject:model];
+        }
+    }else{
+        NSLog(@"打开数据库失败！");
+    }
+    //关闭数据库
+    [self.db close];
+    
+    return dataArray;
+}
+
 
 #pragma mark  ----  懒加载
 -(FMDatabase *)db{
