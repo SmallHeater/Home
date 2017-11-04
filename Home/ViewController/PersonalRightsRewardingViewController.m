@@ -18,6 +18,7 @@
 
 #define MAXHEIGHT 14.0
 #define VIEWHEIGHT 40
+#define DELETEBTNBASETAG 1500
 #define USECONDITIONSSTR  @"请输入使用条件"
 #define ENJOYCONDITIONSSTR  @"请输入享受条件"
 
@@ -44,6 +45,8 @@
 @property (nonatomic,strong) UIView * photoRecordView;
 //存放照片的scrollView
 @property (nonatomic,strong) UIScrollView * photoScrollView;
+//添加照片
+@property (nonatomic,strong) LiveWithDeleteImageView * addImageView;
 
 //权益名称TF
 @property (nonatomic,strong) UITextField * personalRightsTextField;
@@ -165,6 +168,7 @@
 //选择权益开始时间
 -(void)startTimeLabelTaped{
 
+    [self.view endEditing:YES];
     isSelectStartTime = YES;
     [self.view addSubview:self.datePickerView];
 }
@@ -173,6 +177,7 @@
 //选择权益结束时间
 -(void)endTimeLabelTaped{
 
+    [self.view endEditing:YES];
     isSelectStartTime = NO;
     [self.view addSubview:self.datePickerView];
 }
@@ -182,18 +187,41 @@
  
     [SHUIImagePickerControllerLibrary goToSHUIImagePickerViewControllerWithMaxImageSelectCount:9 anResultBlock:^(NSMutableArray *arr) {
         
-        for (NSUInteger i = 0; i < arr.count; i++) {
+        NSMutableArray * modleArray = [[NSMutableArray alloc] initWithArray:arr];
+        arr = nil;
+        for (NSUInteger i = 0; i < modleArray.count; i++) {
             
-            SHAssetModel * model = arr[i];
-            [self.personalRightsModel.personalRightsPhotoArray addObject:model.previewImage];
+            SHAssetModel * model = modleArray[i];
+            [self.personalRightsModel.personalRightsPhotoArray addObject:model.thumbnails];
         }
+        
+        if (modleArray.count == 1) {
+            
+            dispatch_async(dispatch_get_main_queue(), ^{
+               
+                [self addLiveWithDeleteImageView];
+            });
+        }
+        else{
+            
+            dispatch_async(dispatch_get_main_queue(), ^{
+                
+                [self refreshLiveWithDeleteImageView];
+            });
+        }
+        
     }];
+}
+
+//大图浏览
+-(void)imageViewTaped:(UIGestureRecognizer *)ges{
+    
+    
 }
 
 //完成按钮的响应事件
 -(void)finishBtnClicked:(UIButton *)finishBtn{
     
-    [self.personalRightsModel.personalRightsPhotoArray addObject:@"12345"];
     [[CommodityDataManager sharedManager].personalRightsArray addObject:self.personalRightsModel];
     [self.navigationController popViewControllerAnimated:YES];
     
@@ -201,6 +229,42 @@
         
         [[SHFMDBManager sharedManager] insertModel:self.personalRightsModel];
     });
+}
+
+
+//添加单个LiveWithDeleteImageView
+-(void)addLiveWithDeleteImageView{
+    
+    LiveWithDeleteImageView * imageView = [[LiveWithDeleteImageView alloc] initWithImage:self.personalRightsModel.personalRightsPhotoArray.lastObject andFrame:CGRectMake((self.personalRightsModel.personalRightsPhotoArray.count - 1) * (114 + 10), 0, 114, 69) andTarget:self andAction:@selector(imageViewTaped:) andButtonTag:DELETEBTNBASETAG + self.personalRightsModel.personalRightsPhotoArray.count - 1];
+    [self.photoScrollView addSubview:imageView];
+
+  self.addImageView.frame = CGRectMake(self.personalRightsModel.personalRightsPhotoArray.count * (114 + 10), 0, 114, 69);
+  self.photoScrollView.contentSize = CGSizeMake((self.personalRightsModel.personalRightsPhotoArray.count + 1) * 114 + self.personalRightsModel.personalRightsPhotoArray.count * 10, 69);
+}
+
+//刷新scrollView上面的LiveWithDeleteImageView
+-(void)refreshLiveWithDeleteImageView{
+    
+    for (UIView * view in self.photoScrollView.subviews) {
+        
+        if ([view isKindOfClass:[LiveWithDeleteImageView class]]) {
+            
+            [view removeFromSuperview];
+        }
+    }
+    
+    for (NSUInteger i = 0; i < self.personalRightsModel.personalRightsPhotoArray.count; i++) {
+        
+        LiveWithDeleteImageView * imageView = [[LiveWithDeleteImageView alloc] initWithImage:self.personalRightsModel.personalRightsPhotoArray[i] andFrame:CGRectMake(i * (114 + 10), 0, 114, 69) andTarget:self andAction:@selector(imageViewTaped:) andButtonTag:DELETEBTNBASETAG + i];
+        [self.photoScrollView addSubview:imageView];
+    }
+    
+    self.addImageView.frame = CGRectMake(self.personalRightsModel.personalRightsPhotoArray.count * (114 + 10), 0, 114, 69);
+    [self.photoScrollView addSubview:self.addImageView];
+    
+    
+    self.photoScrollView.contentSize = CGSizeMake((self.personalRightsModel.personalRightsPhotoArray.count + 1) * 114 + self.personalRightsModel.personalRightsPhotoArray.count * 10, 69);
+    
 }
 
 #pragma mark  ------  懒加载
@@ -387,9 +451,10 @@
         photoRecordTitleLabel.text = @"照片记录：";
         [_photoRecordView addSubview:photoRecordTitleLabel];
         
-        LiveWithDeleteImageView * addImageView = [[LiveWithDeleteImageView alloc] initWithImage:[UIImage imageNamed:@"HomeSource.bundle/photo_duf.tiff"] andFrame:CGRectMake(0, 0, 114, 69) andTarget:self andAction:@selector(addImageViewTaped:) andButtonTag:0];;
+        LiveWithDeleteImageView * addImageView = [[LiveWithDeleteImageView alloc] initWithImage:[UIImage imageNamed:@"HomeSource.bundle/photo_duf.tiff"] andFrame:CGRectMake(20, 0, 114, 69) andTarget:self andAction:@selector(addImageViewTaped:) andButtonTag:0];;
         [self.photoScrollView addSubview:addImageView];
         [_photoRecordView addSubview:self.photoScrollView];
+        self.addImageView = addImageView;
         
         UILabel * bottomLineLabel = [[UILabel alloc] initWithFrame:CGRectMake(0, CGRectGetHeight(_photoRecordView.frame), SCREENWIDTH, 0.5)];
         bottomLineLabel.backgroundColor = [UIColor blackColor];
@@ -402,7 +467,7 @@
     
     if (!_photoScrollView) {
         
-        _photoScrollView = [[UIScrollView alloc] initWithFrame:CGRectMake(20, VIEWHEIGHT, SCREENWIDTH - 40, 69)];
+        _photoScrollView = [[UIScrollView alloc] initWithFrame:CGRectMake(0, VIEWHEIGHT, SCREENWIDTH, 69)];
         _photoScrollView.contentSize = CGSizeMake(SCREENWIDTH - 40, 69);
     }
     return _photoScrollView;

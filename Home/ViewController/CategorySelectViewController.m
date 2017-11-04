@@ -31,7 +31,7 @@
         model.categoryName = self.categoryNameArray[i];
         [self.tableView.dataArray addObject:model];
     }
-    
+    [self.view addSubview:self.tableView];
     [self.tableView reloadData];
 }
 

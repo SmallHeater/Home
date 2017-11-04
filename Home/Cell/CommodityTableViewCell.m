@@ -60,7 +60,7 @@
     
     _commodityModel = commodityModel;
     
-    if (self.commodityModel.commodityImageArray.count > 0) {
+    if (self.commodityModel.commodityImageArray && self.commodityModel.commodityImageArray.count > 0) {
     
         self.commodityImageView.image = self.commodityModel.commodityImageArray[0];
     }

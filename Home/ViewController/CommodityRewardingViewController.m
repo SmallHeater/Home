@@ -13,14 +13,26 @@
 #import "LiveWithDeleteImageView.h"
 #import "MBProgressHUD.h"
 #import "SHFMDBManager.h"
+#import "SHUIImagePickerControllerLibrary.h"
+
+
+typedef NS_ENUM(NSInteger, AddImageType){
+    
+    CommodityImage,
+    CommodityLocationImage
+};
 
 #define VIEWHEIGHT 40
 #define VIEWWITHIMAGESHEIGHT 119
 #define UITEXTFIEDLBASETAG  1230
 #define COMMODITUIMAGEVIEWBASETAG  1300
 #define LOCATIONIMAGEBASETAG  1400
+#define DELETEBTNBASETAG 1900
+#define COMMODITYDELETEBTNTAG 0
+#define LOCATIONDELETEBTNTAG 50
 
-@interface CommodityRewardingViewController () <UITextFieldDelegate,DatePickViewDelegate,UIImagePickerControllerDelegate,UINavigationControllerDelegate>
+
+@interface CommodityRewardingViewController () <UITextFieldDelegate,DatePickViewDelegate>
 
 //完成按钮
 @property (nonatomic,strong) UIButton * finishBtn;
@@ -142,26 +154,6 @@
     self.model.shelfLife = selectedTime;
 }
 
-#pragma mark  ----  UIImagePickerControllerDelegate
-- (void)imagePickerController:(UIImagePickerController *)picker didFinishPickingImage:(UIImage *)image editingInfo:(NSDictionary *)editingInfo
-{
-    [picker dismissViewControllerAnimated:YES completion:nil];
-    
-    if (self.tapedLiveWithDeleteImageView.tag == COMMODITUIMAGEVIEWBASETAG) {
-        
-        //物品图片
-        [self.commodityImageArray addObject:image];
-        [self refreshCommodityImageViewScrollView];
-    }
-    else if (self.tapedLiveWithDeleteImageView.tag == LOCATIONIMAGEBASETAG){
-        
-        //存放位置图片
-        [self.locationImageViewArray addObject:image];
-        [self refreshLocationImageViewScrollView];
-    }
-    
-}
-
 #pragma mark  ----  自定义函数
 //重写返回方法
 -(void)backBtnClicked:(UIButton *)btn{
@@ -210,23 +202,72 @@
     [self.view addSubview:self.datePickerView];
 }
 
-//添加商品图片点击的响应事件
--(void)addCommodityImageViewTaped:(UIGestureRecognizer *)ges{
-    
-    self.tapedLiveWithDeleteImageView = (LiveWithDeleteImageView *)ges.view;
-    [self showImgSelect];
-}
 //商品图片点击的响应事件
 -(void)commodityImageViewTaped:(UIGestureRecognizer *)ges{
 
     //大图浏览
 }
 
-//添加位置图片点击的响应事件
--(void)addLocationImageViewTaped:(UIGestureRecognizer *)ges{
+//添加商品图片和位置图片点击的响应事件
+-(void)addImageViewTaped:(UIGestureRecognizer *)ges{
     
     self.tapedLiveWithDeleteImageView = (LiveWithDeleteImageView *)ges.view;
-    [self showImgSelect];
+    
+    [SHUIImagePickerControllerLibrary goToSHUIImagePickerViewControllerWithMaxImageSelectCount:9 anResultBlock:^(NSMutableArray *arr) {
+        
+        NSMutableArray * modleArray = [[NSMutableArray alloc] initWithArray:arr];
+        arr = nil;
+        
+        if (self.tapedLiveWithDeleteImageView.tag == COMMODITUIMAGEVIEWBASETAG) {
+            
+            //物品图片
+            for (NSUInteger i = 0; i < modleArray.count; i++) {
+                
+                SHAssetModel * model = modleArray[i];
+                [self.model.commodityImageArray addObject:model.thumbnails];
+            }
+            
+            if (modleArray.count == 1) {
+                
+                dispatch_async(dispatch_get_main_queue(), ^{
+                    
+                    [self addImageViewWithType:CommodityImage];
+                });
+            }
+            else{
+                
+                dispatch_async(dispatch_get_main_queue(), ^{
+                    
+                    [self refreshImageViewWithType:CommodityImage];
+                });
+            }
+        }
+        else if (self.tapedLiveWithDeleteImageView.tag == LOCATIONIMAGEBASETAG){
+            
+            //存放位置图片
+            for (NSUInteger i = 0; i < modleArray.count; i++) {
+                
+                SHAssetModel * model = modleArray[i];
+                [self.model.commodityLocationImagesArray addObject:model.thumbnails];
+            }
+            
+            if (modleArray.count == 1) {
+                
+                dispatch_async(dispatch_get_main_queue(), ^{
+                    
+                    [self addImageViewWithType:CommodityLocationImage];
+                });
+            }
+            else{
+                
+                dispatch_async(dispatch_get_main_queue(), ^{
+                    
+                    [self refreshImageViewWithType:CommodityLocationImage];
+                });
+            }
+        }
+    }];
+    
 }
 
 
@@ -234,97 +275,6 @@
 -(void)locationImageViewTaped:(UIGestureRecognizer *)ges{
     
     //大图浏览
-}
-
-//弹出图片选择方式
--(void)showImgSelect{
-    
-    UIAlertController * actionController = [UIAlertController alertControllerWithTitle:@"上传照片" message:nil preferredStyle:UIAlertControllerStyleActionSheet];
-    UIAlertAction * takePhotoAction = [UIAlertAction actionWithTitle:@"拍照" style:UIAlertActionStyleDefault handler:^(UIAlertAction * _Nonnull action) {
-        UIImagePickerControllerSourceType sourceType=UIImagePickerControllerSourceTypeCamera;
-        if(![UIImagePickerController isSourceTypeAvailable:UIImagePickerControllerSourceTypeCamera])
-        {
-            sourceType=UIImagePickerControllerSourceTypePhotoLibrary;
-        }
-        UIImagePickerController *picker=[[UIImagePickerController alloc]init];
-        picker.delegate=self;
-        picker.sourceType=sourceType;
-        picker.allowsEditing = NO;
-        
-        
-        [self  presentViewController:picker animated:YES completion:^{
-            
-        }];
-    }];
-    UIAlertAction * pictureAction = [UIAlertAction actionWithTitle:@"从相册选取" style:UIAlertActionStyleDefault handler:^(UIAlertAction * _Nonnull action) {
-        UIImagePickerControllerSourceType sourceType=UIImagePickerControllerSourceTypePhotoLibrary;
-        UIImagePickerController *picker=[[UIImagePickerController alloc]init];
-        picker.delegate=self;
-        picker.sourceType=sourceType;
-        picker.allowsEditing = NO;
-        
-        [self  presentViewController:picker animated:YES completion:^{
-            
-        }];
-    }];
-    UIAlertAction * cancleAction = [UIAlertAction actionWithTitle:@"取消" style:UIAlertActionStyleCancel handler:^(UIAlertAction * _Nonnull action) {
-        
-    }];
-    
-    [actionController addAction:takePhotoAction];
-    [actionController addAction:pictureAction];
-    [actionController addAction:cancleAction];
-    
-    
-    [self presentViewController:actionController animated:YES completion:^{
-        
-    }];
-}
-
-//刷新commodityImageViewScrollView
--(void)refreshCommodityImageViewScrollView{
-    
-    for (LiveWithDeleteImageView * imageView in self.commodityImageViewScrollView.subviews) {
-        
-        [imageView removeFromSuperview];
-    }
-    
-    for (NSUInteger i = 0; i < self.commodityImageArray.count; i++) {
-        
-        UIImage * image = self.commodityImageArray[i];
-        
-        LiveWithDeleteImageView * imageView = [[LiveWithDeleteImageView alloc] initWithImage:image andFrame:CGRectMake(i *(114 + 5), 0, 114, 69) andTarget:self andAction:@selector(commodityImageViewTaped:) andButtonTag:COMMODITUIMAGEVIEWBASETAG + i + 1];
-        imageView.deleteAction = @selector(commodityImageDelete:);
-        [self.commodityImageViewScrollView addSubview:imageView];
-    }
-    
-    self.tapedLiveWithDeleteImageView.frame = CGRectMake(self.commodityImageArray.count * (114 + 5), 0, 114, 69);
-    [self.commodityImageViewScrollView addSubview:self.tapedLiveWithDeleteImageView];
-    
-    self.commodityImageViewScrollView.contentSize = CGSizeMake((self.commodityImageArray.count + 1 ) * (114 + 5), 69);
-}
-
-//刷新locationImageViewScrollView
--(void)refreshLocationImageViewScrollView{
-    
-    for (LiveWithDeleteImageView * imageView in self.locationImageViewScrollView.subviews) {
-        
-        [imageView removeFromSuperview];
-    }
-    
-    for (NSUInteger i = 0; i < self.locationImageViewArray.count; i++) {
-        
-        UIImage * image = self.locationImageViewArray[i];
-        
-        LiveWithDeleteImageView * imageView = [[LiveWithDeleteImageView alloc] initWithImage:image andFrame:CGRectMake(i *(114 + 5), 0, 114, 69) andTarget:self andAction:@selector(locationImageViewTaped:) andButtonTag:LOCATIONIMAGEBASETAG + i + 1];
-        imageView.deleteAction = @selector(locationImageDelete:);
-        [self.locationImageViewScrollView addSubview:imageView];
-    }
-    
-    self.tapedLiveWithDeleteImageView.frame = CGRectMake(self.locationImageViewArray.count * (114 + 5), 0, 114, 69);
-    [self.locationImageViewScrollView addSubview:self.tapedLiveWithDeleteImageView];
-    
-    self.locationImageViewScrollView.contentSize = CGSizeMake((self.locationImageViewArray.count + 1 ) * (114 + 5), 69);
 }
 
 //删除物品图片的响应
@@ -337,6 +287,88 @@
 -(void)locationImageDelete:(UIButton *)deleteBtn{
     
     
+}
+
+//添加物品或存放位置图片
+-(void)addImageViewWithType:(AddImageType)type{
+    
+    switch (type) {
+        case CommodityImage:{
+            
+            LiveWithDeleteImageView * imageView = [[LiveWithDeleteImageView alloc] initWithImage:self.model.commodityImageArray.lastObject andFrame:CGRectMake((self.model.commodityImageArray.count - 1) * (114 + 10), 0, 114, 69) andTarget:self andAction:@selector(commodityImageViewTaped:) andButtonTag:DELETEBTNBASETAG + COMMODITYDELETEBTNTAG + self.model.commodityImageArray.count - 1];
+            [self.commodityImageViewScrollView addSubview:imageView];
+            
+            self.tapedLiveWithDeleteImageView.frame = CGRectMake(self.model.commodityImageArray.count * (114 + 10), 0, 114, 69);
+            self.commodityImageViewScrollView.contentSize = CGSizeMake((self.model.commodityImageArray.count + 1) * 114 + self.model.commodityImageArray.count * 10, 69);
+        }
+            break;
+        case CommodityLocationImage:{
+            
+            LiveWithDeleteImageView * imageView = [[LiveWithDeleteImageView alloc] initWithImage:self.model.commodityLocationImagesArray.lastObject andFrame:CGRectMake((self.model.commodityLocationImagesArray.count - 1) * (114 + 10), 0, 114, 69) andTarget:self andAction:@selector(locationImageDelete:) andButtonTag:DELETEBTNBASETAG + LOCATIONDELETEBTNTAG  + self.model.commodityLocationImagesArray.count - 1];
+            [self.locationImageViewScrollView addSubview:imageView];
+            
+            self.tapedLiveWithDeleteImageView.frame = CGRectMake(self.model.commodityLocationImagesArray.count * (114 + 10), 0, 114, 69);
+            self.locationImageViewScrollView.contentSize = CGSizeMake((self.model.commodityLocationImagesArray.count + 1) * 114 + self.model.commodityLocationImagesArray.count * 10, 69);
+        }
+            break;
+        default:
+            break;
+    }
+}
+
+//刷新物品或存放位置图片
+-(void)refreshImageViewWithType:(AddImageType)type{
+    
+    switch (type) {
+        case CommodityImage:{
+            
+            for (UIView * view in self.commodityImageViewScrollView.subviews) {
+                
+                if ([view isKindOfClass:[LiveWithDeleteImageView class]]) {
+                    
+                    [view removeFromSuperview];
+                }
+            }
+            
+            for (NSUInteger i = 0; i < self.model.commodityImageArray.count; i++) {
+                
+                LiveWithDeleteImageView * imageView = [[LiveWithDeleteImageView alloc] initWithImage:self.model.commodityImageArray[i] andFrame:CGRectMake(i * (114 + 10), 0, 114, 69) andTarget:self andAction:@selector(commodityImageViewTaped:) andButtonTag:DELETEBTNBASETAG + i];
+                [self.commodityImageViewScrollView addSubview:imageView];
+            }
+            
+            self.tapedLiveWithDeleteImageView.frame = CGRectMake(self.model.commodityImageArray.count * (114 + 10), 0, 114, 69);
+            [self.commodityImageViewScrollView addSubview:self.tapedLiveWithDeleteImageView];
+            
+            
+            self.commodityImageViewScrollView.contentSize = CGSizeMake((self.model.commodityImageArray.count + 1) * 114 + self.model.commodityImageArray.count * 10, 69);
+        }
+            break;
+        case CommodityLocationImage:{
+            
+            for (UIView * view in self.locationImageViewScrollView.subviews) {
+                
+                if ([view isKindOfClass:[LiveWithDeleteImageView class]]) {
+                    
+                    [view removeFromSuperview];
+                }
+            }
+            
+            for (NSUInteger i = 0; i < self.model.commodityLocationImagesArray.count; i++) {
+                
+                LiveWithDeleteImageView * imageView = [[LiveWithDeleteImageView alloc] initWithImage:self.model.commodityLocationImagesArray[i] andFrame:CGRectMake(i * (114 + 10), 0, 114, 69) andTarget:self andAction:@selector(commodityImageViewTaped:) andButtonTag:DELETEBTNBASETAG + i];
+                [self.locationImageViewScrollView addSubview:imageView];
+            }
+            
+            self.tapedLiveWithDeleteImageView.frame = CGRectMake(self.model.commodityLocationImagesArray.count * (114 + 10), 0, 114, 69);
+            [self.locationImageViewScrollView addSubview:self.tapedLiveWithDeleteImageView];
+            
+            
+            self.locationImageViewScrollView.contentSize = CGSizeMake((self.model.commodityLocationImagesArray.count + 1) * 114 + self.model.commodityLocationImagesArray.count * 10, 69);
+        }
+            break;
+        default:
+            break;
+    }
 }
 
 #pragma mark  ----  懒加载
@@ -428,7 +460,7 @@
         commodityImagesTitleLabel.text = @"物品图片：";
         [_commodityImageView addSubview:commodityImagesTitleLabel];
         //商品图片
-        LiveWithDeleteImageView * commodityImageView = [[LiveWithDeleteImageView alloc] initWithImage:[UIImage imageNamed:@"HomeSource.bundle/photo_duf.tiff"] andFrame:CGRectMake(0, 0, 114, 69) andTarget:self andAction:@selector(addCommodityImageViewTaped:) andButtonTag:0];
+        LiveWithDeleteImageView * commodityImageView = [[LiveWithDeleteImageView alloc] initWithImage:[UIImage imageNamed:@"HomeSource.bundle/photo_duf.tiff"] andFrame:CGRectMake(20, 0, 114, 69) andTarget:self andAction:@selector(addImageViewTaped:) andButtonTag:0];
         commodityImageView.tag = COMMODITUIMAGEVIEWBASETAG;
         [self.commodityImageViewScrollView addSubview:commodityImageView];
         [_commodityImageView addSubview:self.commodityImageViewScrollView];
@@ -444,7 +476,7 @@
     
     if (!_commodityImageViewScrollView) {
         
-        _commodityImageViewScrollView = [[UIScrollView alloc] initWithFrame:CGRectMake(20, VIEWHEIGHT, SCREENWIDTH - 40, 69)];
+        _commodityImageViewScrollView = [[UIScrollView alloc] initWithFrame:CGRectMake(0, VIEWHEIGHT, SCREENWIDTH, 69)];
         _commodityImageViewScrollView.contentSize = CGSizeMake(SCREENWIDTH - 40, 69);
     }
     return _commodityImageViewScrollView;
@@ -488,7 +520,7 @@
         storageLocationImagesTitleLabel.text = @"存放位置图片：";
         [_storageLocationImageView addSubview:storageLocationImagesTitleLabel];
         //存放位置照片
-        LiveWithDeleteImageView * locationImageView = [[LiveWithDeleteImageView alloc] initWithImage:[UIImage imageNamed:@"HomeSource.bundle/photo_duf.tiff"] andFrame:CGRectMake(0, 0, 114, 69) andTarget:self andAction:@selector(addLocationImageViewTaped:) andButtonTag:0];
+        LiveWithDeleteImageView * locationImageView = [[LiveWithDeleteImageView alloc] initWithImage:[UIImage imageNamed:@"HomeSource.bundle/photo_duf.tiff"] andFrame:CGRectMake(20, 0, 114, 69) andTarget:self andAction:@selector(addImageViewTaped:) andButtonTag:0];
         locationImageView.tag = LOCATIONIMAGEBASETAG;
         [self.locationImageViewScrollView addSubview:locationImageView];
         [_storageLocationImageView addSubview:self.locationImageViewScrollView];
@@ -505,7 +537,7 @@
     
     if (!_locationImageViewScrollView) {
         
-        _locationImageViewScrollView = [[UIScrollView alloc] initWithFrame:CGRectMake(20, VIEWHEIGHT, SCREENWIDTH - 40, 69)];
+        _locationImageViewScrollView = [[UIScrollView alloc] initWithFrame:CGRectMake(0, VIEWHEIGHT, SCREENWIDTH, 69)];
         _locationImageViewScrollView.contentSize = CGSizeMake(SCREENWIDTH - 40, 69);
     }
     return _locationImageViewScrollView;

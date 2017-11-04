@@ -45,9 +45,9 @@
     if (!_backBtn) {
         
         _backBtn = [UIButton buttonWithType:UIButtonTypeCustom];
-        [_backBtn setTitle:@"返回" forState:UIControlStateNormal];
+        [_backBtn setImage:[UIImage imageNamed:@"HomeSource.bundle/back.tiff"] forState:UIControlStateNormal];
         _backBtn.frame = CGRectMake(20, 20, 44, 44);
-        [_backBtn setImage:[UIImage imageNamed:@""] forState:UIControlStateNormal];
+        [_backBtn setImageEdgeInsets:UIEdgeInsetsMake(13.5, 13, 13.5, 13)];
     }
     return _backBtn;
 }

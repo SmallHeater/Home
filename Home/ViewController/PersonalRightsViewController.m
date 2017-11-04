@@ -89,7 +89,7 @@
     
     if (!_tableView) {
         
-        _tableView = [[SHPlainTableView alloc] initWithFrame:CGRectMake(0, 64, SCREENWIDTH, SCREENHEIGHT - 64) andType:CommodityTableView];
+        _tableView = [[SHPlainTableView alloc] initWithFrame:CGRectMake(0, 64, SCREENWIDTH, SCREENHEIGHT - 64) andType:PersonalRightsTableView];
     }
     return _tableView;
 }

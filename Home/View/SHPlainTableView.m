@@ -13,7 +13,7 @@
 #import "PersonalRightsCell.h"
 #import "CategoryTableViewCell.h"
 #import "CommodityRewardingViewController.h"
-
+#import "PersonalRightsCell.h"
 
 @interface SHPlainTableView ()<UITableViewDelegate,UITableViewDataSource>
 
@@ -63,13 +63,18 @@
         case PersonalRightsTableView:
         {
             
-            CommodityTableViewCell * cell = [tableView dequeueReusableCellWithIdentifier:@"CommodityTableViewCell"];
+            PersonalRightsCell * cell = [tableView dequeueReusableCellWithIdentifier:@"PersonalRightsCell"];
             if (!cell) {
                 
-                cell = [[CommodityTableViewCell alloc] initWithStyle:UITableViewCellStyleDefault reuseIdentifier:@"CommodityTableViewCell"];
+                cell = [[PersonalRightsCell alloc] initWithStyle:UITableViewCellStyleDefault reuseIdentifier:@"PersonalRightsCell"];
                 cell.selectionStyle = UITableViewCellSelectionStyleNone;
             }
-            cell.commodityModel = self.dataArray[indexPath.row];
+            
+            PersonalRightsModel * model = self.dataArray[indexPath.row];
+            cell.personalRightsNameLabel.text = model.personalRightsName;
+            cell.startEndTimeLabel.text = [[NSString alloc] initWithFormat:@"%@到%@",model.personalRightsStartTime,model.personalRightsEndTime];
+            cell.personalRightsFromLabel.text = model.personalRightsFrom;
+            
             return cell;
         }
         case CategoryTableView:
@@ -114,7 +119,7 @@
             return 120.5;
             break;
         case PersonalRightsTableView:
-            return 100;
+            return 60.5;
             break;
         case CategoryTableView:
             return 40;

@@ -10,4 +10,15 @@
 
 @implementation PersonalRightsModel
 
+#pragma mark  ----  懒加载
+
+-(NSMutableArray *)personalRightsPhotoArray{
+    
+    if (!_personalRightsPhotoArray) {
+        
+        _personalRightsPhotoArray = [[NSMutableArray alloc] init];
+    }
+    return _personalRightsPhotoArray;
+}
+
 @end

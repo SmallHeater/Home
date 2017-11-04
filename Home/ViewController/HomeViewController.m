@@ -35,6 +35,8 @@
 - (void)viewDidLoad {
     [super viewDidLoad];
     self.navigationBar.titleLabel.text = @"首页";
+    self.navigationBar.backBtn.hidden = YES;
+    
     [self.view addSubview:self.commodityListBtn];
     [self.view addSubview:self.doBtn];
     [self.view addSubview:self.myBtn];
