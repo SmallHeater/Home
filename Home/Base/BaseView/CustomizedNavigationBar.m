@@ -46,8 +46,8 @@
         
         _backBtn = [UIButton buttonWithType:UIButtonTypeCustom];
         [_backBtn setImage:[UIImage imageNamed:@"HomeSource.bundle/back.tiff"] forState:UIControlStateNormal];
-        _backBtn.frame = CGRectMake(20, 20, 44, 44);
-        [_backBtn setImageEdgeInsets:UIEdgeInsetsMake(13.5, 13, 13.5, 13)];
+        _backBtn.frame = CGRectMake(10, 20, 44, 44);
+        [_backBtn setImageEdgeInsets:UIEdgeInsetsMake(13.5, 0, 13.5, 26)];
     }
     return _backBtn;
 }

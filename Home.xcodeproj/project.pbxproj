@@ -40,6 +40,10 @@
 		622B8AF81FA9ACDC0080552F /* PersonalRightsCell.m in Sources */ = {isa = PBXBuildFile; fileRef = 622B8AF71FA9ACDC0080552F /* PersonalRightsCell.m */; };
 		622B8AFB1FA9ADBC0080552F /* SHPlainTableView.m in Sources */ = {isa = PBXBuildFile; fileRef = 622B8AFA1FA9ADBC0080552F /* SHPlainTableView.m */; };
 		622B8AFE1FAA0A6E0080552F /* PersonalRightsRewardingViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 622B8AFD1FAA0A6E0080552F /* PersonalRightsRewardingViewController.m */; };
+		622B8B011FAD964D0080552F /* BaseAbnormalViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 622B8B001FAD964D0080552F /* BaseAbnormalViewController.m */; };
+		622B8B041FAD96A30080552F /* NoDataView.m in Sources */ = {isa = PBXBuildFile; fileRef = 622B8B031FAD96A30080552F /* NoDataView.m */; };
+		622B8B071FAD96BD0080552F /* NoInternetView.m in Sources */ = {isa = PBXBuildFile; fileRef = 622B8B061FAD96BD0080552F /* NoInternetView.m */; };
+		622B8B0A1FAD99460080552F /* BaseTableViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 622B8B091FAD99450080552F /* BaseTableViewController.m */; };
 		6275CED41FAC144600A1C616 /* ModelWithState.m in Sources */ = {isa = PBXBuildFile; fileRef = 6275CED11FAC144600A1C616 /* ModelWithState.m */; };
 		6275CED51FAC144600A1C616 /* ModelWithTitle.m in Sources */ = {isa = PBXBuildFile; fileRef = 6275CED31FAC144600A1C616 /* ModelWithTitle.m */; };
 		6275CED81FAC14AF00A1C616 /* LiveWithDeleteImageView.m in Sources */ = {isa = PBXBuildFile; fileRef = 6275CED71FAC14AF00A1C616 /* LiveWithDeleteImageView.m */; };
@@ -99,7 +103,6 @@
 		62F8019F1F9B8F910038DD5C /* HomeSource.bundle in Sources */ = {isa = PBXBuildFile; fileRef = 62F8018E1F9B8C390038DD5C /* HomeSource.bundle */; };
 		62F801A01F9B90170038DD5C /* HomeSource.bundle in Resources */ = {isa = PBXBuildFile; fileRef = 62F8018E1F9B8C390038DD5C /* HomeSource.bundle */; };
 		62F801A61F9B916E0038DD5C /* SetTableViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 62F801A51F9B916E0038DD5C /* SetTableViewController.m */; };
-		62F801A91F9B93A50038DD5C /* BaseTableViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 62F801A81F9B93A50038DD5C /* BaseTableViewController.m */; };
 		62F801AD1F9C33E40038DD5C /* BaseTableViewCell.m in Sources */ = {isa = PBXBuildFile; fileRef = 62F801AC1F9C33E40038DD5C /* BaseTableViewCell.m */; };
 		62F801B61F9C3D410038DD5C /* TableViewCellWithBottomLine.m in Sources */ = {isa = PBXBuildFile; fileRef = 62F801B51F9C3D410038DD5C /* TableViewCellWithBottomLine.m */; };
 		62F801BA1F9C3F010038DD5C /* BaseModel.m in Sources */ = {isa = PBXBuildFile; fileRef = 62F801B91F9C3F010038DD5C /* BaseModel.m */; };
@@ -190,6 +193,14 @@
 		622B8AFA1FA9ADBC0080552F /* SHPlainTableView.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = SHPlainTableView.m; sourceTree = "<group>"; };
 		622B8AFC1FAA0A6E0080552F /* PersonalRightsRewardingViewController.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = PersonalRightsRewardingViewController.h; sourceTree = "<group>"; };
 		622B8AFD1FAA0A6E0080552F /* PersonalRightsRewardingViewController.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = PersonalRightsRewardingViewController.m; sourceTree = "<group>"; };
+		622B8AFF1FAD964D0080552F /* BaseAbnormalViewController.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = BaseAbnormalViewController.h; sourceTree = "<group>"; };
+		622B8B001FAD964D0080552F /* BaseAbnormalViewController.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = BaseAbnormalViewController.m; sourceTree = "<group>"; };
+		622B8B021FAD96A30080552F /* NoDataView.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = NoDataView.h; sourceTree = "<group>"; };
+		622B8B031FAD96A30080552F /* NoDataView.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = NoDataView.m; sourceTree = "<group>"; };
+		622B8B051FAD96BD0080552F /* NoInternetView.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = NoInternetView.h; sourceTree = "<group>"; };
+		622B8B061FAD96BD0080552F /* NoInternetView.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = NoInternetView.m; sourceTree = "<group>"; };
+		622B8B081FAD99450080552F /* BaseTableViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = BaseTableViewController.h; sourceTree = "<group>"; };
+		622B8B091FAD99450080552F /* BaseTableViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = BaseTableViewController.m; sourceTree = "<group>"; };
 		6275CED01FAC144600A1C616 /* ModelWithState.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = ModelWithState.h; sourceTree = "<group>"; };
 		6275CED11FAC144600A1C616 /* ModelWithState.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = ModelWithState.m; sourceTree = "<group>"; };
 		6275CED21FAC144600A1C616 /* ModelWithTitle.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = ModelWithTitle.h; sourceTree = "<group>"; };
@@ -278,8 +289,6 @@
 		62F8019E1F9B8F830038DD5C /* 1.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = 1.png; sourceTree = "<group>"; };
 		62F801A41F9B916E0038DD5C /* SetTableViewController.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = SetTableViewController.h; sourceTree = "<group>"; };
 		62F801A51F9B916E0038DD5C /* SetTableViewController.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = SetTableViewController.m; sourceTree = "<group>"; };
-		62F801A71F9B93A50038DD5C /* BaseTableViewController.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = BaseTableViewController.h; sourceTree = "<group>"; };
-		62F801A81F9B93A50038DD5C /* BaseTableViewController.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = BaseTableViewController.m; sourceTree = "<group>"; };
 		62F801AB1F9C33E40038DD5C /* BaseTableViewCell.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = BaseTableViewCell.h; sourceTree = "<group>"; };
 		62F801AC1F9C33E40038DD5C /* BaseTableViewCell.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = BaseTableViewCell.m; sourceTree = "<group>"; };
 		62F801B41F9C3D410038DD5C /* TableViewCellWithBottomLine.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = TableViewCellWithBottomLine.h; sourceTree = "<group>"; };
@@ -556,13 +565,6 @@
 			path = View;
 			sourceTree = "<group>";
 		};
-		62DE4C661FA326B60086CE06 /* BaseNSObject */ = {
-			isa = PBXGroup;
-			children = (
-			);
-			path = BaseNSObject;
-			sourceTree = "<group>";
-		};
 		62F801231F9B5D780038DD5C = {
 			isa = PBXGroup;
 			children = (
@@ -668,7 +670,6 @@
 		62F801631F9B5DAD0038DD5C /* Base */ = {
 			isa = PBXGroup;
 			children = (
-				62DE4C661FA326B60086CE06 /* BaseNSObject */,
 				62F8020E1F9C998D0038DD5C /* BaseController */,
 				62F801B71F9C3EEE0038DD5C /* BaseModel */,
 				62F801AA1F9C33CE0038DD5C /* BaseCell */,
@@ -688,6 +689,10 @@
 				62F801791F9B60EC0038DD5C /* CustomizedNavigationBar.m */,
 				62F801871F9B7F5C0038DD5C /* BaseTabBarItem.h */,
 				62F801881F9B7F5C0038DD5C /* BaseTabBarItem.m */,
+				622B8B021FAD96A30080552F /* NoDataView.h */,
+				622B8B031FAD96A30080552F /* NoDataView.m */,
+				622B8B051FAD96BD0080552F /* NoInternetView.h */,
+				622B8B061FAD96BD0080552F /* NoInternetView.m */,
 			);
 			path = BaseView;
 			sourceTree = "<group>";
@@ -695,12 +700,14 @@
 		62F8016B1F9B5E9F0038DD5C /* BaseViewController */ = {
 			isa = PBXGroup;
 			children = (
+				622B8B081FAD99450080552F /* BaseTableViewController.h */,
+				622B8B091FAD99450080552F /* BaseTableViewController.m */,
 				62F801721F9B5F020038DD5C /* BaseViewController.h */,
 				62F801731F9B5F030038DD5C /* BaseViewController.m */,
 				62F8016F1F9B5EC60038DD5C /* BaseNavViewController.h */,
 				62F801701F9B5EC60038DD5C /* BaseNavViewController.m */,
-				62F801A71F9B93A50038DD5C /* BaseTableViewController.h */,
-				62F801A81F9B93A50038DD5C /* BaseTableViewController.m */,
+				622B8AFF1FAD964D0080552F /* BaseAbnormalViewController.h */,
+				622B8B001FAD964D0080552F /* BaseAbnormalViewController.m */,
 			);
 			path = BaseViewController;
 			sourceTree = "<group>";
@@ -1106,6 +1113,7 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				622B8B041FAD96A30080552F /* NoDataView.m in Sources */,
 				62F8019F1F9B8F910038DD5C /* HomeSource.bundle in Sources */,
 				62282C6D1F9E2C02007E3ABE /* CommodityTableViewCell.m in Sources */,
 				62F801831F9B68F40038DD5C /* BaseTabBarController.m in Sources */,
@@ -1113,16 +1121,18 @@
 				622B8AF81FA9ACDC0080552F /* PersonalRightsCell.m in Sources */,
 				62282C6A1F9CCF8F007E3ABE /* CommodityModel.m in Sources */,
 				62F8017A1F9B60EC0038DD5C /* CustomizedNavigationBar.m in Sources */,
+				622B8B071FAD96BD0080552F /* NoInternetView.m in Sources */,
 				6275CED41FAC144600A1C616 /* ModelWithState.m in Sources */,
 				62F801B61F9C3D410038DD5C /* TableViewCellWithBottomLine.m in Sources */,
+				622B8B011FAD964D0080552F /* BaseAbnormalViewController.m in Sources */,
 				622B8AFE1FAA0A6E0080552F /* PersonalRightsRewardingViewController.m in Sources */,
 				62282D311FA5FDA3007E3ABE /* LogInViewController.m in Sources */,
 				62F801341F9B5D780038DD5C /* ViewController.m in Sources */,
-				62F801A91F9B93A50038DD5C /* BaseTableViewController.m in Sources */,
 				62F801C31F9C67330038DD5C /* CategorySelectViewController.m in Sources */,
 				62F802111F9C99BF0038DD5C /* BaseController.m in Sources */,
 				622B8AEF1FA969A20080552F /* SearchViewController.m in Sources */,
 				62F802141F9C9AC70038DD5C /* CommodityDataManager.m in Sources */,
+				622B8B0A1FAD99460080552F /* BaseTableViewController.m in Sources */,
 				62F801741F9B5F030038DD5C /* BaseViewController.m in Sources */,
 				622B8AF51FA96BBA0080552F /* PersonalRightsModel.m in Sources */,
 				62F801861F9B69F50038DD5C /* TabBarController.m in Sources */,

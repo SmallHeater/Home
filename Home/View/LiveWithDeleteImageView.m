@@ -76,7 +76,7 @@
 -(UIButton *)btn{
     if (!_btn) {
         _btn = [UIButton buttonWithType:UIButtonTypeCustom];
-        [_btn setImage:[UIImage imageNamed:@"HomeSource/delete_ful.tiff"] forState:UIControlStateNormal];
+        [_btn setImage:[UIImage imageNamed:@"HomeSource.bundle/delete_ful.tiff"] forState:UIControlStateNormal];
     }
     return _btn;
 }

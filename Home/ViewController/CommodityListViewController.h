@@ -6,8 +6,8 @@
 //  Copyright © 2017年 xianjunwang. All rights reserved.
 //  物品清单页面
 
-#import "BaseNavViewController.h"
+#import "BaseAbnormalViewController.h"
 
-@interface CommodityListViewController : BaseNavViewController
+@interface CommodityListViewController : BaseAbnormalViewController
 
 @end

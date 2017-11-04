@@ -46,11 +46,20 @@
     if ([CommodityDataManager sharedManager].commodityDataArray.count == 0) {
         
         NSMutableArray * dataArray = [[SHFMDBManager sharedManager] selectCommodityTable];
-        [[CommodityDataManager sharedManager].commodityDataArray addObjectsFromArray:dataArray];
-        [self.tableView.dataArray addObjectsFromArray:[CommodityDataManager sharedManager].commodityDataArray];
+        if (dataArray.count == 0) {
+            
+            [self.view addSubview:self.noDataView];
+        }
+        else{
+            
+            [self.noDataView removeFromSuperview];
+            [[CommodityDataManager sharedManager].commodityDataArray addObjectsFromArray:dataArray];
+            [self.tableView.dataArray addObjectsFromArray:[CommodityDataManager sharedManager].commodityDataArray];
+        }
     }
     else{
         
+        [self.noDataView removeFromSuperview];
         [self.tableView.dataArray removeAllObjects];
         [self.tableView.dataArray addObjectsFromArray:[CommodityDataManager sharedManager].commodityDataArray];
     }

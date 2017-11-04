@@ -14,6 +14,8 @@
 #import "CategoryTableViewCell.h"
 #import "CommodityRewardingViewController.h"
 #import "PersonalRightsCell.h"
+#import "SHFMDBManager.h"
+#import "CommodityDataManager.h"
 
 @interface SHPlainTableView ()<UITableViewDelegate,UITableViewDataSource>
 
@@ -106,7 +108,30 @@
     if (editingStyle == UITableViewCellEditingStyleDelete) {
         
         //删除
+        [[SHFMDBManager sharedManager] deleteCommodityModel:self.dataArray[indexPath.row]];
         [self.dataArray removeObjectAtIndex:indexPath.row];
+        
+        switch (self.type) {
+            case CommodityTableView:{
+                
+                //物品列表
+                [[CommodityDataManager sharedManager].commodityDataArray removeObjectAtIndex:indexPath.row];
+                }
+                break;
+            case PersonalRightsTableView:{
+                
+                //个人权益列表
+            }
+                break;
+            case CategoryTableView:{
+                
+                //品类列表
+            }
+                break;
+            default:
+                break;
+        }
+        
         [self.tableView reloadData];
     }
 }

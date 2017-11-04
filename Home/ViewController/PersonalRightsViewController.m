@@ -44,11 +44,21 @@
     if ([CommodityDataManager sharedManager].personalRightsArray.count == 0) {
         
         NSMutableArray * dataArray = [[SHFMDBManager sharedManager] selectPersonalRightsTable];
+        if (dataArray.count == 0) {
+            
+            [self.view addSubview:self.noDataView];
+        }
+        else{
+            
+            [self.noDataView removeFromSuperview];
+        }
         [[CommodityDataManager sharedManager].personalRightsArray addObjectsFromArray:dataArray];
         [self.tableView.dataArray addObjectsFromArray:[CommodityDataManager sharedManager].personalRightsArray];
     }
     else{
         
+        [self.noDataView removeFromSuperview];
+        [self.tableView.dataArray removeAllObjects];
         [self.tableView.dataArray addObjectsFromArray:[CommodityDataManager sharedManager].personalRightsArray];
     }
     [self.tableView reloadData];

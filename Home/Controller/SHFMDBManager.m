@@ -104,14 +104,32 @@
     BOOL result = NO;
     if ([self.db open]) {
         
-        result = [self.db executeUpdate:@"delete from Home_CommodityTable where CommodityID = '%@'",model.commodityID];
-        if (result) {
+        if ([model isKindOfClass:[CommodityModel class]]) {
             
-            NSLog(@"成功");
+            CommodityModel * commodityModel = (CommodityModel *)model;
+            NSString * sql = [[NSString alloc] initWithFormat:@"delete from Home_CommodityTable where CommodityID = '%@'",commodityModel.commodityID];
+            result = [self.db executeUpdate:sql];
+            if (result) {
+                
+                NSLog(@"成功");
+            }
+            else{
+                
+                NSLog(@"失败");
+            }
         }
-        else{
+        else if ([model isKindOfClass:[PersonalRightsModel class]]){
             
-            NSLog(@"失败");
+            PersonalRightsModel * personalRightsModel = (PersonalRightsModel *)model;
+            result = [self.db executeUpdate:@"delete from Home_PersonalRightsTable where PersonalRightsID = '%@'",personalRightsModel.personalRightsID];
+            if (result) {
+                
+                NSLog(@"成功");
+            }
+            else{
+                
+                NSLog(@"失败");
+            }
         }
     }
     //关闭数据库
@@ -129,7 +147,7 @@
         NSData * commodityImageArrayData = [NSJSONSerialization dataWithJSONObject:model.commodityImageArray options:NSJSONWritingPrettyPrinted error:nil];
         NSData * commodityLocationImageArrayData = [NSJSONSerialization dataWithJSONObject:model.commodityLocationImagesArray options:NSJSONWritingPrettyPrinted error:nil];
         
-        result = [self.db executeUpdate:@"UPDATE Home_CommodityTable set CommodityName = '%@', CommodityImageArray = '%@', CategoryID = '%@', CategoryName = '%@', CommodityLocation = '%@', CommodityLocationImageArray = '%@', hasShelfLife = '%d', shelfLife = '%@' where CommodityID = '%d'",model.commodityName,commodityImageArrayData,model.categoryID,model.category,model.commodityLocation,commodityLocationImageArrayData,model.hasShelfLife,@"rr",model.commodityID];
+        result = [self.db executeUpdate:@"UPDATE Home_CommodityTable set CommodityName = '%@', CommodityImageArray = '%@', CategoryID = '%@', CategoryName = '%@', CommodityLocation = '%@', CommodityLocationImageArray = '%@', hasShelfLife = '%d', shelfLife = '%@' where CommodityID = '%@'",model.commodityName,commodityImageArrayData,model.categoryID,model.category,model.commodityLocation,commodityLocationImageArrayData,model.hasShelfLife,@"rr",model.commodityID];
         if (result) {
             
             NSLog(@"成功");

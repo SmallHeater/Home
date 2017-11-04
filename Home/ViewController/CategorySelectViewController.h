@@ -6,7 +6,7 @@
 //  Copyright © 2017年 xianjunwang. All rights reserved.
 //  品类选择页面
 
-#import "BaseTableViewController.h"
+#import "BaseNavViewController.h"
 
 @interface CategorySelectViewController : BaseNavViewController
 

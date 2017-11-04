@@ -289,6 +289,23 @@ typedef NS_ENUM(NSInteger, AddImageType){
     
 }
 
+//删除图片的响应
+-(void)deleteImage:(UIButton *)deleteBtn{
+    
+    if (deleteBtn.tag - DELETEBTNBASETAG - LOCATIONDELETEBTNTAG >= 0) {
+        
+        //删除位置图片
+        [self.model.commodityLocationImagesArray removeObjectAtIndex:(deleteBtn.tag - DELETEBTNBASETAG - LOCATIONDELETEBTNTAG)];
+        [self refreshImageViewWithType:CommodityLocationImage];
+    }
+    else{
+        
+        //删除物品图片
+        [self.model.commodityImageArray removeObjectAtIndex:(deleteBtn.tag - DELETEBTNBASETAG)];
+        [self refreshImageViewWithType:CommodityImage];
+    }
+}
+
 //添加物品或存放位置图片
 -(void)addImageViewWithType:(AddImageType)type{
     
@@ -296,6 +313,7 @@ typedef NS_ENUM(NSInteger, AddImageType){
         case CommodityImage:{
             
             LiveWithDeleteImageView * imageView = [[LiveWithDeleteImageView alloc] initWithImage:self.model.commodityImageArray.lastObject andFrame:CGRectMake((self.model.commodityImageArray.count - 1) * (114 + 10), 0, 114, 69) andTarget:self andAction:@selector(commodityImageViewTaped:) andButtonTag:DELETEBTNBASETAG + COMMODITYDELETEBTNTAG + self.model.commodityImageArray.count - 1];
+            imageView.deleteAction = @selector(deleteImage:);
             [self.commodityImageViewScrollView addSubview:imageView];
             
             self.tapedLiveWithDeleteImageView.frame = CGRectMake(self.model.commodityImageArray.count * (114 + 10), 0, 114, 69);
@@ -304,7 +322,8 @@ typedef NS_ENUM(NSInteger, AddImageType){
             break;
         case CommodityLocationImage:{
             
-            LiveWithDeleteImageView * imageView = [[LiveWithDeleteImageView alloc] initWithImage:self.model.commodityLocationImagesArray.lastObject andFrame:CGRectMake((self.model.commodityLocationImagesArray.count - 1) * (114 + 10), 0, 114, 69) andTarget:self andAction:@selector(locationImageDelete:) andButtonTag:DELETEBTNBASETAG + LOCATIONDELETEBTNTAG  + self.model.commodityLocationImagesArray.count - 1];
+            LiveWithDeleteImageView * imageView = [[LiveWithDeleteImageView alloc] initWithImage:self.model.commodityLocationImagesArray.lastObject andFrame:CGRectMake((self.model.commodityLocationImagesArray.count - 1) * (114 + 10), 0, 114, 69) andTarget:self andAction:@selector(locationImageViewTaped:) andButtonTag:DELETEBTNBASETAG + LOCATIONDELETEBTNTAG  + self.model.commodityLocationImagesArray.count - 1];
+            imageView.deleteAction = @selector(deleteImage:);
             [self.locationImageViewScrollView addSubview:imageView];
             
             self.tapedLiveWithDeleteImageView.frame = CGRectMake(self.model.commodityLocationImagesArray.count * (114 + 10), 0, 114, 69);
@@ -333,6 +352,7 @@ typedef NS_ENUM(NSInteger, AddImageType){
             for (NSUInteger i = 0; i < self.model.commodityImageArray.count; i++) {
                 
                 LiveWithDeleteImageView * imageView = [[LiveWithDeleteImageView alloc] initWithImage:self.model.commodityImageArray[i] andFrame:CGRectMake(i * (114 + 10), 0, 114, 69) andTarget:self andAction:@selector(commodityImageViewTaped:) andButtonTag:DELETEBTNBASETAG + i];
+                imageView.deleteAction = @selector(deleteImage:);
                 [self.commodityImageViewScrollView addSubview:imageView];
             }
             
@@ -355,7 +375,8 @@ typedef NS_ENUM(NSInteger, AddImageType){
             
             for (NSUInteger i = 0; i < self.model.commodityLocationImagesArray.count; i++) {
                 
-                LiveWithDeleteImageView * imageView = [[LiveWithDeleteImageView alloc] initWithImage:self.model.commodityLocationImagesArray[i] andFrame:CGRectMake(i * (114 + 10), 0, 114, 69) andTarget:self andAction:@selector(commodityImageViewTaped:) andButtonTag:DELETEBTNBASETAG + i];
+                LiveWithDeleteImageView * imageView = [[LiveWithDeleteImageView alloc] initWithImage:self.model.commodityLocationImagesArray[i] andFrame:CGRectMake(i * (114 + 10), 0, 114, 69) andTarget:self andAction:@selector(locationImageViewTaped:) andButtonTag:DELETEBTNBASETAG + LOCATIONDELETEBTNTAG + i];
+                imageView.deleteAction = @selector(deleteImage:);
                 [self.locationImageViewScrollView addSubview:imageView];
             }
             
@@ -460,7 +481,7 @@ typedef NS_ENUM(NSInteger, AddImageType){
         commodityImagesTitleLabel.text = @"物品图片：";
         [_commodityImageView addSubview:commodityImagesTitleLabel];
         //商品图片
-        LiveWithDeleteImageView * commodityImageView = [[LiveWithDeleteImageView alloc] initWithImage:[UIImage imageNamed:@"HomeSource.bundle/photo_duf.tiff"] andFrame:CGRectMake(20, 0, 114, 69) andTarget:self andAction:@selector(addImageViewTaped:) andButtonTag:0];
+        LiveWithDeleteImageView * commodityImageView = [[LiveWithDeleteImageView alloc] initWithImage:[UIImage imageNamed:@"HomeSource.bundle/photo_duf.tiff"] andFrame:CGRectMake(0, 0, 114, 69) andTarget:self andAction:@selector(addImageViewTaped:) andButtonTag:0];
         commodityImageView.tag = COMMODITUIMAGEVIEWBASETAG;
         [self.commodityImageViewScrollView addSubview:commodityImageView];
         [_commodityImageView addSubview:self.commodityImageViewScrollView];
@@ -476,7 +497,7 @@ typedef NS_ENUM(NSInteger, AddImageType){
     
     if (!_commodityImageViewScrollView) {
         
-        _commodityImageViewScrollView = [[UIScrollView alloc] initWithFrame:CGRectMake(0, VIEWHEIGHT, SCREENWIDTH, 69)];
+        _commodityImageViewScrollView = [[UIScrollView alloc] initWithFrame:CGRectMake(20, VIEWHEIGHT, SCREENWIDTH - 40, 69)];
         _commodityImageViewScrollView.contentSize = CGSizeMake(SCREENWIDTH - 40, 69);
     }
     return _commodityImageViewScrollView;
@@ -520,7 +541,7 @@ typedef NS_ENUM(NSInteger, AddImageType){
         storageLocationImagesTitleLabel.text = @"存放位置图片：";
         [_storageLocationImageView addSubview:storageLocationImagesTitleLabel];
         //存放位置照片
-        LiveWithDeleteImageView * locationImageView = [[LiveWithDeleteImageView alloc] initWithImage:[UIImage imageNamed:@"HomeSource.bundle/photo_duf.tiff"] andFrame:CGRectMake(20, 0, 114, 69) andTarget:self andAction:@selector(addImageViewTaped:) andButtonTag:0];
+        LiveWithDeleteImageView * locationImageView = [[LiveWithDeleteImageView alloc] initWithImage:[UIImage imageNamed:@"HomeSource.bundle/photo_duf.tiff"] andFrame:CGRectMake(0, 0, 114, 69) andTarget:self andAction:@selector(addImageViewTaped:) andButtonTag:0];
         locationImageView.tag = LOCATIONIMAGEBASETAG;
         [self.locationImageViewScrollView addSubview:locationImageView];
         [_storageLocationImageView addSubview:self.locationImageViewScrollView];
@@ -537,7 +558,7 @@ typedef NS_ENUM(NSInteger, AddImageType){
     
     if (!_locationImageViewScrollView) {
         
-        _locationImageViewScrollView = [[UIScrollView alloc] initWithFrame:CGRectMake(0, VIEWHEIGHT, SCREENWIDTH, 69)];
+        _locationImageViewScrollView = [[UIScrollView alloc] initWithFrame:CGRectMake(20, VIEWHEIGHT, SCREENWIDTH - 40, 69)];
         _locationImageViewScrollView.contentSize = CGSizeMake(SCREENWIDTH - 40, 69);
     }
     return _locationImageViewScrollView;

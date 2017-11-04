@@ -25,13 +25,13 @@
             shouldBeEnabled = "Yes"
             ignoreCount = "0"
             continueAfterRunningActions = "No"
-            filePath = "Home/ViewController/PersonalRightsRewardingViewController.m"
-            timestampString = "531464727.46384"
+            filePath = "Home/ViewController/CommodityRewardingViewController.m"
+            timestampString = "531470826.61922"
             startingColumnNumber = "9223372036854775807"
             endingColumnNumber = "9223372036854775807"
-            startingLineNumber = "132"
-            endingLineNumber = "132"
-            landmarkName = "-textViewDidEndEditing:"
+            startingLineNumber = "299"
+            endingLineNumber = "299"
+            landmarkName = "-deleteImage:"
             landmarkType = "7">
          </BreakpointContent>
       </BreakpointProxy>
@@ -41,13 +41,13 @@
             shouldBeEnabled = "Yes"
             ignoreCount = "0"
             continueAfterRunningActions = "No"
-            filePath = "Home/ViewController/PersonalRightsRewardingViewController.m"
-            timestampString = "531464727.469836"
+            filePath = "Home/ViewController/CommodityRewardingViewController.m"
+            timestampString = "531470826.621357"
             startingColumnNumber = "9223372036854775807"
             endingColumnNumber = "9223372036854775807"
-            startingLineNumber = "143"
-            endingLineNumber = "143"
-            landmarkName = "-textViewDidEndEditing:"
+            startingLineNumber = "376"
+            endingLineNumber = "376"
+            landmarkName = "-refreshImageViewWithType:"
             landmarkType = "7">
          </BreakpointContent>
       </BreakpointProxy>
