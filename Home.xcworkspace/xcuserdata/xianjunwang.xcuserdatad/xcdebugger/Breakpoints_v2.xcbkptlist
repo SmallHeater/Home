@@ -26,12 +26,12 @@
             ignoreCount = "0"
             continueAfterRunningActions = "No"
             filePath = "Home/ViewController/CommodityRewardingViewController.m"
-            timestampString = "531470826.61922"
+            timestampString = "531487558.123875"
             startingColumnNumber = "9223372036854775807"
             endingColumnNumber = "9223372036854775807"
-            startingLineNumber = "299"
-            endingLineNumber = "299"
-            landmarkName = "-deleteImage:"
+            startingLineNumber = "314"
+            endingLineNumber = "314"
+            landmarkName = "-locationImageDelete:"
             landmarkType = "7">
          </BreakpointContent>
       </BreakpointProxy>
@@ -41,13 +41,13 @@
             shouldBeEnabled = "Yes"
             ignoreCount = "0"
             continueAfterRunningActions = "No"
-            filePath = "Home/ViewController/CommodityRewardingViewController.m"
-            timestampString = "531470826.621357"
+            filePath = "Home/Cell/CommodityTableViewCell.m"
+            timestampString = "531487558.127312"
             startingColumnNumber = "9223372036854775807"
             endingColumnNumber = "9223372036854775807"
-            startingLineNumber = "376"
-            endingLineNumber = "376"
-            landmarkName = "-refreshImageViewWithType:"
+            startingLineNumber = "63"
+            endingLineNumber = "63"
+            landmarkName = "-setCommodityModel:"
             landmarkType = "7">
          </BreakpointContent>
       </BreakpointProxy>

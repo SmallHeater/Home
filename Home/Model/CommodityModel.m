@@ -12,15 +12,6 @@
 
 #pragma mark  ----  懒加载
 
--(NSUInteger)commodityCount{
-    if (_commodityCount < 1) {
-        return 1;
-    }
-    else{
-        return _commodityCount;
-    }
-}
-
 -(NSMutableArray *)commodityImageArray{
     
     if (!_commodityImageArray) {

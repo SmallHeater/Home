@@ -53,11 +53,11 @@
     [self.dataArray addObject:rewardModel];
 }
 
--(void)viewWillAppear:(BOOL)animated{
+
+-(void)viewDidAppear:(BOOL)animated{
     
-    [super viewWillAppear:animated];
+    [super viewDidAppear:animated];
     [MobClick beginLogPageView:@"设置页面"];
-    
     self.tabBarController.tabBar.hidden = NO;
 }
 
@@ -65,6 +65,7 @@
     
     [super viewWillDisappear:animated];
     [MobClick endLogPageView:@"设置页面"];
+    self.tabBarController.tabBar.hidden = YES;
 }
 
 - (void)didReceiveMemoryWarning {

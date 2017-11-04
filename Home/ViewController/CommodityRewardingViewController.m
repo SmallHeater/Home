@@ -11,7 +11,7 @@
 #import "CommodityModel.h"
 #import "CommodityDataManager.h"
 #import "LiveWithDeleteImageView.h"
-#import "MBProgressHUD.h"
+#import "MBProgressHUD+BWMExtension.H"
 #import "SHFMDBManager.h"
 #import "SHUIImagePickerControllerLibrary.h"
 
@@ -30,6 +30,11 @@ typedef NS_ENUM(NSInteger, AddImageType){
 #define DELETEBTNBASETAG 1900
 #define COMMODITYDELETEBTNTAG 0
 #define LOCATIONDELETEBTNTAG 50
+
+#define COMMODITYNAME @"请输入商品名称"
+#define COMMODITYLOCATION @"请输入存放位置"
+#define COMMODITYCOUNT @"商品数量不能为0"
+#define COMMODITYLIFE  @"请选择物品到期时间"
 
 
 @interface CommodityRewardingViewController () <UITextFieldDelegate,DatePickViewDelegate>
@@ -135,7 +140,7 @@ typedef NS_ENUM(NSInteger, AddImageType){
         else if (textField.tag == UITEXTFIEDLBASETAG + 2){
             
             //数量
-            self.model.commodityCount = textField.text.integerValue;
+            self.model.commodityCount = textField.text.intValue;
         }
     }
 }
@@ -165,15 +170,36 @@ typedef NS_ENUM(NSInteger, AddImageType){
 //完成按钮的响应事件
 -(void)finishBtnClicked:(UIButton *)finishBtn{
     
-    [self.model.commodityImageArray  addObjectsFromArray:self.commodityImageArray];
-    [self.model.commodityLocationImagesArray addObjectsFromArray:self.locationImageViewArray];
-    [[CommodityDataManager sharedManager].commodityDataArray addObject:self.model];
-    [self.navigationController popViewControllerAnimated:YES];
+    [self.view endEditing:YES];
     
-    dispatch_async(dispatch_get_global_queue(0, 0), ^{
+    if (!self.model.commodityName || self.model.commodityName.length < 1) {
         
-        [[SHFMDBManager sharedManager] insertModel:self.model];
-    });
+        [MBProgressHUD bwm_showTitle:COMMODITYNAME toView:self.view hideAfter:1 msgType:BWMMBProgressHUDMsgTypeError];
+    }
+    else if (!self.model.commodityLocation || self.model.commodityLocation.length < 1){
+        
+        [MBProgressHUD bwm_showTitle:COMMODITYLOCATION toView:self.view hideAfter:1 msgType:BWMMBProgressHUDMsgTypeError];
+    }
+    else if (self.model.commodityCount == 0){
+        
+        [MBProgressHUD bwm_showTitle:COMMODITYCOUNT toView:self.view hideAfter:1 msgType:BWMMBProgressHUDMsgTypeError];
+    }
+    else if (self.model.hasShelfLife && (!self.model.shelfLife || self.model.shelfLife.length < 1)){
+        
+        [MBProgressHUD bwm_showTitle:COMMODITYLIFE toView:self.view hideAfter:1 msgType:BWMMBProgressHUDMsgTypeError];
+    }
+    else{
+        
+        [self.model.commodityImageArray  addObjectsFromArray:self.commodityImageArray];
+        [self.model.commodityLocationImagesArray addObjectsFromArray:self.locationImageViewArray];
+        [[CommodityDataManager sharedManager].commodityDataArray addObject:self.model];
+        [self.navigationController popViewControllerAnimated:YES];
+        
+        dispatch_async(dispatch_get_global_queue(0, 0), ^{
+            
+            [[SHFMDBManager sharedManager] insertModel:self.model];
+        });
+    }
 }
 
 //有无保质期开关的响应
@@ -460,7 +486,7 @@ typedef NS_ENUM(NSInteger, AddImageType){
         commodityTextField.font = FONT14;
         commodityTextField.delegate = self;
         commodityTextField.tag = UITEXTFIEDLBASETAG;
-        commodityTextField.placeholder = @"请输入商品名称";
+        commodityTextField.placeholder = COMMODITYNAME;
         [_commodityView addSubview:commodityTextField];
         
         UILabel * bottomLineLabel = [[UILabel alloc] initWithFrame:CGRectMake(0, CGRectGetHeight(_commodityView.frame), SCREENWIDTH, 0.5)];
@@ -520,7 +546,7 @@ typedef NS_ENUM(NSInteger, AddImageType){
         storageLocationTextField.font = FONT14;
         storageLocationTextField.delegate = self;
         storageLocationTextField.tag = UITEXTFIEDLBASETAG + 1;
-        storageLocationTextField.placeholder = @"请输入存放位置";
+        storageLocationTextField.placeholder = COMMODITYLOCATION;
         [_storageLocationView addSubview:storageLocationTextField];
         
         UILabel * bottomLineLabel = [[UILabel alloc] initWithFrame:CGRectMake(0, CGRectGetHeight(_storageLocationView.frame), SCREENWIDTH, 0.5)];
@@ -633,7 +659,7 @@ typedef NS_ENUM(NSInteger, AddImageType){
         //保质期
         UILabel * shelfLifeLabel = [[UILabel alloc] initWithFrame:CGRectMake(CGRectGetMaxX(shelfLifeTitleLabel.frame) + 5, 0, SCREENWIDTH - CGRectGetMaxX(shelfLifeTitleLabel.frame), VIEWHEIGHT)];
         shelfLifeLabel.font = FONT14;
-        shelfLifeLabel.text = @"请选择物品到期时间";
+        shelfLifeLabel.text = COMMODITYLIFE;
         [_shelfLifeView addSubview:shelfLifeLabel];
         self.dateLabel = shelfLifeLabel;
         

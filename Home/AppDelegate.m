@@ -11,7 +11,7 @@
 #import "HomeViewController.h"
 #import "SetTableViewController.h"
 #import "BaseTabBarItem.h"
-
+#import <Bugly/Bugly.h>
 
 @interface AppDelegate ()
 
@@ -24,6 +24,7 @@
     // Override point for customization after application launch.
     
     [Crasheye initWithAppKey:@"059063f0"];
+    [Bugly startWithAppId:@""];
     
     // 配置友盟SDK产品并并统一初始化
     [UMConfigure setEncryptEnabled:YES]; // optional: 设置加密传输, 默认NO.

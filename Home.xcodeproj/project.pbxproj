@@ -1097,9 +1097,12 @@
 			files = (
 			);
 			inputPaths = (
+				"${SRCROOT}/Pods/Target Support Files/Pods-Home/Pods-Home-resources.sh",
+				"${PODS_ROOT}/MBProgressHUD+BWMExtension/Example/MBProgressHUD+BWMExtension/MBProgressHUD+BWMExtension.xcassets",
 			);
 			name = "[CP] Copy Pods Resources";
 			outputPaths = (
+				"${TARGET_BUILD_DIR}/${UNLOCALIZED_RESOURCES_FOLDER_PATH}",
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 			shellPath = /bin/sh;

@@ -14,13 +14,22 @@
 #import "SHFMDBManager.h"
 #import "SHUIImagePickerControllerLibrary.h"
 #import "SHAssetModel.h"
+#import "MBProgressHUD+BWMExtension.H"
 
 
 #define MAXHEIGHT 14.0
 #define VIEWHEIGHT 40
 #define DELETEBTNBASETAG 1500
+
 #define USECONDITIONSSTR  @"请输入使用条件"
 #define ENJOYCONDITIONSSTR  @"请输入享受条件"
+
+#define PERSONALRIGHTSNAME @"请输入权益名称"
+#define STARTTIME @"请选择开始时间"
+#define ENDTIME @"请选择结束时间"
+#define PERSONALRIGHTSFROM @"请输入权益来源"
+
+
 
 
 @interface PersonalRightsRewardingViewController ()<UITextFieldDelegate,UITextViewDelegate,DatePickViewDelegate>{
@@ -117,7 +126,20 @@
 #pragma mark  ----  UITextViewDelegate
 - (BOOL)textViewShouldBeginEditing:(UITextView *)textView{
 
-    textView.text = @"";
+    if ([textView.text isEqualToString:USECONDITIONSSTR] || [textView.text isEqualToString:ENJOYCONDITIONSSTR]) {
+        
+        textView.text = @"";
+    }
+    
+    return YES;
+}
+
+- (BOOL)textView:(UITextView *)textView shouldChangeTextInRange:(NSRange)range replacementText:(NSString *)text{
+    
+    if ([text isEqualToString:@"\n"]) {
+        
+        [textView resignFirstResponder];
+    }
     return YES;
 }
 
@@ -127,6 +149,7 @@
         
         if (textView.text.length == 0) {
             
+            self.personalRightsModel.personalRightsUsedConditions = @"";
             self.useConditionsTextView.text = USECONDITIONSSTR;
         }
         else{
@@ -138,6 +161,7 @@
     
         if (textView.text.length == 0) {
             
+            self.personalRightsModel.personalRightsEnjoyConditions = @"";
             self.enjoyConditionsTextView.text = USECONDITIONSSTR;
         }
         else{
@@ -222,13 +246,42 @@
 //完成按钮的响应事件
 -(void)finishBtnClicked:(UIButton *)finishBtn{
     
-    [[CommodityDataManager sharedManager].personalRightsArray addObject:self.personalRightsModel];
-    [self.navigationController popViewControllerAnimated:YES];
+    [self.view endEditing:YES];
     
-    dispatch_async(dispatch_get_global_queue(0, 0), ^{
+    if (!self.personalRightsModel.personalRightsName || self.personalRightsModel.personalRightsName.length < 1) {
         
-        [[SHFMDBManager sharedManager] insertModel:self.personalRightsModel];
-    });
+        [MBProgressHUD bwm_showTitle:PERSONALRIGHTSNAME toView:self.view hideAfter:1 msgType:BWMMBProgressHUDMsgTypeError];
+    }
+    else if (!self.personalRightsModel.personalRightsStartTime || self.personalRightsModel.personalRightsStartTime.length < 1){
+        
+        [MBProgressHUD bwm_showTitle:STARTTIME toView:self.view hideAfter:1 msgType:BWMMBProgressHUDMsgTypeError];
+    }
+    else if (!self.personalRightsModel.personalRightsEndTime || self.personalRightsModel.personalRightsEndTime.length < 1){
+        
+        [MBProgressHUD bwm_showTitle:ENDTIME toView:self.view hideAfter:1 msgType:BWMMBProgressHUDMsgTypeError];
+    }
+    else if (!self.personalRightsModel.personalRightsFrom || self.personalRightsModel.personalRightsFrom.length < 1){
+        
+        [MBProgressHUD bwm_showTitle:PERSONALRIGHTSNAME  toView:self.view hideAfter:1 msgType:BWMMBProgressHUDMsgTypeError];
+    }
+    else if (!self.personalRightsModel.personalRightsUsedConditions || self.personalRightsModel.personalRightsUsedConditions.length < 1){
+        
+        [MBProgressHUD bwm_showTitle:USECONDITIONSSTR  toView:self.view hideAfter:1 msgType:BWMMBProgressHUDMsgTypeError];
+    }
+    else if (!self.personalRightsModel.personalRightsEnjoyConditions || self.personalRightsModel.personalRightsEnjoyConditions.length < 1){
+        
+        [MBProgressHUD bwm_showTitle:ENJOYCONDITIONSSTR  toView:self.view hideAfter:1 msgType:BWMMBProgressHUDMsgTypeError];
+    }
+    else{
+        
+        [[CommodityDataManager sharedManager].personalRightsArray addObject:self.personalRightsModel];
+        [self.navigationController popViewControllerAnimated:YES];
+        
+        dispatch_async(dispatch_get_global_queue(0, 0), ^{
+            
+            [[SHFMDBManager sharedManager] insertModel:self.personalRightsModel];
+        });
+    }
 }
 
 
@@ -296,7 +349,7 @@
         
         UITextField * personalRightsTextField = [[UITextField alloc] initWithFrame:CGRectMake(CGRectGetMaxX(personalRightsTitleLabel.frame) + 5, 0, SCREENWIDTH - 10 - CGRectGetMaxX(personalRightsTitleLabel.frame), VIEWHEIGHT)];
         personalRightsTextField.delegate = self;
-        personalRightsTextField.placeholder = @"请输入权益名称";
+        personalRightsTextField.placeholder = PERSONALRIGHTSNAME;
         personalRightsTextField.font = FONT14;
         [_personalRightsView addSubview:personalRightsTextField];
         self.personalRightsTextField = personalRightsTextField;
@@ -328,7 +381,7 @@
         UILabel * startTimeLabel = [[UILabel alloc] initWithFrame:CGRectMake(CGRectGetMaxX(startTimeTitleLabel.frame) + 5, 0, SCREENWIDTH - 10 - CGRectGetMaxX(startTimeTitleLabel.frame), VIEWHEIGHT)];
         startTimeLabel.userInteractionEnabled = YES;
         startTimeLabel.font = FONT14;
-        startTimeLabel.text = @"请选择开始时间";
+        startTimeLabel.text = STARTTIME;
         [_timeView addSubview:startTimeLabel];
         self.startTimeLabel = startTimeLabel;
         
@@ -347,7 +400,7 @@
         UILabel * endTimeLabel = [[UILabel alloc] initWithFrame:CGRectMake(CGRectGetMaxX(endTimeTitleLabel.frame) + 5, CGRectGetMinY(endTimeTitleLabel.frame), SCREENWIDTH - 10 - CGRectGetMaxX(endTimeTitleLabel.frame), VIEWHEIGHT)];
         endTimeLabel.userInteractionEnabled = YES;
         endTimeLabel.font = FONT14;
-        endTimeLabel.text = @"请选择结束时间";
+        endTimeLabel.text = ENDTIME;
         [_timeView addSubview:endTimeLabel];
         self.endTimeLabel = endTimeLabel;
         
@@ -379,7 +432,7 @@
         UITextField * personalRightsFromTextField = [[UITextField alloc] initWithFrame:CGRectMake(CGRectGetMaxX(personalRightsFromTitleLabel.frame) + 5, 0, SCREENWIDTH - 10 - CGRectGetMaxX(personalRightsFromTitleLabel.frame), VIEWHEIGHT)];
         personalRightsFromTextField.delegate = self;
         personalRightsFromTextField.font = FONT14;
-        personalRightsFromTextField.placeholder = @"请输入权益来源";
+        personalRightsFromTextField.placeholder = PERSONALRIGHTSFROM;
         [_rightsFromView addSubview:personalRightsFromTextField];
         self.personalRightsFromTextField = personalRightsFromTextField;
         
