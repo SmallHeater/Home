@@ -16,6 +16,8 @@
 #import "PersonalRightsCell.h"
 #import "SHFMDBManager.h"
 #import "CommodityDataManager.h"
+#import "CommodityDetailViewController.h"
+#import "PersonalRightsDetailViewController.h"
 
 @interface SHPlainTableView ()<UITableViewDelegate,UITableViewDataSource>
 
@@ -169,10 +171,30 @@
     switch (self.type) {
         case CommodityTableView:
         {
+            CommodityModel * selectedModel = self.dataArray[indexPath.row];
+            CommodityDetailViewController * detailVC = [[CommodityDetailViewController alloc] init];
+            detailVC.commodityName = selectedModel.commodityName;
+            
+            UIViewController * parentsVC = [self viewController];
+            
+            if (parentsVC) {
+                
+                [parentsVC.navigationController pushViewController:detailVC animated:YES];
+            }
         }
             break;
         case PersonalRightsTableView:
         {
+            PersonalRightsModel * selectedModel = self.dataArray[indexPath.row];
+            PersonalRightsDetailViewController * detailVC = [[PersonalRightsDetailViewController alloc] init];
+            detailVC.personalRightsName = selectedModel.personalRightsName;
+            
+            UIViewController * parentsVC = [self viewController];
+            
+            if (parentsVC) {
+                
+                [parentsVC.navigationController pushViewController:detailVC animated:YES];
+            }
         }
             break;
         case CategoryTableView:
@@ -181,11 +203,11 @@
             CommodityRewardingViewController * rewardingViewController = [[CommodityRewardingViewController alloc] init];
             rewardingViewController.categoryStr = selectedModel.categoryName;
             
-            UIViewController * vc = [self viewController];
+            UIViewController * parentsVC = [self viewController];
             
-            if (vc) {
+            if (parentsVC) {
                 
-                [vc.navigationController pushViewController:rewardingViewController animated:YES];
+                [parentsVC.navigationController pushViewController:rewardingViewController animated:YES];
             }
         }
             break;

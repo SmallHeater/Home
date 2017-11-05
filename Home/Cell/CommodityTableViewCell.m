@@ -62,7 +62,11 @@
     
     if (self.commodityModel.commodityImageArray && self.commodityModel.commodityImageArray.count > 0) {
     
-        self.commodityImageView.image = self.commodityModel.commodityImageArray[0];
+        NSString *path = [NSSearchPathForDirectoriesInDomains(NSDocumentDirectory, NSUserDomainMask, YES) lastObject];
+        
+        NSString *imageFilePath = [path stringByAppendingPathComponent:self.commodityModel.commodityImageArray[0]];
+        
+        self.commodityImageView.image = [UIImage imageWithContentsOfFile:imageFilePath];
     }
     
     self.commodityNameLabel.text = self.commodityModel.commodityName;

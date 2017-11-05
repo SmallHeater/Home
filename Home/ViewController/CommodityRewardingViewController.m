@@ -14,7 +14,7 @@
 #import "MBProgressHUD+BWMExtension.H"
 #import "SHFMDBManager.h"
 #import "SHUIImagePickerControllerLibrary.h"
-
+#import "UIImage+helper.h"
 
 typedef NS_ENUM(NSInteger, AddImageType){
     
@@ -190,8 +190,86 @@ typedef NS_ENUM(NSInteger, AddImageType){
     }
     else{
         
-        [self.model.commodityImageArray  addObjectsFromArray:self.commodityImageArray];
-        [self.model.commodityLocationImagesArray addObjectsFromArray:self.locationImageViewArray];
+//        [self.model.commodityImageArray  addObjectsFromArray:self.commodityImageArray];
+//        [self.model.commodityLocationImagesArray addObjectsFromArray:self.locationImageViewArray];
+        
+        for (NSUInteger i = 0; i < self.commodityImageArray.count; i++) {
+            
+            NSString *path = [NSSearchPathForDirectoriesInDomains(NSDocumentDirectory, NSUserDomainMask, YES) lastObject];
+            
+            NSString * imageName = [[NSString alloc] initWithFormat:@"%@%ld.png",self.model.commodityID,(long)i];
+            NSString *imageFilePath = [path stringByAppendingPathComponent:imageName];
+            [self.model.commodityImageArray addObject:imageName];
+            //其中参数0.5表示压缩比例，1表示不压缩，数值越小压缩比例越大
+            NSData * jgegImageData = UIImageJPEGRepresentation(self.commodityImageArray[i], 0.5);
+            if (jgegImageData) {
+                
+                BOOL result =  [jgegImageData writeToFile:imageFilePath  atomically:YES];
+                if (result) {
+                    
+                    NSLog(@"JGEG图片写入成功");
+                }
+                else{
+                    
+                    NSLog(@"JGEG图片写入失败");
+                }
+            }
+            else{
+                
+                NSData * pngImageData =UIImagePNGRepresentation(self.commodityImageArray[i]);
+                if (pngImageData) {
+                    
+                    BOOL result =  [jgegImageData writeToFile:imageFilePath  atomically:YES];
+                    if (result) {
+                        
+                        NSLog(@"PNG图片写入成功");
+                    }
+                    else{
+                        
+                        NSLog(@"PNG图片写入失败");
+                    }
+                }
+                else{
+                    
+                    //图片两种转换data方式都得到nil，处理
+                    UIImage * image = self.commodityImageArray[i];
+                    unsigned char * bitmap = [UIImage convertUIImageToBitmapRGBA8:image];
+                    
+                    int width = image.size.width;
+                    
+                    int height = image.size.height;
+                    
+                    UIImage*imageCopy = [UIImage convertBitmapRGBA8ToUIImage:bitmap withWidth:width withHeight:height];
+                    
+                    NSData * imageCopyData =UIImageJPEGRepresentation(imageCopy,0.5);
+                    if (imageCopyData) {
+                        
+                        BOOL result =  [imageCopyData writeToFile:imageFilePath  atomically:YES];
+                        if (result) {
+                            
+                            NSLog(@"图片写入成功");
+                        }
+                        else{
+                            
+                            NSLog(@"图片写入失败");
+                        }
+                    }
+                    
+                }
+            }
+        }
+        
+        for (NSUInteger i = 0; i < self.locationImageViewArray.count; i++) {
+            
+            NSString *path = [NSSearchPathForDirectoriesInDomains(NSDocumentDirectory, NSUserDomainMask, YES) lastObject];
+            
+            NSString * imageName = [[NSString alloc] initWithFormat:@"location%@%ld.png",self.model.commodityID,(long)i];
+            NSString *imageFilePath = [path stringByAppendingPathComponent:imageName];
+            [self.model.commodityLocationImagesArray addObject:imageFilePath];
+            //其中参数0.5表示压缩比例，1表示不压缩，数值越小压缩比例越大
+            [UIImageJPEGRepresentation(self.locationImageViewArray[i], 0.5) writeToFile:imageFilePath  atomically:YES];
+        }
+        
         [[CommodityDataManager sharedManager].commodityDataArray addObject:self.model];
         [self.navigationController popViewControllerAnimated:YES];
         
@@ -250,7 +328,7 @@ typedef NS_ENUM(NSInteger, AddImageType){
             for (NSUInteger i = 0; i < modleArray.count; i++) {
                 
                 SHAssetModel * model = modleArray[i];
-                [self.model.commodityImageArray addObject:model.thumbnails];
+                [self.commodityImageArray addObject:model.thumbnails];
             }
             
             if (modleArray.count == 1) {
@@ -274,7 +352,7 @@ typedef NS_ENUM(NSInteger, AddImageType){
             for (NSUInteger i = 0; i < modleArray.count; i++) {
                 
                 SHAssetModel * model = modleArray[i];
-                [self.model.commodityLocationImagesArray addObject:model.thumbnails];
+                [self.locationImageViewArray addObject:model.thumbnails];
             }
             
             if (modleArray.count == 1) {
@@ -338,22 +416,22 @@ typedef NS_ENUM(NSInteger, AddImageType){
     switch (type) {
         case CommodityImage:{
             
-            LiveWithDeleteImageView * imageView = [[LiveWithDeleteImageView alloc] initWithImage:self.model.commodityImageArray.lastObject andFrame:CGRectMake((self.model.commodityImageArray.count - 1) * (114 + 10), 0, 114, 69) andTarget:self andAction:@selector(commodityImageViewTaped:) andButtonTag:DELETEBTNBASETAG + COMMODITYDELETEBTNTAG + self.model.commodityImageArray.count - 1];
+            LiveWithDeleteImageView * imageView = [[LiveWithDeleteImageView alloc] initWithImage:self.commodityImageArray.lastObject andFrame:CGRectMake((self.commodityImageArray.count - 1) * (114 + 10), 0, 114, 69) andTarget:self andAction:@selector(commodityImageViewTaped:) andButtonTag:DELETEBTNBASETAG + COMMODITYDELETEBTNTAG + self.commodityImageArray.count - 1];
             imageView.deleteAction = @selector(deleteImage:);
             [self.commodityImageViewScrollView addSubview:imageView];
             
-            self.tapedLiveWithDeleteImageView.frame = CGRectMake(self.model.commodityImageArray.count * (114 + 10), 0, 114, 69);
-            self.commodityImageViewScrollView.contentSize = CGSizeMake((self.model.commodityImageArray.count + 1) * 114 + self.model.commodityImageArray.count * 10, 69);
+            self.tapedLiveWithDeleteImageView.frame = CGRectMake(self.commodityImageArray.count * (114 + 10), 0, 114, 69);
+            self.commodityImageViewScrollView.contentSize = CGSizeMake((self.commodityImageArray.count + 1) * 114 + self.commodityImageArray.count * 10, 69);
         }
             break;
         case CommodityLocationImage:{
             
-            LiveWithDeleteImageView * imageView = [[LiveWithDeleteImageView alloc] initWithImage:self.model.commodityLocationImagesArray.lastObject andFrame:CGRectMake((self.model.commodityLocationImagesArray.count - 1) * (114 + 10), 0, 114, 69) andTarget:self andAction:@selector(locationImageViewTaped:) andButtonTag:DELETEBTNBASETAG + LOCATIONDELETEBTNTAG  + self.model.commodityLocationImagesArray.count - 1];
+            LiveWithDeleteImageView * imageView = [[LiveWithDeleteImageView alloc] initWithImage:self.locationImageViewArray.lastObject andFrame:CGRectMake((self.locationImageViewArray.count - 1) * (114 + 10), 0, 114, 69) andTarget:self andAction:@selector(locationImageViewTaped:) andButtonTag:DELETEBTNBASETAG + LOCATIONDELETEBTNTAG  + self.locationImageViewArray.count - 1];
             imageView.deleteAction = @selector(deleteImage:);
             [self.locationImageViewScrollView addSubview:imageView];
             
-            self.tapedLiveWithDeleteImageView.frame = CGRectMake(self.model.commodityLocationImagesArray.count * (114 + 10), 0, 114, 69);
-            self.locationImageViewScrollView.contentSize = CGSizeMake((self.model.commodityLocationImagesArray.count + 1) * 114 + self.model.commodityLocationImagesArray.count * 10, 69);
+            self.tapedLiveWithDeleteImageView.frame = CGRectMake(self.locationImageViewArray.count * (114 + 10), 0, 114, 69);
+            self.locationImageViewScrollView.contentSize = CGSizeMake((self.locationImageViewArray.count + 1) * 114 + self.locationImageViewArray.count * 10, 69);
         }
             break;
         default:
@@ -375,18 +453,18 @@ typedef NS_ENUM(NSInteger, AddImageType){
                 }
             }
             
-            for (NSUInteger i = 0; i < self.model.commodityImageArray.count; i++) {
+            for (NSUInteger i = 0; i < self.commodityImageArray.count; i++) {
                 
-                LiveWithDeleteImageView * imageView = [[LiveWithDeleteImageView alloc] initWithImage:self.model.commodityImageArray[i] andFrame:CGRectMake(i * (114 + 10), 0, 114, 69) andTarget:self andAction:@selector(commodityImageViewTaped:) andButtonTag:DELETEBTNBASETAG + i];
+                LiveWithDeleteImageView * imageView = [[LiveWithDeleteImageView alloc] initWithImage:self.commodityImageArray[i] andFrame:CGRectMake(i * (114 + 10), 0, 114, 69) andTarget:self andAction:@selector(commodityImageViewTaped:) andButtonTag:DELETEBTNBASETAG + i];
                 imageView.deleteAction = @selector(deleteImage:);
                 [self.commodityImageViewScrollView addSubview:imageView];
             }
             
-            self.tapedLiveWithDeleteImageView.frame = CGRectMake(self.model.commodityImageArray.count * (114 + 10), 0, 114, 69);
+            self.tapedLiveWithDeleteImageView.frame = CGRectMake(self.commodityImageArray.count * (114 + 10), 0, 114, 69);
             [self.commodityImageViewScrollView addSubview:self.tapedLiveWithDeleteImageView];
             
             
-            self.commodityImageViewScrollView.contentSize = CGSizeMake((self.model.commodityImageArray.count + 1) * 114 + self.model.commodityImageArray.count * 10, 69);
+            self.commodityImageViewScrollView.contentSize = CGSizeMake((self.commodityImageArray.count + 1) * 114 + self.commodityImageArray.count * 10, 69);
         }
             break;
         case CommodityLocationImage:{
@@ -399,18 +477,18 @@ typedef NS_ENUM(NSInteger, AddImageType){
                 }
             }
             
-            for (NSUInteger i = 0; i < self.model.commodityLocationImagesArray.count; i++) {
+            for (NSUInteger i = 0; i < self.locationImageViewArray.count; i++) {
                 
-                LiveWithDeleteImageView * imageView = [[LiveWithDeleteImageView alloc] initWithImage:self.model.commodityLocationImagesArray[i] andFrame:CGRectMake(i * (114 + 10), 0, 114, 69) andTarget:self andAction:@selector(locationImageViewTaped:) andButtonTag:DELETEBTNBASETAG + LOCATIONDELETEBTNTAG + i];
+                LiveWithDeleteImageView * imageView = [[LiveWithDeleteImageView alloc] initWithImage:self.locationImageViewArray[i] andFrame:CGRectMake(i * (114 + 10), 0, 114, 69) andTarget:self andAction:@selector(locationImageViewTaped:) andButtonTag:DELETEBTNBASETAG + LOCATIONDELETEBTNTAG + i];
                 imageView.deleteAction = @selector(deleteImage:);
                 [self.locationImageViewScrollView addSubview:imageView];
             }
             
-            self.tapedLiveWithDeleteImageView.frame = CGRectMake(self.model.commodityLocationImagesArray.count * (114 + 10), 0, 114, 69);
+            self.tapedLiveWithDeleteImageView.frame = CGRectMake(self.locationImageViewArray.count * (114 + 10), 0, 114, 69);
             [self.locationImageViewScrollView addSubview:self.tapedLiveWithDeleteImageView];
             
             
-            self.locationImageViewScrollView.contentSize = CGSizeMake((self.model.commodityLocationImagesArray.count + 1) * 114 + self.model.commodityLocationImagesArray.count * 10, 69);
+            self.locationImageViewScrollView.contentSize = CGSizeMake((self.locationImageViewArray.count + 1) * 114 + self.locationImageViewArray.count * 10, 69);
         }
             break;
         default:

@@ -74,6 +74,9 @@
 
 //权益模型
 @property (nonatomic,strong) PersonalRightsModel * personalRightsModel;
+
+//存放权益照片的数组
+@property (nonatomic,strong) NSMutableArray * photoArray;
 @end
 
 @implementation PersonalRightsRewardingViewController
@@ -216,7 +219,8 @@
         for (NSUInteger i = 0; i < modleArray.count; i++) {
             
             SHAssetModel * model = modleArray[i];
-            [self.personalRightsModel.personalRightsPhotoArray addObject:model.thumbnails];
+            //[self.personalRightsModel.personalRightsPhotoArray addObject:model.thumbnails];
+            [self.photoArray addObject:model.thumbnails];
         }
         
         if (modleArray.count == 1) {
@@ -273,6 +277,18 @@
         [MBProgressHUD bwm_showTitle:ENJOYCONDITIONSSTR  toView:self.view hideAfter:1 msgType:BWMMBProgressHUDMsgTypeError];
     }
     else{
+        
+        for (NSUInteger i = 0; i < self.photoArray.count; i++) {
+            
+            NSString *path = [NSSearchPathForDirectoriesInDomains(NSDocumentDirectory, NSUserDomainMask, YES) lastObject];
+            
+            NSString * imageName = [[NSString alloc] initWithFormat:@"%@%ld.png",self.personalRightsModel.personalRightsID,(long)i];
+            NSString *imageFilePath = [path stringByAppendingPathComponent:imageName];
+            [self.personalRightsModel.personalRightsPhotoArray addObject:imageFilePath];
+            //其中参数0.5表示压缩比例，1表示不压缩，数值越小压缩比例越大
+            [UIImageJPEGRepresentation(self.photoArray[i], 0.5) writeToFile:imageFilePath  atomically:YES];
+        }
+        
         
         [[CommodityDataManager sharedManager].personalRightsArray addObject:self.personalRightsModel];
         [self.navigationController popViewControllerAnimated:YES];
@@ -545,6 +561,15 @@
         _personalRightsModel.personalRightsID = [[NSUUID UUID] UUIDString];
     }
     return _personalRightsModel;
+}
+
+-(NSMutableArray *)photoArray{
+    
+    if (!_photoArray) {
+        
+        _photoArray = [[NSMutableArray alloc] init];
+    }
+    return _photoArray;
 }
 
 @end

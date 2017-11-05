@@ -44,6 +44,8 @@
 		622B8B041FAD96A30080552F /* NoDataView.m in Sources */ = {isa = PBXBuildFile; fileRef = 622B8B031FAD96A30080552F /* NoDataView.m */; };
 		622B8B071FAD96BD0080552F /* NoInternetView.m in Sources */ = {isa = PBXBuildFile; fileRef = 622B8B061FAD96BD0080552F /* NoInternetView.m */; };
 		622B8B0A1FAD99460080552F /* BaseTableViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 622B8B091FAD99450080552F /* BaseTableViewController.m */; };
+		62416F6E1FAED75800AE78DB /* CommodityDetailViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 62416F6D1FAED75800AE78DB /* CommodityDetailViewController.m */; };
+		62416F711FAED78100AE78DB /* PersonalRightsDetailViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 62416F701FAED78100AE78DB /* PersonalRightsDetailViewController.m */; };
 		6275CED41FAC144600A1C616 /* ModelWithState.m in Sources */ = {isa = PBXBuildFile; fileRef = 6275CED11FAC144600A1C616 /* ModelWithState.m */; };
 		6275CED51FAC144600A1C616 /* ModelWithTitle.m in Sources */ = {isa = PBXBuildFile; fileRef = 6275CED31FAC144600A1C616 /* ModelWithTitle.m */; };
 		6275CED81FAC14AF00A1C616 /* LiveWithDeleteImageView.m in Sources */ = {isa = PBXBuildFile; fileRef = 6275CED71FAC14AF00A1C616 /* LiveWithDeleteImageView.m */; };
@@ -82,6 +84,7 @@
 		62DE4B461F9F42890086CE06 /* delete_ful@3x.png in Resources */ = {isa = PBXBuildFile; fileRef = 62DE4B421F9F42890086CE06 /* delete_ful@3x.png */; };
 		62DE4B471F9F42890086CE06 /* photo_duf@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = 62DE4B431F9F42890086CE06 /* photo_duf@2x.png */; };
 		62DE4B481F9F42890086CE06 /* photo_duf@3x.png in Resources */ = {isa = PBXBuildFile; fileRef = 62DE4B441F9F42890086CE06 /* photo_duf@3x.png */; };
+		62F3D38A1FAF4F5500E63BBD /* UIImage+helper.m in Sources */ = {isa = PBXBuildFile; fileRef = 62F3D3891FAF4F5500E63BBD /* UIImage+helper.m */; };
 		62F801311F9B5D780038DD5C /* AppDelegate.m in Sources */ = {isa = PBXBuildFile; fileRef = 62F801301F9B5D780038DD5C /* AppDelegate.m */; };
 		62F801341F9B5D780038DD5C /* ViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 62F801331F9B5D780038DD5C /* ViewController.m */; };
 		62F801371F9B5D780038DD5C /* Main.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 62F801351F9B5D780038DD5C /* Main.storyboard */; };
@@ -201,6 +204,10 @@
 		622B8B061FAD96BD0080552F /* NoInternetView.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = NoInternetView.m; sourceTree = "<group>"; };
 		622B8B081FAD99450080552F /* BaseTableViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = BaseTableViewController.h; sourceTree = "<group>"; };
 		622B8B091FAD99450080552F /* BaseTableViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = BaseTableViewController.m; sourceTree = "<group>"; };
+		62416F6C1FAED75800AE78DB /* CommodityDetailViewController.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = CommodityDetailViewController.h; sourceTree = "<group>"; };
+		62416F6D1FAED75800AE78DB /* CommodityDetailViewController.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = CommodityDetailViewController.m; sourceTree = "<group>"; };
+		62416F6F1FAED78100AE78DB /* PersonalRightsDetailViewController.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = PersonalRightsDetailViewController.h; sourceTree = "<group>"; };
+		62416F701FAED78100AE78DB /* PersonalRightsDetailViewController.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = PersonalRightsDetailViewController.m; sourceTree = "<group>"; };
 		6275CED01FAC144600A1C616 /* ModelWithState.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = ModelWithState.h; sourceTree = "<group>"; };
 		6275CED11FAC144600A1C616 /* ModelWithState.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = ModelWithState.m; sourceTree = "<group>"; };
 		6275CED21FAC144600A1C616 /* ModelWithTitle.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = ModelWithTitle.h; sourceTree = "<group>"; };
@@ -247,6 +254,8 @@
 		62DE4B421F9F42890086CE06 /* delete_ful@3x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "delete_ful@3x.png"; sourceTree = "<group>"; };
 		62DE4B431F9F42890086CE06 /* photo_duf@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "photo_duf@2x.png"; sourceTree = "<group>"; };
 		62DE4B441F9F42890086CE06 /* photo_duf@3x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "photo_duf@3x.png"; sourceTree = "<group>"; };
+		62F3D3881FAF4F5500E63BBD /* UIImage+helper.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = "UIImage+helper.h"; sourceTree = "<group>"; };
+		62F3D3891FAF4F5500E63BBD /* UIImage+helper.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = "UIImage+helper.m"; sourceTree = "<group>"; };
 		62F8012C1F9B5D780038DD5C /* Home.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = Home.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		62F8012F1F9B5D780038DD5C /* AppDelegate.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = AppDelegate.h; sourceTree = "<group>"; };
 		62F801301F9B5D780038DD5C /* AppDelegate.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = AppDelegate.m; sourceTree = "<group>"; };
@@ -380,6 +389,8 @@
 				62282C731F9F7998007E3ABE /* UIColor+Translate.m */,
 				62282C6F1F9E2FB1007E3ABE /* NSString+CGSize.h */,
 				62282C701F9E2FB1007E3ABE /* NSString+CGSize.m */,
+				62F3D3881FAF4F5500E63BBD /* UIImage+helper.h */,
+				62F3D3891FAF4F5500E63BBD /* UIImage+helper.m */,
 			);
 			path = Category;
 			sourceTree = "<group>";
@@ -654,6 +665,10 @@
 				622B8AF11FA96B140080552F /* PersonalRightsViewController.m */,
 				622B8AFC1FAA0A6E0080552F /* PersonalRightsRewardingViewController.h */,
 				622B8AFD1FAA0A6E0080552F /* PersonalRightsRewardingViewController.m */,
+				62416F6C1FAED75800AE78DB /* CommodityDetailViewController.h */,
+				62416F6D1FAED75800AE78DB /* CommodityDetailViewController.m */,
+				62416F6F1FAED78100AE78DB /* PersonalRightsDetailViewController.h */,
+				62416F701FAED78100AE78DB /* PersonalRightsDetailViewController.m */,
 			);
 			path = ViewController;
 			sourceTree = "<group>";
@@ -1116,6 +1131,7 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				62416F711FAED78100AE78DB /* PersonalRightsDetailViewController.m in Sources */,
 				622B8B041FAD96A30080552F /* NoDataView.m in Sources */,
 				62F8019F1F9B8F910038DD5C /* HomeSource.bundle in Sources */,
 				62282C6D1F9E2C02007E3ABE /* CommodityTableViewCell.m in Sources */,
@@ -1138,6 +1154,7 @@
 				622B8B0A1FAD99460080552F /* BaseTableViewController.m in Sources */,
 				62F801741F9B5F030038DD5C /* BaseViewController.m in Sources */,
 				622B8AF51FA96BBA0080552F /* PersonalRightsModel.m in Sources */,
+				62F3D38A1FAF4F5500E63BBD /* UIImage+helper.m in Sources */,
 				62F801861F9B69F50038DD5C /* TabBarController.m in Sources */,
 				6275CED51FAC144600A1C616 /* ModelWithTitle.m in Sources */,
 				62F801771F9B5F310038DD5C /* BaseView.m in Sources */,
@@ -1159,6 +1176,7 @@
 				622B8AFB1FA9ADBC0080552F /* SHPlainTableView.m in Sources */,
 				6275CEDE1FAC14CD00A1C616 /* TableViewCellWithTitle.m in Sources */,
 				62282C741F9F7998007E3ABE /* UIColor+Translate.m in Sources */,
+				62416F6E1FAED75800AE78DB /* CommodityDetailViewController.m in Sources */,
 				62F801CE1F9C6BFE0038DD5C /* CommodityRewardingViewController.m in Sources */,
 				62F801711F9B5EC60038DD5C /* BaseNavViewController.m in Sources */,
 			);

@@ -29,14 +29,14 @@
         if ([manager.db open])
         {
             //4.创表（CommodityImageArray，CommodityLocationImageArray，存储前，数组归档(NSKeyedArchiver)为二进制数据，再存入数据库；从数据库取出时肯定也是取出的二进制数据，这时要将二进制数据解档（NSKeyedUnArchiver）为数组）
-            BOOL commodityResult = [manager.db executeUpdate:@"CREATE TABLE IF NOT EXISTS Home_CommodityTable (CommodityID text NOT NULL,CommodityName text NOT NULL,CommodityImageArray blob NOT NULL,CommodityCount integer,CategoryID text NOT NULL,CategoryName text NOT NULL,CommodityLocation text NOT NULL,CommodityLocationImageArray blob NOT NULL,hasShelfLife integer,shelfLife text);"];
+            BOOL commodityResult = [manager.db executeUpdate:@"CREATE TABLE IF NOT EXISTS Home_CommodityTable (CommodityID text NOT NULL,CommodityName text NOT NULL,CommodityImageArray text NOT NULL,CommodityCount integer,CategoryID text NOT NULL,CategoryName text NOT NULL,CommodityLocation text NOT NULL,CommodityLocationImageArray text NOT NULL,hasShelfLife integer,shelfLife text);"];
             if (commodityResult)
             {
                 NSLog(@"创建物品表成功");
             }
             
             
-            BOOL personalRightsResult = [manager.db executeUpdate:@"CREATE TABLE IF NOT EXISTS Home_PersonalRightsTable (PersonalRightsID text NOT NULL,PersonalRightsName text NOT NULL,PersonalRightsStartTime text NOT NULL,PersonalRightsEndTime text NOT NULL,PersonalRightsFrom text NOT NULL,PersonalRightsUsedConditions text NOT NULL,PersonalRightsEnjoyConditions text NOT NULL,PersonalRightsArray blob NOT NULL);"];
+            BOOL personalRightsResult = [manager.db executeUpdate:@"CREATE TABLE IF NOT EXISTS Home_PersonalRightsTable (PersonalRightsID text NOT NULL,PersonalRightsName text NOT NULL,PersonalRightsStartTime text NOT NULL,PersonalRightsEndTime text NOT NULL,PersonalRightsFrom text NOT NULL,PersonalRightsUsedConditions text NOT NULL,PersonalRightsEnjoyConditions text NOT NULL,PersonalRightsArray text NOT NULL);"];
             if (personalRightsResult)
             {
                 NSLog(@"创建权益表成功");
@@ -58,12 +58,12 @@
         if ([model isKindOfClass:[CommodityModel class]]) {
             
             CommodityModel * commodityModel = (CommodityModel *)model;
-            NSData * commodityImageArrayData = [NSKeyedArchiver archivedDataWithRootObject:commodityModel.commodityImageArray];
-            NSData * commodityLocationImageArrayData = [NSKeyedArchiver archivedDataWithRootObject:commodityModel.commodityLocationImagesArray];
+            NSString * commodityImageArrayStr = [commodityModel.commodityImageArray componentsJoinedByString:@","];
+            NSString * commodityLocationImageArrayStr = [commodityModel.commodityLocationImagesArray componentsJoinedByString:@","];
             
             NSString * sql = [[NSString alloc] initWithFormat:@"INSERT INTO Home_CommodityTable(CommodityID,CommodityName,CommodityImageArray,CommodityCount,CategoryID,CategoryName,CommodityLocation,CommodityLocationImageArray,hasShelfLife,shelfLife) VALUES (?,?,?,?,?,?,?,?,?,?)"];
             
-            result = [self.db executeUpdate:sql,commodityModel.commodityID,commodityModel.commodityName,commodityImageArrayData,[NSNumber numberWithUnsignedInteger:commodityModel.commodityCount],commodityModel.categoryID,commodityModel.category,commodityModel.commodityLocation,commodityLocationImageArrayData,[NSNumber numberWithBool:commodityModel.hasShelfLife],commodityModel.shelfLife];
+            result = [self.db executeUpdate:sql,commodityModel.commodityID,commodityModel.commodityName,commodityImageArrayStr,[NSNumber numberWithUnsignedInteger:commodityModel.commodityCount],commodityModel.categoryID,commodityModel.category,commodityModel.commodityLocation,commodityLocationImageArrayStr,[NSNumber numberWithBool:commodityModel.hasShelfLife],commodityModel.shelfLife];
             if (result) {
                 
                 NSLog(@"成功");
@@ -180,14 +180,15 @@
             model.categoryID = [set stringForColumn:@"categoryID"];
             model.commodityName = [set stringForColumn:@"commodityName"];
             model.commodityCount = [set intForColumn:@"commodityCount"];
-            NSData * commodityImageArrayData = [set dataForColumn:@"commodityImageArray"];
             
-            NSMutableArray * commodityImageArray = [NSKeyedUnarchiver unarchiveObjectWithData:commodityImageArrayData];
+            NSString * commodityImageArrayStr = [set stringForColumn:@"commodityImageArray"];
+            
+            NSMutableArray * commodityImageArray = [[NSMutableArray alloc] initWithArray:[commodityImageArrayStr componentsSeparatedByString:@","]];
             model.commodityImageArray = commodityImageArray;
             model.commodityLocation = [set stringForColumn:@"commodityLocation"];
             
-            NSData * commodityLocationImagesArrayData = [set dataForColumn:@"CommodityLocationImageArray"];
-            NSMutableArray * commodityLocationImagesArray = [NSKeyedUnarchiver unarchiveObjectWithData:commodityLocationImagesArrayData];
+            NSString * commodityLocationImagesArrayStr = [set stringForColumn:@"CommodityLocationImageArray"];
+            NSMutableArray * commodityLocationImagesArray = [[NSMutableArray alloc] initWithArray:[commodityLocationImagesArrayStr componentsSeparatedByString:@","]];
             model.commodityLocationImagesArray = commodityLocationImagesArray;
             model.hasShelfLife = [set boolForColumn:@"hasShelfLife"];
             model.shelfLife = [set stringForColumn:@"shelfLife"];
