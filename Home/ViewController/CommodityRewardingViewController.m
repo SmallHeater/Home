@@ -14,7 +14,9 @@
 #import "MBProgressHUD+BWMExtension.H"
 #import "SHFMDBManager.h"
 #import "SHUIImagePickerControllerLibrary.h"
-#import "UIImage+helper.h"
+#import "ImageCompressionController.h"
+
+
 
 typedef NS_ENUM(NSInteger, AddImageType){
     
@@ -190,9 +192,6 @@ typedef NS_ENUM(NSInteger, AddImageType){
     }
     else{
         
-//        [self.model.commodityImageArray  addObjectsFromArray:self.commodityImageArray];
-//        [self.model.commodityLocationImagesArray addObjectsFromArray:self.locationImageViewArray];
-        
         for (NSUInteger i = 0; i < self.commodityImageArray.count; i++) {
             
             NSString *path = [NSSearchPathForDirectoriesInDomains(NSDocumentDirectory, NSUserDomainMask, YES) lastObject];
@@ -200,62 +199,18 @@ typedef NS_ENUM(NSInteger, AddImageType){
             NSString * imageName = [[NSString alloc] initWithFormat:@"%@%ld.png",self.model.commodityID,(long)i];
             NSString *imageFilePath = [path stringByAppendingPathComponent:imageName];
             [self.model.commodityImageArray addObject:imageName];
-            //其中参数0.5表示压缩比例，1表示不压缩，数值越小压缩比例越大
-            NSData * jgegImageData = UIImageJPEGRepresentation(self.commodityImageArray[i], 0.5);
-            if (jgegImageData) {
+            
+            UIImage * image = self.commodityImageArray[i];
+            
+            NSData * imageData = [ImageCompressionController getImageData:image];
+            BOOL result =  [imageData writeToFile:imageFilePath  atomically:YES];
+            if (result) {
                 
-                BOOL result =  [jgegImageData writeToFile:imageFilePath  atomically:YES];
-                if (result) {
-                    
-                    NSLog(@"JGEG图片写入成功");
-                }
-                else{
-                    
-                    NSLog(@"JGEG图片写入失败");
-                }
+                NSLog(@"物品图片写入成功");
             }
             else{
                 
-                NSData * pngImageData =UIImagePNGRepresentation(self.commodityImageArray[i]);
-                if (pngImageData) {
-                    
-                    BOOL result =  [jgegImageData writeToFile:imageFilePath  atomically:YES];
-                    if (result) {
-                        
-                        NSLog(@"PNG图片写入成功");
-                    }
-                    else{
-                        
-                        NSLog(@"PNG图片写入失败");
-                    }
-                }
-                else{
-                    
-                    //图片两种转换data方式都得到nil，处理
-                    UIImage * image = self.commodityImageArray[i];
-                    unsigned char * bitmap = [UIImage convertUIImageToBitmapRGBA8:image];
-                    
-                    int width = image.size.width;
-                    
-                    int height = image.size.height;
-                    
-                    UIImage*imageCopy = [UIImage convertBitmapRGBA8ToUIImage:bitmap withWidth:width withHeight:height];
-                    
-                    NSData * imageCopyData =UIImageJPEGRepresentation(imageCopy,0.5);
-                    if (imageCopyData) {
-                        
-                        BOOL result =  [imageCopyData writeToFile:imageFilePath  atomically:YES];
-                        if (result) {
-                            
-                            NSLog(@"图片写入成功");
-                        }
-                        else{
-                            
-                            NSLog(@"图片写入失败");
-                        }
-                    }
-                    
-                }
+                NSLog(@"物品图片写入失败");
             }
         }
         
@@ -266,8 +221,18 @@ typedef NS_ENUM(NSInteger, AddImageType){
             NSString * imageName = [[NSString alloc] initWithFormat:@"location%@%ld.png",self.model.commodityID,(long)i];
             NSString *imageFilePath = [path stringByAppendingPathComponent:imageName];
             [self.model.commodityLocationImagesArray addObject:imageFilePath];
-            //其中参数0.5表示压缩比例，1表示不压缩，数值越小压缩比例越大
-            [UIImageJPEGRepresentation(self.locationImageViewArray[i], 0.5) writeToFile:imageFilePath  atomically:YES];
+            
+            UIImage * image = self.locationImageViewArray[i];
+            NSData * imageData = [ImageCompressionController getImageData:image];
+            BOOL result =  [imageData writeToFile:imageFilePath  atomically:YES];
+            if (result) {
+                
+                NSLog(@"位置图片写入成功");
+            }
+            else{
+                
+                NSLog(@"位置图片写入失败");
+            }
         }
         
         [[CommodityDataManager sharedManager].commodityDataArray addObject:self.model];

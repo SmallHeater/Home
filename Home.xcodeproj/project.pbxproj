@@ -44,6 +44,7 @@
 		622B8B041FAD96A30080552F /* NoDataView.m in Sources */ = {isa = PBXBuildFile; fileRef = 622B8B031FAD96A30080552F /* NoDataView.m */; };
 		622B8B071FAD96BD0080552F /* NoInternetView.m in Sources */ = {isa = PBXBuildFile; fileRef = 622B8B061FAD96BD0080552F /* NoInternetView.m */; };
 		622B8B0A1FAD99460080552F /* BaseTableViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 622B8B091FAD99450080552F /* BaseTableViewController.m */; };
+		623EE2F51FAFFBA800550B11 /* ImageCompressionController.m in Sources */ = {isa = PBXBuildFile; fileRef = 623EE2F41FAFFBA800550B11 /* ImageCompressionController.m */; };
 		62416F6E1FAED75800AE78DB /* CommodityDetailViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 62416F6D1FAED75800AE78DB /* CommodityDetailViewController.m */; };
 		62416F711FAED78100AE78DB /* PersonalRightsDetailViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 62416F701FAED78100AE78DB /* PersonalRightsDetailViewController.m */; };
 		6275CED41FAC144600A1C616 /* ModelWithState.m in Sources */ = {isa = PBXBuildFile; fileRef = 6275CED11FAC144600A1C616 /* ModelWithState.m */; };
@@ -204,6 +205,8 @@
 		622B8B061FAD96BD0080552F /* NoInternetView.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = NoInternetView.m; sourceTree = "<group>"; };
 		622B8B081FAD99450080552F /* BaseTableViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = BaseTableViewController.h; sourceTree = "<group>"; };
 		622B8B091FAD99450080552F /* BaseTableViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = BaseTableViewController.m; sourceTree = "<group>"; };
+		623EE2F31FAFFBA800550B11 /* ImageCompressionController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = ImageCompressionController.h; sourceTree = "<group>"; };
+		623EE2F41FAFFBA800550B11 /* ImageCompressionController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = ImageCompressionController.m; sourceTree = "<group>"; };
 		62416F6C1FAED75800AE78DB /* CommodityDetailViewController.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = CommodityDetailViewController.h; sourceTree = "<group>"; };
 		62416F6D1FAED75800AE78DB /* CommodityDetailViewController.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = CommodityDetailViewController.m; sourceTree = "<group>"; };
 		62416F6F1FAED78100AE78DB /* PersonalRightsDetailViewController.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = PersonalRightsDetailViewController.h; sourceTree = "<group>"; };
@@ -858,6 +861,8 @@
 		62F8020D1F9C99840038DD5C /* Controller */ = {
 			isa = PBXGroup;
 			children = (
+				623EE2F31FAFFBA800550B11 /* ImageCompressionController.h */,
+				623EE2F41FAFFBA800550B11 /* ImageCompressionController.m */,
 				62F802121F9C9AC70038DD5C /* CommodityDataManager.h */,
 				62F802131F9C9AC70038DD5C /* CommodityDataManager.m */,
 				62282D571FA6097C007E3ABE /* SHFMDBManager.h */,
@@ -1137,6 +1142,7 @@
 				62282C6D1F9E2C02007E3ABE /* CommodityTableViewCell.m in Sources */,
 				62F801831F9B68F40038DD5C /* BaseTabBarController.m in Sources */,
 				62F801C71F9C689B0038DD5C /* CategoryModel.m in Sources */,
+				623EE2F51FAFFBA800550B11 /* ImageCompressionController.m in Sources */,
 				622B8AF81FA9ACDC0080552F /* PersonalRightsCell.m in Sources */,
 				62282C6A1F9CCF8F007E3ABE /* CommodityModel.m in Sources */,
 				62F8017A1F9B60EC0038DD5C /* CustomizedNavigationBar.m in Sources */,
