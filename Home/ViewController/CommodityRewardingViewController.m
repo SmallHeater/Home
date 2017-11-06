@@ -568,6 +568,8 @@ typedef NS_ENUM(NSInteger, AddImageType){
         
         _commodityImageViewScrollView = [[UIScrollView alloc] initWithFrame:CGRectMake(20, VIEWHEIGHT, SCREENWIDTH - 40, 69)];
         _commodityImageViewScrollView.contentSize = CGSizeMake(SCREENWIDTH - 40, 69);
+        _commodityImageViewScrollView.showsVerticalScrollIndicator = NO;
+        _commodityImageViewScrollView.showsHorizontalScrollIndicator = NO;
     }
     return _commodityImageViewScrollView;
 }
@@ -629,6 +631,8 @@ typedef NS_ENUM(NSInteger, AddImageType){
         
         _locationImageViewScrollView = [[UIScrollView alloc] initWithFrame:CGRectMake(20, VIEWHEIGHT, SCREENWIDTH - 40, 69)];
         _locationImageViewScrollView.contentSize = CGSizeMake(SCREENWIDTH - 40, 69);
+        _locationImageViewScrollView.showsVerticalScrollIndicator = NO;
+        _locationImageViewScrollView.showsHorizontalScrollIndicator = NO;
     }
     return _locationImageViewScrollView;
 }

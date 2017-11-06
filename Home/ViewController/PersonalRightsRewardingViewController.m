@@ -546,6 +546,8 @@
         
         _photoScrollView = [[UIScrollView alloc] initWithFrame:CGRectMake(20, VIEWHEIGHT, SCREENWIDTH - 40, 69)];
         _photoScrollView.contentSize = CGSizeMake(SCREENWIDTH - 40, 69);
+        _photoScrollView.showsVerticalScrollIndicator = NO;
+        _photoScrollView.showsHorizontalScrollIndicator = NO;
     }
     return _photoScrollView;
 }
