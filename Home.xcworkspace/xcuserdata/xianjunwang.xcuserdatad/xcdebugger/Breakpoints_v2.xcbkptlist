@@ -26,12 +26,28 @@
             ignoreCount = "0"
             continueAfterRunningActions = "No"
             filePath = "Home/ViewController/CommodityRewardingViewController.m"
-            timestampString = "531638271.839785"
+            timestampString = "531655104.24065"
             startingColumnNumber = "9223372036854775807"
             endingColumnNumber = "9223372036854775807"
             startingLineNumber = "392"
             endingLineNumber = "392"
             landmarkName = "-addImageViewWithType:"
+            landmarkType = "7">
+         </BreakpointContent>
+      </BreakpointProxy>
+      <BreakpointProxy
+         BreakpointExtensionID = "Xcode.Breakpoint.FileBreakpoint">
+         <BreakpointContent
+            shouldBeEnabled = "Yes"
+            ignoreCount = "0"
+            continueAfterRunningActions = "No"
+            filePath = "../SHUIImagePickerController/SHUIImagePickerControllerLibrary/Controller/SHUIImagePickerController.m"
+            timestampString = "531647402.942429"
+            startingColumnNumber = "9223372036854775807"
+            endingColumnNumber = "9223372036854775807"
+            startingLineNumber = "100"
+            endingLineNumber = "100"
+            landmarkName = "-getCameraAuthority"
             landmarkType = "7">
          </BreakpointContent>
       </BreakpointProxy>

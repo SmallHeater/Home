@@ -364,13 +364,13 @@ typedef NS_ENUM(NSInteger, AddImageType){
     if (deleteBtn.tag - DELETEBTNBASETAG - LOCATIONDELETEBTNTAG >= 0) {
         
         //删除位置图片
-        [self.model.commodityLocationImagesArray removeObjectAtIndex:(deleteBtn.tag - DELETEBTNBASETAG - LOCATIONDELETEBTNTAG)];
+        [self.locationImageViewArray removeObjectAtIndex:(deleteBtn.tag - DELETEBTNBASETAG - LOCATIONDELETEBTNTAG)];
         [self refreshImageViewWithType:CommodityLocationImage];
     }
     else{
         
         //删除物品图片
-        [self.model.commodityImageArray removeObjectAtIndex:(deleteBtn.tag - DELETEBTNBASETAG)];
+        [self.commodityImageArray removeObjectAtIndex:(deleteBtn.tag - DELETEBTNBASETAG)];
         [self refreshImageViewWithType:CommodityImage];
     }
 }

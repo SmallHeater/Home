@@ -304,11 +304,12 @@
 //添加单个LiveWithDeleteImageView
 -(void)addLiveWithDeleteImageView{
     
-    LiveWithDeleteImageView * imageView = [[LiveWithDeleteImageView alloc] initWithImage:self.personalRightsModel.personalRightsPhotoArray.lastObject andFrame:CGRectMake((self.personalRightsModel.personalRightsPhotoArray.count - 1) * (114 + 10), 0, 114, 69) andTarget:self andAction:@selector(imageViewTaped:) andButtonTag:DELETEBTNBASETAG + self.personalRightsModel.personalRightsPhotoArray.count - 1];
+    LiveWithDeleteImageView * imageView = [[LiveWithDeleteImageView alloc] initWithImage:self.photoArray.lastObject andFrame:CGRectMake((self.photoArray.count - 1) * (114 + 10), 0, 114, 69) andTarget:self andAction:@selector(imageViewTaped:) andButtonTag:DELETEBTNBASETAG + self.photoArray.count - 1];
+    imageView.deleteAction = @selector(deleteImage:);
     [self.photoScrollView addSubview:imageView];
 
-  self.addImageView.frame = CGRectMake(self.personalRightsModel.personalRightsPhotoArray.count * (114 + 10), 0, 114, 69);
-  self.photoScrollView.contentSize = CGSizeMake((self.personalRightsModel.personalRightsPhotoArray.count + 1) * 114 + self.personalRightsModel.personalRightsPhotoArray.count * 10, 69);
+  self.addImageView.frame = CGRectMake(self.photoArray.count * (114 + 10), 0, 114, 69);
+  self.photoScrollView.contentSize = CGSizeMake((self.photoArray.count + 1) * 114 + self.photoArray.count * 10, 69);
 }
 
 //刷新scrollView上面的LiveWithDeleteImageView
@@ -322,18 +323,25 @@
         }
     }
     
-    for (NSUInteger i = 0; i < self.personalRightsModel.personalRightsPhotoArray.count; i++) {
+    for (NSUInteger i = 0; i < self.photoArray.count; i++) {
         
-        LiveWithDeleteImageView * imageView = [[LiveWithDeleteImageView alloc] initWithImage:self.personalRightsModel.personalRightsPhotoArray[i] andFrame:CGRectMake(i * (114 + 10), 0, 114, 69) andTarget:self andAction:@selector(imageViewTaped:) andButtonTag:DELETEBTNBASETAG + i];
+        LiveWithDeleteImageView * imageView = [[LiveWithDeleteImageView alloc] initWithImage:self.photoArray[i] andFrame:CGRectMake(i * (114 + 10), 0, 114, 69) andTarget:self andAction:@selector(imageViewTaped:) andButtonTag:DELETEBTNBASETAG + i];
+        imageView.deleteAction = @selector(deleteImage:);
         [self.photoScrollView addSubview:imageView];
     }
     
-    self.addImageView.frame = CGRectMake(self.personalRightsModel.personalRightsPhotoArray.count * (114 + 10), 0, 114, 69);
+    self.addImageView.frame = CGRectMake(self.photoArray.count * (114 + 10), 0, 114, 69);
     [self.photoScrollView addSubview:self.addImageView];
     
     
-    self.photoScrollView.contentSize = CGSizeMake((self.personalRightsModel.personalRightsPhotoArray.count + 1) * 114 + self.personalRightsModel.personalRightsPhotoArray.count * 10, 69);
-    
+    self.photoScrollView.contentSize = CGSizeMake((self.photoArray.count + 1) * 114 + self.photoArray.count * 10, 69);
+}
+
+//删除图片的响应
+-(void)deleteImage:(UIButton *)deleteBtn{
+
+    [self.photoArray removeObjectAtIndex:(deleteBtn.tag - DELETEBTNBASETAG)];
+    [self refreshLiveWithDeleteImageView];
 }
 
 #pragma mark  ------  懒加载
@@ -520,7 +528,7 @@
         photoRecordTitleLabel.text = @"照片记录：";
         [_photoRecordView addSubview:photoRecordTitleLabel];
         
-        LiveWithDeleteImageView * addImageView = [[LiveWithDeleteImageView alloc] initWithImage:[UIImage imageNamed:@"HomeSource.bundle/photo_duf.tiff"] andFrame:CGRectMake(20, 0, 114, 69) andTarget:self andAction:@selector(addImageViewTaped:) andButtonTag:0];;
+        LiveWithDeleteImageView * addImageView = [[LiveWithDeleteImageView alloc] initWithImage:[UIImage imageNamed:@"HomeSource.bundle/photo_duf.tiff"] andFrame:CGRectMake(0, 0, 114, 69) andTarget:self andAction:@selector(addImageViewTaped:) andButtonTag:0];;
         [self.photoScrollView addSubview:addImageView];
         [_photoRecordView addSubview:self.photoScrollView];
         self.addImageView = addImageView;
@@ -536,7 +544,7 @@
     
     if (!_photoScrollView) {
         
-        _photoScrollView = [[UIScrollView alloc] initWithFrame:CGRectMake(0, VIEWHEIGHT, SCREENWIDTH, 69)];
+        _photoScrollView = [[UIScrollView alloc] initWithFrame:CGRectMake(20, VIEWHEIGHT, SCREENWIDTH - 40, 69)];
         _photoScrollView.contentSize = CGSizeMake(SCREENWIDTH - 40, 69);
     }
     return _photoScrollView;

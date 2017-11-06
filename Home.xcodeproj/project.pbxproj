@@ -47,12 +47,12 @@
 		623EE2F51FAFFBA800550B11 /* ImageCompressionController.m in Sources */ = {isa = PBXBuildFile; fileRef = 623EE2F41FAFFBA800550B11 /* ImageCompressionController.m */; };
 		62416F6E1FAED75800AE78DB /* CommodityDetailViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 62416F6D1FAED75800AE78DB /* CommodityDetailViewController.m */; };
 		62416F711FAED78100AE78DB /* PersonalRightsDetailViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 62416F701FAED78100AE78DB /* PersonalRightsDetailViewController.m */; };
+		625876AF1FB067E800AC48CD /* libSHUIImagePickerControllerLibrary.a in Frameworks */ = {isa = PBXBuildFile; fileRef = 6275CEE01FAC34C000A1C616 /* libSHUIImagePickerControllerLibrary.a */; };
 		6275CED41FAC144600A1C616 /* ModelWithState.m in Sources */ = {isa = PBXBuildFile; fileRef = 6275CED11FAC144600A1C616 /* ModelWithState.m */; };
 		6275CED51FAC144600A1C616 /* ModelWithTitle.m in Sources */ = {isa = PBXBuildFile; fileRef = 6275CED31FAC144600A1C616 /* ModelWithTitle.m */; };
 		6275CED81FAC14AF00A1C616 /* LiveWithDeleteImageView.m in Sources */ = {isa = PBXBuildFile; fileRef = 6275CED71FAC14AF00A1C616 /* LiveWithDeleteImageView.m */; };
 		6275CEDD1FAC14CD00A1C616 /* TableViewCellWithSwitch.m in Sources */ = {isa = PBXBuildFile; fileRef = 6275CEDA1FAC14CD00A1C616 /* TableViewCellWithSwitch.m */; };
 		6275CEDE1FAC14CD00A1C616 /* TableViewCellWithTitle.m in Sources */ = {isa = PBXBuildFile; fileRef = 6275CEDC1FAC14CD00A1C616 /* TableViewCellWithTitle.m */; };
-		6275CEE31FAC34C000A1C616 /* libSHUIImagePickerControllerLibrary.a in Frameworks */ = {isa = PBXBuildFile; fileRef = 6275CEE01FAC34C000A1C616 /* libSHUIImagePickerControllerLibrary.a */; };
 		6275CEE41FAC34C000A1C616 /* SHUIImagePickerControllerLibrarySource.bundle in Resources */ = {isa = PBXBuildFile; fileRef = 6275CEE21FAC34C000A1C616 /* SHUIImagePickerControllerLibrarySource.bundle */; };
 		6275CF091FAC38FC00A1C616 /* frame_icon@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = 6275CEEF1FAC38FC00A1C616 /* frame_icon@2x.png */; };
 		6275CF0A1FAC38FC00A1C616 /* frame_icon@3x.png in Resources */ = {isa = PBXBuildFile; fileRef = 6275CEF01FAC38FC00A1C616 /* frame_icon@3x.png */; };
@@ -87,7 +87,6 @@
 		62DE4B481F9F42890086CE06 /* photo_duf@3x.png in Resources */ = {isa = PBXBuildFile; fileRef = 62DE4B441F9F42890086CE06 /* photo_duf@3x.png */; };
 		62F3D38A1FAF4F5500E63BBD /* UIImage+helper.m in Sources */ = {isa = PBXBuildFile; fileRef = 62F3D3891FAF4F5500E63BBD /* UIImage+helper.m */; };
 		62F801311F9B5D780038DD5C /* AppDelegate.m in Sources */ = {isa = PBXBuildFile; fileRef = 62F801301F9B5D780038DD5C /* AppDelegate.m */; };
-		62F801341F9B5D780038DD5C /* ViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 62F801331F9B5D780038DD5C /* ViewController.m */; };
 		62F801371F9B5D780038DD5C /* Main.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 62F801351F9B5D780038DD5C /* Main.storyboard */; };
 		62F801391F9B5D780038DD5C /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 62F801381F9B5D780038DD5C /* Assets.xcassets */; };
 		62F8013C1F9B5D780038DD5C /* LaunchScreen.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 62F8013A1F9B5D780038DD5C /* LaunchScreen.storyboard */; };
@@ -262,8 +261,6 @@
 		62F8012C1F9B5D780038DD5C /* Home.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = Home.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		62F8012F1F9B5D780038DD5C /* AppDelegate.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = AppDelegate.h; sourceTree = "<group>"; };
 		62F801301F9B5D780038DD5C /* AppDelegate.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = AppDelegate.m; sourceTree = "<group>"; };
-		62F801321F9B5D780038DD5C /* ViewController.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = ViewController.h; sourceTree = "<group>"; };
-		62F801331F9B5D780038DD5C /* ViewController.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = ViewController.m; sourceTree = "<group>"; };
 		62F801361F9B5D780038DD5C /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = Base.lproj/Main.storyboard; sourceTree = "<group>"; };
 		62F801381F9B5D780038DD5C /* Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Assets.xcassets; sourceTree = "<group>"; };
 		62F8013B1F9B5D780038DD5C /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = Base.lproj/LaunchScreen.storyboard; sourceTree = "<group>"; };
@@ -347,7 +344,7 @@
 				62282D511FA60011007E3ABE /* libSocialSMS.a in Frameworks */,
 				62282D561FA60011007E3ABE /* libUMSocialLog.a in Frameworks */,
 				62282D531FA60011007E3ABE /* libSocialWeChat.a in Frameworks */,
-				6275CEE31FAC34C000A1C616 /* libSHUIImagePickerControllerLibrary.a in Frameworks */,
+				625876AF1FB067E800AC48CD /* libSHUIImagePickerControllerLibrary.a in Frameworks */,
 				62282D141FA49F6E007E3ABE /* libCrasheye.a in Frameworks */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
@@ -617,8 +614,6 @@
 				62F801611F9B5DAD0038DD5C /* ViewController */,
 				62F8012F1F9B5D780038DD5C /* AppDelegate.h */,
 				62F801301F9B5D780038DD5C /* AppDelegate.m */,
-				62F801321F9B5D780038DD5C /* ViewController.h */,
-				62F801331F9B5D780038DD5C /* ViewController.m */,
 				62F801351F9B5D780038DD5C /* Main.storyboard */,
 				62F801381F9B5D780038DD5C /* Assets.xcassets */,
 				62F8013A1F9B5D780038DD5C /* LaunchScreen.storyboard */,
@@ -1152,7 +1147,6 @@
 				622B8B011FAD964D0080552F /* BaseAbnormalViewController.m in Sources */,
 				622B8AFE1FAA0A6E0080552F /* PersonalRightsRewardingViewController.m in Sources */,
 				62282D311FA5FDA3007E3ABE /* LogInViewController.m in Sources */,
-				62F801341F9B5D780038DD5C /* ViewController.m in Sources */,
 				62F801C31F9C67330038DD5C /* CategorySelectViewController.m in Sources */,
 				62F802111F9C99BF0038DD5C /* BaseController.m in Sources */,
 				622B8AEF1FA969A20080552F /* SearchViewController.m in Sources */,
