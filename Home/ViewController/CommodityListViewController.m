@@ -20,8 +20,11 @@
 @interface CommodityListViewController ()
 //录入按钮
 @property (nonatomic,strong) UIButton * rewardBtn;
+//有无保质期选择view
+@property (nonatomic,strong) UIView * headerView;
 
-@property (nonatomic,strong) SHPlainTableView * tableView;
+@property (nonatomic,strong) SHPlainTableView * commodityTableView;
+
 @end
 
 @implementation CommodityListViewController
@@ -33,7 +36,8 @@
     
     self.navigationBar.titleLabel.text = @"物品列表";
     [self.navigationBar addSubview:self.rewardBtn];
-    [self.view addSubview:self.tableView];
+    [self.view addSubview:self.headerView];
+    [self.view addSubview:self.commodityTableView];
     
 }
 
@@ -42,28 +46,44 @@
     [super viewWillAppear:animated];
     [MobClick beginLogPageView:@"物品清单页面"];
     
-    
-    if ([CommodityDataManager sharedManager].commodityDataArray.count == 0) {
+    if ([CommodityDataManager sharedManager].hasShelfCommodityDataArray.count == 0) {
         
         NSMutableArray * dataArray = [[SHFMDBManager sharedManager] selectCommodityTable];
-        if (dataArray.count == 0) {
+        NSMutableArray * hasShelfDataArray = [[NSMutableArray alloc] init];
+        NSMutableArray * noShelfDataArray = [[NSMutableArray alloc] init];
+        for (NSUInteger i = 0 ; i < dataArray.count; i++) {
             
+            CommodityModel * model = dataArray[i];
+            if (model.hasShelfLife) {
+                
+                [hasShelfDataArray addObject:model];
+            }
+            else{
+                
+                [noShelfDataArray addObject:model];
+            }
+        }
+        
+        if (hasShelfDataArray.count == 0) {
+            
+            self.noDataView.frame = CGRectMake(0, 114, SCREENWIDTH, SCREENHEIGHT - 104);
             [self.view addSubview:self.noDataView];
         }
         else{
             
             [self.noDataView removeFromSuperview];
-            [[CommodityDataManager sharedManager].commodityDataArray addObjectsFromArray:dataArray];
-            [self.tableView.dataArray addObjectsFromArray:[CommodityDataManager sharedManager].commodityDataArray];
+            [[CommodityDataManager sharedManager].hasShelfCommodityDataArray addObjectsFromArray:hasShelfDataArray];
+            [self.commodityTableView.dataArray addObjectsFromArray:[CommodityDataManager sharedManager].hasShelfCommodityDataArray];
         }
+        [[CommodityDataManager sharedManager].noShelfCommodityDataArray addObjectsFromArray:noShelfDataArray];
     }
     else{
         
         [self.noDataView removeFromSuperview];
-        [self.tableView.dataArray removeAllObjects];
-        [self.tableView.dataArray addObjectsFromArray:[CommodityDataManager sharedManager].commodityDataArray];
+        [self.commodityTableView.dataArray removeAllObjects];
+        [self.commodityTableView.dataArray addObjectsFromArray:[CommodityDataManager sharedManager].hasShelfCommodityDataArray];
     }
-    [self.tableView reloadData];
+    [self.commodityTableView reloadData];
 }
 
 -(void)viewWillDisappear:(BOOL)animated{
@@ -147,6 +167,40 @@
     }];
 }
 
+-(void)controlClicked:(UISegmentedControl *)control{
+    
+    if (control.selectedSegmentIndex == 0) {
+        
+        [self.commodityTableView.dataArray removeAllObjects];
+        if ([CommodityDataManager sharedManager].hasShelfCommodityDataArray.count > 0) {
+            
+            [self.noDataView removeFromSuperview];
+            self.commodityTableView.type = CommodityWithShelfTableView;
+            [self.commodityTableView.dataArray addObjectsFromArray:[CommodityDataManager sharedManager].hasShelfCommodityDataArray];
+        }
+        else{
+            
+            [self.view addSubview:self.noDataView];
+        }
+    }
+    else if (control.selectedSegmentIndex == 1){
+        
+        [self.commodityTableView.dataArray removeAllObjects];
+        if ([CommodityDataManager sharedManager].noShelfCommodityDataArray.count > 0) {
+            
+            [self.noDataView removeFromSuperview];
+            self.commodityTableView.type = CommodityWithoutShelfTableView;
+            [self.commodityTableView.dataArray addObjectsFromArray:[CommodityDataManager sharedManager].noShelfCommodityDataArray];
+        }
+        else{
+            
+            [self.view addSubview:self.noDataView];
+        }
+    }
+    
+    [self.commodityTableView reloadData];
+}
+
 #pragma mark  ----  懒加载
 -(UIButton *)rewardBtn{
     if (!_rewardBtn) {
@@ -159,12 +213,28 @@
     return _rewardBtn;
 }
 
--(SHPlainTableView *)tableView{
+-(UIView *)headerView{
     
-    if (!_tableView) {
+    if (!_headerView) {
         
-        _tableView = [[SHPlainTableView alloc] initWithFrame:CGRectMake(0, 64, SCREENWIDTH, SCREENHEIGHT - 64) andType:CommodityTableView];
+        _headerView = [[UIView alloc] initWithFrame:CGRectMake(0, 64, SCREENWIDTH, 50)];
+        
+        UISegmentedControl * control = [[UISegmentedControl alloc] initWithItems:@[@"有保质期",@"无保质期"]];
+        control.selectedSegmentIndex = 0;
+        control.frame = CGRectMake((SCREENWIDTH - 200) / 2, 2, 200, 46);
+        [control addTarget:self action:@selector(controlClicked:) forControlEvents:UIControlEventValueChanged];
+        [_headerView addSubview:control];
     }
-    return _tableView;
+    return _headerView;
 }
+
+-(SHPlainTableView *)commodityTableView{
+    
+    if (!_commodityTableView) {
+        
+        _commodityTableView = [[SHPlainTableView alloc] initWithFrame:CGRectMake(0, 114, SCREENWIDTH, SCREENHEIGHT - 104) andType:CommodityWithShelfTableView];
+    }
+    return _commodityTableView;
+}
+
 @end

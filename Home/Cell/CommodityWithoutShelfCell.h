@@ -8,9 +8,17 @@
 
 #import "TableViewCellWithBottomLine.h"
 
+#define LABELHEIGHT 20
+
 @class CommodityModel;
 
-@interface CommodityTableViewCell : TableViewCellWithBottomLine
+@interface CommodityWithoutShelfCell : TableViewCellWithBottomLine
 //物品模型
 @property (nonatomic,strong) CommodityModel * commodityModel;
+
+
+//物品图片
+@property (nonatomic,strong) UIImageView * commodityImageView;
+//物品数量
+@property (nonatomic,strong) UILabel * commodityCountLabel;
 @end

@@ -84,7 +84,7 @@
             
             float radio = [ImageCompressionController getCompressionFactorWithLength:length andExpextLength:600];
             //需要压缩
-            photoAddedWatermarkData=UIImageJPEGRepresentation(image,radio);
+            photoAddedWatermarkData=UIImageJPEGRepresentation(image,1);
         }
         else{
             
@@ -121,7 +121,7 @@
                     
                     float radio = [ImageCompressionController getCompressionFactorWithLength:length andExpextLength:600];
                     //需要压缩
-                    photoAddedWatermarkData=UIImageJPEGRepresentation(imageCopy,radio);
+                    photoAddedWatermarkData=UIImageJPEGRepresentation(imageCopy,1);
                 }
                 else{
                     

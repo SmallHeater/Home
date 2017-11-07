@@ -235,7 +235,16 @@ typedef NS_ENUM(NSInteger, AddImageType){
             }
         }
         
-        [[CommodityDataManager sharedManager].commodityDataArray addObject:self.model];
+        if (self.model.hasShelfLife) {
+            
+             [[CommodityDataManager sharedManager].hasShelfCommodityDataArray addObject:self.model];
+        }
+        else{
+            
+             [[CommodityDataManager sharedManager].noShelfCommodityDataArray addObject:self.model];
+        }
+        
+       
         [self.navigationController popViewControllerAnimated:YES];
         
         dispatch_async(dispatch_get_global_queue(0, 0), ^{

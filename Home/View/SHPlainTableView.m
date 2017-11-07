@@ -8,7 +8,8 @@
 
 #import "SHPlainTableView.h"
 #import "CommodityModel.h"
-#import "CommodityTableViewCell.h"
+#import "CommodityWithoutShelfCell.h"
+#import "CommodityWithShelfCell.h"
 #import "PersonalRightsModel.h"
 #import "PersonalRightsCell.h"
 #import "CategoryTableViewCell.h"
@@ -22,8 +23,6 @@
 @interface SHPlainTableView ()<UITableViewDelegate,UITableViewDataSource>
 
 @property (nonatomic,strong) UITableView * tableView;
-
-@property (nonatomic,assign) SHUITableViewType type;
 @end
 
 
@@ -52,17 +51,29 @@
 - (UITableViewCell *)tableView:(UITableView *)tableView cellForRowAtIndexPath:(NSIndexPath *)indexPath{
     
     switch (self.type) {
-        case CommodityTableView:
+        case CommodityWithShelfTableView:
             {
-                CommodityTableViewCell * cell = [tableView dequeueReusableCellWithIdentifier:@"CommodityTableViewCell"];
+                CommodityWithShelfCell * cell = [tableView dequeueReusableCellWithIdentifier:@"CommodityWithShelfCell"];
                 if (!cell) {
                     
-                    cell = [[CommodityTableViewCell alloc] initWithStyle:UITableViewCellStyleDefault reuseIdentifier:@"CommodityTableViewCell"];
+                    cell = [[CommodityWithShelfCell alloc] initWithStyle:UITableViewCellStyleDefault reuseIdentifier:@"CommodityWithShelfCell"];
                     cell.selectionStyle = UITableViewCellSelectionStyleNone;
                 }
                 cell.commodityModel = self.dataArray[indexPath.row];
                 return cell;
             }
+            break;
+        case CommodityWithoutShelfTableView:
+        {
+            CommodityWithoutShelfCell * cell = [tableView dequeueReusableCellWithIdentifier:@"CommodityWithoutShelfCell"];
+            if (!cell) {
+                
+                cell = [[CommodityWithoutShelfCell alloc] initWithStyle:UITableViewCellStyleDefault reuseIdentifier:@"CommodityWithoutShelfCell"];
+                cell.selectionStyle = UITableViewCellSelectionStyleNone;
+            }
+            cell.commodityModel = self.dataArray[indexPath.row];
+            return cell;
+        }
             break;
         case PersonalRightsTableView:
         {
@@ -114,11 +125,17 @@
         [self.dataArray removeObjectAtIndex:indexPath.row];
         
         switch (self.type) {
-            case CommodityTableView:{
+            case CommodityWithShelfTableView:{
                 
-                //物品列表
-                [[CommodityDataManager sharedManager].commodityDataArray removeObjectAtIndex:indexPath.row];
+                //有保质期的物品列表
+                [[CommodityDataManager sharedManager].hasShelfCommodityDataArray removeObjectAtIndex:indexPath.row];
                 }
+                break;
+            case CommodityWithoutShelfTableView:{
+                
+                //无保质期的物品列表
+                [[CommodityDataManager sharedManager].noShelfCommodityDataArray removeObjectAtIndex:indexPath.row];
+            }
                 break;
             case PersonalRightsTableView:{
                 
@@ -142,7 +159,10 @@
 - (CGFloat)tableView:(UITableView *)tableView heightForRowAtIndexPath:(NSIndexPath *)indexPath{
     
     switch (self.type) {
-        case CommodityTableView:
+        case CommodityWithShelfTableView:
+            return 120.5;
+            break;
+        case CommodityWithoutShelfTableView:
             return 120.5;
             break;
         case PersonalRightsTableView:
@@ -169,11 +189,14 @@
 - (void)tableView:(UITableView *)tableView didSelectRowAtIndexPath:(NSIndexPath *)indexPath{
     
     switch (self.type) {
-        case CommodityTableView:
+        case CommodityWithShelfTableView:{
+            
+        };
+        case CommodityWithoutShelfTableView:
         {
             CommodityModel * selectedModel = self.dataArray[indexPath.row];
             CommodityDetailViewController * detailVC = [[CommodityDetailViewController alloc] init];
-            detailVC.commodityName = selectedModel.commodityName;
+            detailVC.model = selectedModel;
             
             UIViewController * parentsVC = [self viewController];
             

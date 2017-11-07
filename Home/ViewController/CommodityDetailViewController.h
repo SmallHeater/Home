@@ -8,7 +8,9 @@
 
 #import "BaseNavViewController.h"
 
+@class CommodityModel;
+
 @interface CommodityDetailViewController : BaseNavViewController
-//物品名
-@property (nonatomic,strong) NSString * commodityName;
+//物品模型
+@property (nonatomic,strong) CommodityModel * model;
 @end

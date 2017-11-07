@@ -6,34 +6,32 @@
 //  Copyright © 2017年 xianjunwang. All rights reserved.
 //
 
-#import "CommodityTableViewCell.h"
+#import "CommodityWithoutShelfCell.h"
 #import "NSString+CGSize.h"
 #import "CommodityModel.h"
 
 
-#define LABELHEIGHT 20
 
-@interface CommodityTableViewCell ()
-//物品图片
-@property (nonatomic,strong) UIImageView * commodityImageView;
-//物品名
+@interface CommodityWithoutShelfCell ()
+
+
+
+//物品名标题
 @property (nonatomic,strong) UILabel * commodityNameTitleLabel;
+//物品名
 @property (nonatomic,strong) UILabel * commodityNameLabel;
-//物品存放位置
+//物品存放位置标题
 @property (nonatomic,strong) UILabel * commodityLocationTitleLabel;
+//物品存放位置
 @property (nonatomic,strong) UILabel * commodityLocationLabel;
-//物品数量
+//物品数量标题
 @property (nonatomic,strong) UILabel * commodityCountTitleLabel;
-@property (nonatomic,strong) UILabel * commodityCountLabel;
-//物品到期时间
-@property (nonatomic,strong) UILabel * commodityShelfLifeTitleLabel;
-@property (nonatomic,strong) UILabel * commodityShelfLifeLabel;
 //底部分割线
 @property (nonatomic,strong) UILabel * bottomLine;
 
 @end
 
-@implementation CommodityTableViewCell
+@implementation CommodityWithoutShelfCell
 
 #pragma mark  ----  生命周期函数
 -(instancetype)initWithStyle:(UITableViewCellStyle)style reuseIdentifier:(NSString *)reuseIdentifier{
@@ -48,8 +46,6 @@
         [self addSubview:self.commodityLocationLabel];
         [self addSubview:self.commodityCountTitleLabel];
         [self addSubview:self.commodityCountLabel];
-        [self addSubview:self.commodityShelfLifeTitleLabel];
-        [self addSubview:self.commodityShelfLifeLabel];
         [self addSubview:self.bottomLine];
     }
     return self;
@@ -72,7 +68,6 @@
     self.commodityNameLabel.text = self.commodityModel.commodityName;
     self.commodityLocationLabel.text = self.commodityModel.commodityLocation;
     self.commodityCountLabel.text = [[NSString alloc] initWithFormat:@"%ld",(long)self.commodityModel.commodityCount];
-    self.commodityShelfLifeLabel.text = self.commodityModel.shelfLife;
 }
 
 #pragma mark  ----  懒加载
@@ -158,29 +153,6 @@
     return _commodityCountLabel;
 }
 
--(UILabel *)commodityShelfLifeTitleLabel{
-    
-    if (!_commodityShelfLifeTitleLabel) {
-        
-        NSString * str = @"物品到期时间:";
-        float commodityShelfLifeTitleLabelWidth = [NSString widthWithStr:str andFont:FONT14 andMaxHeight:LABELHEIGHT];
-        
-        _commodityShelfLifeTitleLabel = [[UILabel alloc] initWithFrame:CGRectMake(CGRectGetMaxX(self.commodityImageView.frame) + 10, CGRectGetMaxY(self.commodityCountTitleLabel.frame) + 4, commodityShelfLifeTitleLabelWidth, LABELHEIGHT)];
-        _commodityShelfLifeTitleLabel.font = FONT14;
-        _commodityShelfLifeTitleLabel.text = str;
-    }
-    return _commodityShelfLifeTitleLabel;
-}
-
--(UILabel *)commodityShelfLifeLabel{
-    
-    if (!_commodityShelfLifeLabel) {
-        
-        _commodityShelfLifeLabel = [[UILabel alloc] initWithFrame:CGRectMake(CGRectGetMaxX(self.commodityShelfLifeTitleLabel.frame), CGRectGetMinY(self.commodityShelfLifeTitleLabel.frame), SCREENWIDTH - 10 - CGRectGetMaxX(self.commodityShelfLifeTitleLabel.frame), CGRectGetHeight(self.commodityShelfLifeTitleLabel.frame))];
-        _commodityShelfLifeLabel.font = FONT14;
-    }
-    return _commodityShelfLifeLabel;
-}
 
 -(UILabel *)bottomLine{
     

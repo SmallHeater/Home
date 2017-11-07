@@ -12,8 +12,11 @@
 @class CommodityModel,PersonalRightsModel;
 @interface CommodityDataManager : BaseController
 
-//物品列表数组
-@property (nonatomic,strong) NSMutableArray<CommodityModel *> * commodityDataArray;
+//有保质期的物品列表数组
+@property (nonatomic,strong) NSMutableArray<CommodityModel *> * hasShelfCommodityDataArray;
+//无保质期的物品列表数组
+@property (nonatomic,strong) NSMutableArray<CommodityModel *> * noShelfCommodityDataArray;
+
 //权益列表数组
 @property (nonatomic,strong) NSMutableArray<PersonalRightsModel *> * personalRightsArray;
 

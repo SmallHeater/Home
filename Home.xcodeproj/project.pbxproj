@@ -8,7 +8,7 @@
 
 /* Begin PBXBuildFile section */
 		62282C6A1F9CCF8F007E3ABE /* CommodityModel.m in Sources */ = {isa = PBXBuildFile; fileRef = 62282C691F9CCF8F007E3ABE /* CommodityModel.m */; };
-		62282C6D1F9E2C02007E3ABE /* CommodityTableViewCell.m in Sources */ = {isa = PBXBuildFile; fileRef = 62282C6C1F9E2C02007E3ABE /* CommodityTableViewCell.m */; };
+		62282C6D1F9E2C02007E3ABE /* CommodityWithoutShelfCell.m in Sources */ = {isa = PBXBuildFile; fileRef = 62282C6C1F9E2C02007E3ABE /* CommodityWithoutShelfCell.m */; };
 		62282C711F9E2FB1007E3ABE /* NSString+CGSize.m in Sources */ = {isa = PBXBuildFile; fileRef = 62282C701F9E2FB1007E3ABE /* NSString+CGSize.m */; };
 		62282C741F9F7998007E3ABE /* UIColor+Translate.m in Sources */ = {isa = PBXBuildFile; fileRef = 62282C731F9F7998007E3ABE /* UIColor+Translate.m */; };
 		62282D141FA49F6E007E3ABE /* libCrasheye.a in Frameworks */ = {isa = PBXBuildFile; fileRef = 62282D0C1FA49F6E007E3ABE /* libCrasheye.a */; };
@@ -86,6 +86,7 @@
 		62DE4B471F9F42890086CE06 /* photo_duf@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = 62DE4B431F9F42890086CE06 /* photo_duf@2x.png */; };
 		62DE4B481F9F42890086CE06 /* photo_duf@3x.png in Resources */ = {isa = PBXBuildFile; fileRef = 62DE4B441F9F42890086CE06 /* photo_duf@3x.png */; };
 		62F3D38A1FAF4F5500E63BBD /* UIImage+helper.m in Sources */ = {isa = PBXBuildFile; fileRef = 62F3D3891FAF4F5500E63BBD /* UIImage+helper.m */; };
+		62F3D38D1FB1F30C00E63BBD /* CommodityWithShelfCell.m in Sources */ = {isa = PBXBuildFile; fileRef = 62F3D38C1FB1F30C00E63BBD /* CommodityWithShelfCell.m */; };
 		62F801311F9B5D780038DD5C /* AppDelegate.m in Sources */ = {isa = PBXBuildFile; fileRef = 62F801301F9B5D780038DD5C /* AppDelegate.m */; };
 		62F801371F9B5D780038DD5C /* Main.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 62F801351F9B5D780038DD5C /* Main.storyboard */; };
 		62F801391F9B5D780038DD5C /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 62F801381F9B5D780038DD5C /* Assets.xcassets */; };
@@ -145,8 +146,8 @@
 /* Begin PBXFileReference section */
 		62282C681F9CCF8F007E3ABE /* CommodityModel.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = CommodityModel.h; sourceTree = "<group>"; };
 		62282C691F9CCF8F007E3ABE /* CommodityModel.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = CommodityModel.m; sourceTree = "<group>"; };
-		62282C6B1F9E2C02007E3ABE /* CommodityTableViewCell.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = CommodityTableViewCell.h; sourceTree = "<group>"; };
-		62282C6C1F9E2C02007E3ABE /* CommodityTableViewCell.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = CommodityTableViewCell.m; sourceTree = "<group>"; };
+		62282C6B1F9E2C02007E3ABE /* CommodityWithoutShelfCell.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = CommodityWithoutShelfCell.h; sourceTree = "<group>"; };
+		62282C6C1F9E2C02007E3ABE /* CommodityWithoutShelfCell.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = CommodityWithoutShelfCell.m; sourceTree = "<group>"; };
 		62282C6F1F9E2FB1007E3ABE /* NSString+CGSize.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = "NSString+CGSize.h"; sourceTree = "<group>"; };
 		62282C701F9E2FB1007E3ABE /* NSString+CGSize.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = "NSString+CGSize.m"; sourceTree = "<group>"; };
 		62282C721F9F7998007E3ABE /* UIColor+Translate.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = "UIColor+Translate.h"; sourceTree = "<group>"; };
@@ -258,6 +259,8 @@
 		62DE4B441F9F42890086CE06 /* photo_duf@3x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "photo_duf@3x.png"; sourceTree = "<group>"; };
 		62F3D3881FAF4F5500E63BBD /* UIImage+helper.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = "UIImage+helper.h"; sourceTree = "<group>"; };
 		62F3D3891FAF4F5500E63BBD /* UIImage+helper.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = "UIImage+helper.m"; sourceTree = "<group>"; };
+		62F3D38B1FB1F30C00E63BBD /* CommodityWithShelfCell.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = CommodityWithShelfCell.h; sourceTree = "<group>"; };
+		62F3D38C1FB1F30C00E63BBD /* CommodityWithShelfCell.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = CommodityWithShelfCell.m; sourceTree = "<group>"; };
 		62F8012C1F9B5D780038DD5C /* Home.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = Home.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		62F8012F1F9B5D780038DD5C /* AppDelegate.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = AppDelegate.h; sourceTree = "<group>"; };
 		62F801301F9B5D780038DD5C /* AppDelegate.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = AppDelegate.m; sourceTree = "<group>"; };
@@ -845,10 +848,12 @@
 				6275CEDC1FAC14CD00A1C616 /* TableViewCellWithTitle.m */,
 				62F801C91F9C6AFE0038DD5C /* CategoryTableViewCell.h */,
 				62F801CA1F9C6AFE0038DD5C /* CategoryTableViewCell.m */,
-				62282C6B1F9E2C02007E3ABE /* CommodityTableViewCell.h */,
-				62282C6C1F9E2C02007E3ABE /* CommodityTableViewCell.m */,
+				62282C6B1F9E2C02007E3ABE /* CommodityWithoutShelfCell.h */,
+				62282C6C1F9E2C02007E3ABE /* CommodityWithoutShelfCell.m */,
 				622B8AF61FA9ACDC0080552F /* PersonalRightsCell.h */,
 				622B8AF71FA9ACDC0080552F /* PersonalRightsCell.m */,
+				62F3D38B1FB1F30C00E63BBD /* CommodityWithShelfCell.h */,
+				62F3D38C1FB1F30C00E63BBD /* CommodityWithShelfCell.m */,
 			);
 			path = Cell;
 			sourceTree = "<group>";
@@ -1134,7 +1139,7 @@
 				62416F711FAED78100AE78DB /* PersonalRightsDetailViewController.m in Sources */,
 				622B8B041FAD96A30080552F /* NoDataView.m in Sources */,
 				62F8019F1F9B8F910038DD5C /* HomeSource.bundle in Sources */,
-				62282C6D1F9E2C02007E3ABE /* CommodityTableViewCell.m in Sources */,
+				62282C6D1F9E2C02007E3ABE /* CommodityWithoutShelfCell.m in Sources */,
 				62F801831F9B68F40038DD5C /* BaseTabBarController.m in Sources */,
 				62F801C71F9C689B0038DD5C /* CategoryModel.m in Sources */,
 				623EE2F51FAFFBA800550B11 /* ImageCompressionController.m in Sources */,
@@ -1170,6 +1175,7 @@
 				62F801AD1F9C33E40038DD5C /* BaseTableViewCell.m in Sources */,
 				62F801311F9B5D780038DD5C /* AppDelegate.m in Sources */,
 				62F801CB1F9C6AFE0038DD5C /* CategoryTableViewCell.m in Sources */,
+				62F3D38D1FB1F30C00E63BBD /* CommodityWithShelfCell.m in Sources */,
 				62F801A61F9B916E0038DD5C /* SetTableViewController.m in Sources */,
 				62282D591FA6097C007E3ABE /* SHFMDBManager.m in Sources */,
 				62F801BA1F9C3F010038DD5C /* BaseModel.m in Sources */,

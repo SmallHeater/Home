@@ -25,13 +25,22 @@
 
 
 #pragma mark  ----  懒加载
--(NSMutableArray<CommodityModel *> *)commodityDataArray{
+-(NSMutableArray<CommodityModel *> *)hasShelfCommodityDataArray{
     
-    if (!_commodityDataArray) {
+    if (!_hasShelfCommodityDataArray) {
         
-        _commodityDataArray = [[NSMutableArray alloc] init];
+        _hasShelfCommodityDataArray = [[NSMutableArray alloc] init];
     }
-    return _commodityDataArray;
+    return _hasShelfCommodityDataArray;
+}
+
+-(NSMutableArray<CommodityModel *> *)noShelfCommodityDataArray{
+    
+    if (!_noShelfCommodityDataArray) {
+        
+        _noShelfCommodityDataArray = [[NSMutableArray alloc] init];
+    }
+    return _noShelfCommodityDataArray;
 }
 
 -(NSMutableArray<PersonalRightsModel *> *)personalRightsArray{
