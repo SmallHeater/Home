@@ -210,7 +210,7 @@
         {
             PersonalRightsModel * selectedModel = self.dataArray[indexPath.row];
             PersonalRightsDetailViewController * detailVC = [[PersonalRightsDetailViewController alloc] init];
-            detailVC.personalRightsName = selectedModel.personalRightsName;
+            detailVC.model = selectedModel;
             
             UIViewController * parentsVC = [self viewController];
             

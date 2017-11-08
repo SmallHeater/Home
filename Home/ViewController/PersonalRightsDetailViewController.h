@@ -8,7 +8,9 @@
 
 #import "BaseNavViewController.h"
 
+@class PersonalRightsModel;
+
 @interface PersonalRightsDetailViewController : BaseNavViewController
 //权益名
-@property (nonatomic,strong) NSString * personalRightsName;
+@property (nonatomic,strong) PersonalRightsModel * model;
 @end
