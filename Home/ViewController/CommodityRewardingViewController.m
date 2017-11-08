@@ -220,7 +220,7 @@ typedef NS_ENUM(NSInteger, AddImageType){
             
             NSString * imageName = [[NSString alloc] initWithFormat:@"location%@%ld.png",self.model.commodityID,(long)i];
             NSString *imageFilePath = [path stringByAppendingPathComponent:imageName];
-            [self.model.commodityLocationImagesArray addObject:imageFilePath];
+            [self.model.commodityLocationImagesArray addObject:imageName];
             
             UIImage * image = self.locationImageViewArray[i];
             NSData * imageData = [ImageCompressionController getImageData:image];

@@ -217,11 +217,11 @@
     
     if (!_headerView) {
         
-        _headerView = [[UIView alloc] initWithFrame:CGRectMake(0, 64, SCREENWIDTH, 50)];
+        _headerView = [[UIView alloc] initWithFrame:CGRectMake(0, 64, SCREENWIDTH, 40)];
         
         UISegmentedControl * control = [[UISegmentedControl alloc] initWithItems:@[@"有保质期",@"无保质期"]];
         control.selectedSegmentIndex = 0;
-        control.frame = CGRectMake((SCREENWIDTH - 200) / 2, 2, 200, 46);
+        control.frame = CGRectMake((SCREENWIDTH - 200) / 2, 5, 200, 30);
         [control addTarget:self action:@selector(controlClicked:) forControlEvents:UIControlEventValueChanged];
         [_headerView addSubview:control];
     }
@@ -232,7 +232,7 @@
     
     if (!_commodityTableView) {
         
-        _commodityTableView = [[SHPlainTableView alloc] initWithFrame:CGRectMake(0, 114, SCREENWIDTH, SCREENHEIGHT - 104) andType:CommodityWithShelfTableView];
+        _commodityTableView = [[SHPlainTableView alloc] initWithFrame:CGRectMake(0, CGRectGetMaxY(self.headerView.frame), SCREENWIDTH, SCREENHEIGHT - CGRectGetMaxY(self.headerView.frame)) andType:CommodityWithShelfTableView];
     }
     return _commodityTableView;
 }
