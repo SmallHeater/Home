@@ -192,9 +192,8 @@ typedef NS_ENUM(NSInteger, AddImageType){
     }
     else{
         
+        NSString *path = [NSSearchPathForDirectoriesInDomains(NSDocumentDirectory, NSUserDomainMask, YES) lastObject];
         for (NSUInteger i = 0; i < self.commodityImageArray.count; i++) {
-            
-            NSString *path = [NSSearchPathForDirectoriesInDomains(NSDocumentDirectory, NSUserDomainMask, YES) lastObject];
             
             NSString * imageName = [[NSString alloc] initWithFormat:@"%@%ld.png",self.model.commodityID,(long)i];
             NSString *imageFilePath = [path stringByAppendingPathComponent:imageName];

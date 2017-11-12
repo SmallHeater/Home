@@ -76,12 +76,12 @@
         else if ([model isKindOfClass:[PersonalRightsModel class]]){
             
             PersonalRightsModel * personalRightsModel = (PersonalRightsModel *)model;
-            NSData * personalRightsPhotoData = [NSKeyedArchiver archivedDataWithRootObject:personalRightsModel.personalRightsPhotoArray];
+            NSString * personalRifhtsImageArrayStr = [personalRightsModel.personalRightsPhotoArray componentsJoinedByString:@","];
             
             
             NSString * sql = [[NSString alloc] initWithFormat:@"INSERT INTO Home_PersonalRightsTable(PersonalRightsID,PersonalRightsName,PersonalRightsStartTime,PersonalRightsEndTime,PersonalRightsFrom,PersonalRightsUsedConditions,PersonalRightsEnjoyConditions,PersonalRightsArray) VALUES (?,?,?,?,?,?,?,?)"];
             
-            result = [self.db executeUpdate:sql,personalRightsModel.personalRightsID,personalRightsModel.personalRightsName,personalRightsModel.personalRightsStartTime,personalRightsModel.personalRightsEndTime,personalRightsModel.personalRightsFrom,personalRightsModel.personalRightsUsedConditions,personalRightsModel.personalRightsEnjoyConditions,personalRightsPhotoData];
+            result = [self.db executeUpdate:sql,personalRightsModel.personalRightsID,personalRightsModel.personalRightsName,personalRightsModel.personalRightsStartTime,personalRightsModel.personalRightsEndTime,personalRightsModel.personalRightsFrom,personalRightsModel.personalRightsUsedConditions,personalRightsModel.personalRightsEnjoyConditions,personalRifhtsImageArrayStr];
             if (result) {
                 
                 NSLog(@"成功");
@@ -223,10 +223,9 @@
             model.personalRightsUsedConditions = [set stringForColumn:@"personalRightsUsedConditions"];
             model.personalRightsEnjoyConditions = [set stringForColumn:@"personalRightsEnjoyConditions"];
             
-            NSData * personalRightsPhotoArrayData = [set dataForColumn:@"personalRightsPhotoArray"];
-            
-            NSMutableArray * personalRightsPhotoArray = [NSKeyedUnarchiver unarchiveObjectWithData:personalRightsPhotoArrayData];
-            model.personalRightsPhotoArray = personalRightsPhotoArray;
+            NSString * personalRightsPhotoStr = [set stringForColumn:@"PersonalRightsArray"];
+            NSMutableArray * commodityLocationImagesArray = [[NSMutableArray alloc] initWithArray:[personalRightsPhotoStr componentsSeparatedByString:@","]];
+            model.personalRightsPhotoArray = commodityLocationImagesArray;
             //加入数组
             [dataArray addObject:model];
         }

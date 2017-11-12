@@ -15,7 +15,7 @@
 #import "SHUIImagePickerControllerLibrary.h"
 #import "SHAssetModel.h"
 #import "MBProgressHUD+BWMExtension.H"
-
+#import "ImageCompressionController.h"
 
 #define MAXHEIGHT 14.0
 #define VIEWHEIGHT 40
@@ -278,15 +278,24 @@
     }
     else{
         
+        NSString *path = [NSSearchPathForDirectoriesInDomains(NSDocumentDirectory, NSUserDomainMask, YES) lastObject];
         for (NSUInteger i = 0; i < self.photoArray.count; i++) {
-            
-            NSString *path = [NSSearchPathForDirectoriesInDomains(NSDocumentDirectory, NSUserDomainMask, YES) lastObject];
             
             NSString * imageName = [[NSString alloc] initWithFormat:@"%@%ld.png",self.personalRightsModel.personalRightsID,(long)i];
             NSString *imageFilePath = [path stringByAppendingPathComponent:imageName];
             [self.personalRightsModel.personalRightsPhotoArray addObject:imageFilePath];
-            //其中参数0.5表示压缩比例，1表示不压缩，数值越小压缩比例越大
-            [UIImageJPEGRepresentation(self.photoArray[i], 0.5) writeToFile:imageFilePath  atomically:YES];
+            
+            UIImage * image = self.photoArray[i];
+            NSData * imageData = [ImageCompressionController getImageData:image];
+            BOOL result =  [imageData writeToFile:imageFilePath  atomically:YES];
+            if (result) {
+                
+                NSLog(@"个人权益图片写入成功");
+            }
+            else{
+                
+                NSLog(@"个人权益图片写入失败");
+            }
         }
         
         
