@@ -7,6 +7,8 @@
 //
 
 #import "CommodityDataManager.h"
+#import "SHFMDBManager.h"
+#import "CommodityModel.h"
 
 @implementation CommodityDataManager
 
@@ -30,6 +32,16 @@
     if (!_hasShelfCommodityDataArray) {
         
         _hasShelfCommodityDataArray = [[NSMutableArray alloc] init];
+        NSMutableArray * dataArray = [[SHFMDBManager sharedManager] selectCommodityTable];
+        for (NSUInteger i = 0 ; i < dataArray.count; i++) {
+            
+            CommodityModel * model = dataArray[i];
+            if (model.hasShelfLife) {
+                
+                [_hasShelfCommodityDataArray addObject:model];
+            }
+        }
+        
     }
     return _hasShelfCommodityDataArray;
 }
@@ -39,6 +51,15 @@
     if (!_noShelfCommodityDataArray) {
         
         _noShelfCommodityDataArray = [[NSMutableArray alloc] init];
+        NSMutableArray * dataArray = [[SHFMDBManager sharedManager] selectCommodityTable];
+        for (NSUInteger i = 0 ; i < dataArray.count; i++) {
+            
+            CommodityModel * model = dataArray[i];
+            if (!model.hasShelfLife){
+                
+                [_noShelfCommodityDataArray addObject:model];
+            }
+        }
     }
     return _noShelfCommodityDataArray;
 }

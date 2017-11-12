@@ -48,34 +48,8 @@
     
     if ([CommodityDataManager sharedManager].hasShelfCommodityDataArray.count == 0) {
         
-        NSMutableArray * dataArray = [[SHFMDBManager sharedManager] selectCommodityTable];
-        NSMutableArray * hasShelfDataArray = [[NSMutableArray alloc] init];
-        NSMutableArray * noShelfDataArray = [[NSMutableArray alloc] init];
-        for (NSUInteger i = 0 ; i < dataArray.count; i++) {
-            
-            CommodityModel * model = dataArray[i];
-            if (model.hasShelfLife) {
-                
-                [hasShelfDataArray addObject:model];
-            }
-            else{
-                
-                [noShelfDataArray addObject:model];
-            }
-        }
-        
-        if (hasShelfDataArray.count == 0) {
-            
-            self.noDataView.frame = CGRectMake(0, 114, SCREENWIDTH, SCREENHEIGHT - 104);
-            [self.view addSubview:self.noDataView];
-        }
-        else{
-            
-            [self.noDataView removeFromSuperview];
-            [[CommodityDataManager sharedManager].hasShelfCommodityDataArray addObjectsFromArray:hasShelfDataArray];
-            [self.commodityTableView.dataArray addObjectsFromArray:[CommodityDataManager sharedManager].hasShelfCommodityDataArray];
-        }
-        [[CommodityDataManager sharedManager].noShelfCommodityDataArray addObjectsFromArray:noShelfDataArray];
+        self.noDataView.frame = CGRectMake(0, 114, SCREENWIDTH, SCREENHEIGHT - 104);
+        [self.view addSubview:self.noDataView];
     }
     else{
         
