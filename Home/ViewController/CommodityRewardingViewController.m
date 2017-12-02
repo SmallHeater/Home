@@ -15,8 +15,8 @@
 #import "SHFMDBManager.h"
 #import "SHUIImagePickerControllerLibrary.h"
 #import "ImageCompressionController.h"
-
-
+#import "AFNetworking.h"
+#import "SCRFTPRequest.h"
 
 typedef NS_ENUM(NSInteger, AddImageType){
     
@@ -200,6 +200,8 @@ typedef NS_ENUM(NSInteger, AddImageType){
             [self.model.commodityImageArray addObject:imageName];
             
             UIImage * image = self.commodityImageArray[i];
+            
+            [self uploadImage:image];
             
             NSData * imageData = [ImageCompressionController getImageData:image];
             BOOL result =  [imageData writeToFile:imageFilePath  atomically:YES];
@@ -466,6 +468,29 @@ typedef NS_ENUM(NSInteger, AddImageType){
             break;
         default:
             break;
+    }
+}
+
+
+//上传图片到服务器
+-(void)uploadImage:(UIImage *)image{
+    
+    if (image) {
+        
+        NSData * data = [ImageCompressionController getImageData:image];
+        NSString * imageName = [[NSString alloc] initWithFormat:@"%@.png",self.model.commodityID];
+        NSString *path = [NSSearchPathForDirectoriesInDomains(NSDocumentDirectory, NSUserDomainMask, YES) lastObject];
+        NSString *imageFilePath = [path stringByAppendingPathComponent:imageName];
+        [[NSFileManager defaultManager] createFileAtPath:imageFilePath contents:data attributes:nil];
+        
+        
+        SCRFTPRequest * ftprequest = [[SCRFTPRequest alloc] initWithURL:[NSURL URLWithString:@"ftp://192.168.2.103/FTPImage/"] toUploadFile:imageFilePath];
+        ftprequest.username = @"xianjunwang";
+        ftprequest.password = @"wangxianjun";
+        ftprequest.delegate  =self;
+        [ftprequest startRequest];
+        
+        
     }
 }
 
